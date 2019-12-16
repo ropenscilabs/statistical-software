@@ -55,20 +55,19 @@ var nodes = new vis.DataSet([
   { id: 11,
     group: 1,
     label: "Testing: Execution",
-    shape: "circle",
-    title: "A validation program that depends on testing alone for<br>a defect-free device is depending on perfection in testing."
+    shape: "oval"
   },
   { id: 12,
     group: 1,
     label: "Integration Testing",
-    shape: "circle",
+    shape: "oval",
     title: "Testing of control across a program's internal and external interfaces"
   },
   { id: 121, group: 1, label: "Coverage" },
   { id: 13,
     group: 1,
     label: "Unit Testing",
-    shape: "circle",
+    shape: "oval",
     title: "Testing of sub-program functionality that is not visible"
   },
   { id: 131, group: 1, label: "R CMD check and grep parsing" },
@@ -87,7 +86,7 @@ var nodes = new vis.DataSet([
 
   { id: 150, group: 1, label: "How Many Users / Testers?", title: "Empirical formula from Meyers &c (2011):<br>Generally not so many" },
 
-  { id: 2, label: "Review", group: 2},
+  { id: 2, label: "Review", shape: "circle", group: 2},
   { id: 21, label: "Start and End", group: 2, title: "A critical component that is a fundmental part of<br>the FDA's 'Good Practices in Software Validation'"},
   { id: 22, label: "Code Inpsection", group: 2},
 
@@ -95,7 +94,13 @@ var nodes = new vis.DataSet([
   { id: 31, label: "Retirement", group: 3},
   { id: 32, label: "Transfer", group: 3},
 
-  { id: 4, label: "Metrics", group: 4, title: "Project metrics are probably of most value ... [but] these are<br>generally metrics for how much of the source code is exercised.<br>They are not indicative of how well the tests are designed.<br>These metrics are a measure of the breadth of coverage, not<br>the depth or quality of coverage. (Vogel 2011)" },
+  {
+      id: 4,
+      label: "Metrics",
+      group: 4,
+      shape: "circle",
+      title: "Project metrics are probably of most value ... [but] these are<br>generally metrics for how much of the source code is exercised.<br>They are not indicative of how well the tests are designed.<br>These metrics are a measure of the breadth of coverage, not<br>the depth or quality of coverage. (Vogel 2011)"
+  },
   { id: 41, label: "Documentation", group: 4 },
   { id: 42, label: "Meta", group: 4 },
   { id: 421, label: "Reputation", group: 4 },
@@ -200,7 +205,7 @@ var edges = new vis.DataSet([
   { from: 144, to: 143, arrows: "to" },
 
   { from: 21, to: 2, arrows: "to" },
-  { from: 22, to: 2, arrows: "to" },
+  { from: 22, to: 2, arrows: "to, from" },
   { from: 21, to: 3, arrows: "to" },
   { from: 2, to: 0, arrows: "to", value: 1 },
   { from: 2, to: 5, arrows: "to, from", value: 1 },
