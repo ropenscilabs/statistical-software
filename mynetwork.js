@@ -135,7 +135,7 @@ var nodes = new vis.DataSet([
 // 5: Design
 // 51: Planning
 var edges = new vis.DataSet([
-  { from: 1, to: 0, arrows: "to" },
+  { from: 1, to: 0, arrows: "to", value: 1 },
   { from: 101, to: 0, arrows: "to" },
   { from: 102, to: 0, arrows: "to" },
 
@@ -146,7 +146,7 @@ var edges = new vis.DataSet([
   },
   { from: 111, to: 11, arrows: "to" },
   { from: 111, to: 12, arrows: "to" },
-  { from: 12, to: 11, arrows: "to" },
+  { from: 12, to: 11, arrows: "to", value: 1 },
   { from: 121, to: 12, arrows: "to" },
   { from: 122, to: 12, arrows: "to" },
   { from: 123, to: 12, arrows: "to" },
@@ -156,9 +156,9 @@ var edges = new vis.DataSet([
 
   { from: 21, to: 2, arrows: "to" },
   { from: 21, to: 3, arrows: "to" },
-  { from: 2, to: 0, arrows: "to" },
-  { from: 2, to: 5, arrows: "to, from" },
-  { from: 2, to: 4, dashes: [10, 10], arrows: "to, from" },
+  { from: 2, to: 0, arrows: "to", value: 1 },
+  { from: 2, to: 5, arrows: "to, from", value: 1 },
+  { from: 2, to: 4, dashes: [10, 10], arrows: "to, from", value: 1 },
   { from: 2, to: 102, arrows: "to" },
 
 
@@ -180,8 +180,8 @@ var edges = new vis.DataSet([
   },
   { from: 32, to: 2, arrows: "to" },
   { from: 32, to: 5, arrows: "to" },
-  { from: 3, to: 2, arrows: "to, from" },
-  { from: 3, to: 0, arrows: "to" },
+  { from: 3, to: 2, arrows: "to, from", value: 1 },
+  { from: 3, to: 0, arrows: "to", value: 1 },
 
   { from: 41, to: 4, arrows: "to" },
   { from: 42, to: 4, arrows: "to" },
