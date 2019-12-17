@@ -131,7 +131,7 @@ var nodes = new vis.DataSet([
   { id: 42, label: "Meta", group: 4 },
   { id: 421, label: "Reputation", group: 4 },
   { id: 422, label: "Breadth of Use", group: 4 },
-  { id: 43, label: "Formal CS Metrics", group: 4 },
+  { id: 43, label: "Formal CS Metrics", group: 4, title: "Mostly from Mili & Tchier (2015)" },
   { id: 431, label: "Fault Proneness", group: 4 },
   { id: 432, label: "Fault Detectability", group: 4 },
   { id: 433, label: "Error Detectability", group: 4 },
@@ -150,7 +150,7 @@ var nodes = new vis.DataSet([
   { id: 524, label: "Calibrability", group: 5},
   { id: 525, label: "Interoperability", group: 5},
   { id: 53, label: "Structure", group: 5, title: "Most apsects from Mili & Tchier (2015)"},
-  { id: 531, label: "Design Integrity", group: 5},
+  { id: 531, label: "Design Integrity", group: 5, title: "Simplicity, Orthogonality, Economy of Concept<br>Cohesiveness of Design (Mili & Tchier, 2015)" },
   { id: 532, label: "Modularity", group: 5},
   { id: 5321, label: "Cohesion", group: 5, title: "Volume of Information Flow within a Component" },
   { id: 5322, label: "Coupling", group: 5, title: "Bandwidth of Information Between Components" },
@@ -337,7 +337,8 @@ var edges = new vis.DataSet([
   { from: 5322, to: 532, arrows: "to" },
   { from: 533, to: 53, arrows: "to" },
   { from: 533, to: 1, arrows: "to" },
-  { from: 534, to: 53, arrows: "to" }
+  { from: 534, to: 53, arrows: "to" },
+  { from: 523, to: 532, arrows: "to, from", dashes: [10, 10] }
 ]);
 
 var container = document.getElementById("mynetwork");
