@@ -143,17 +143,17 @@ var nodes = new vis.DataSet([
 
   { id: 5, label: "Design", group: 5},
   { id: 51, label: "Planning", group: 5},
-  { id: 52, label: "Useability", group: 5},
+  { id: 52, label: "Useability", group: 5, title: "Most apsects from Ammann & Offutt (2017)"},
   { id: 521, label: "Ease of Use", group: 5},
   { id: 522, label: "Ease of Learning", group: 5},
   { id: 523, label: "Customizability", group: 5},
   { id: 524, label: "Calibrability", group: 5},
   { id: 525, label: "Interoperability", group: 5},
-  { id: 53, label: "Structure", group: 5},
+  { id: 53, label: "Structure", group: 5, title: "Most apsects from Mili & Tchier (2015)"},
   { id: 531, label: "Design Integrity", group: 5},
   { id: 532, label: "Modularity", group: 5},
-  { id: 5321, label: "Cohesion", group: 5},
-  { id: 5322, label: "Coupling", group: 5},
+  { id: 5321, label: "Cohesion", group: 5, title: "Volume of Information Flow within a Component" },
+  { id: 5322, label: "Coupling", group: 5, title: "Bandwidth of Information Between Components" },
   { id: 533, label: "Testability", group: 5},
   { id: 534, label: "Adaptability", group: 5}
 
