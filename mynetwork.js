@@ -62,6 +62,8 @@ var
 // 5322: Coupling
 // 533: Testability
 // 534: Adaptability
+//
+// 6: Risk
 var nodes = new vis.DataSet([
   { id: 0,
     group: 0,
@@ -155,7 +157,9 @@ var nodes = new vis.DataSet([
   { id: 5321, label: "Cohesion", group: 5, title: "Volume of Information Flow within a Component" },
   { id: 5322, label: "Coupling", group: 5, title: "Bandwidth of Information Between Components" },
   { id: 533, label: "Testability", group: 5},
-  { id: 534, label: "Adaptability", group: 5}
+  { id: 534, label: "Adaptability", group: 5},
+
+  { id: 6, label: "Risk", group: 6, title: "It is therefore suggested that a risk assessment<br>exercise be conducted to establish the level to which<br>individual package maintainers have gone to ensure the<br>accuracy / validity of their packages and the level of<br>community usage and testing that packages have been<br>exposed to. (Pharmar White Paper)" }
 
   /*
    {
@@ -338,7 +342,9 @@ var edges = new vis.DataSet([
   { from: 533, to: 53, arrows: "to" },
   { from: 533, to: 1, arrows: "to" },
   { from: 534, to: 53, arrows: "to" },
-  { from: 523, to: 532, arrows: "to, from", dashes: [10, 10] }
+  { from: 523, to: 532, arrows: "to, from", dashes: [10, 10] },
+
+  { from: 6, to: 0, arrows: "to" }
 ]);
 
 var container = document.getElementById("mynetwork");
