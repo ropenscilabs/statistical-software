@@ -62,6 +62,7 @@ var
 // 5322: Coupling
 // 533: Testability
 // 534: Adaptability
+// 54: Tidyverse Design Guide (as example)
 //
 // 6: Risk
 var nodes = new vis.DataSet([
@@ -158,6 +159,7 @@ var nodes = new vis.DataSet([
   { id: 5322, label: "Coupling", group: 5, title: "Bandwidth of Information Between Components" },
   { id: 533, label: "Testability", group: 5},
   { id: 534, label: "Adaptability", group: 5},
+  { id: 54, label: "Example: Tidyverse Design Guide", group: 5, URL: "https://principles.tidyverse.org/" },
 
   { id: 6, label: "Risk", group: 6, title: "It is therefore suggested that a risk assessment<br>exercise be conducted to establish the level to which<br>individual package maintainers have gone to ensure the<br>accuracy / validity of their packages and the level of<br>community usage and testing that packages have been<br>exposed to. (Pharmar White Paper)" }
 
@@ -243,6 +245,7 @@ var nodes = new vis.DataSet([
 // 5322: Coupling
 // 533: Testability
 // 534: Adaptability
+// 54: Tidyverse Design Guide (as example)
 var edges = new vis.DataSet([
   { from: 1, to: 0, arrows: "to", value: 1 },
   { from: 101, to: 1, arrows: "to" },
@@ -343,6 +346,7 @@ var edges = new vis.DataSet([
   { from: 533, to: 1, arrows: "to" },
   { from: 534, to: 53, arrows: "to" },
   { from: 523, to: 532, arrows: "to, from", dashes: [10, 10] },
+  { from: 54, to: 5, arrows: "to" },
 
   { from: 6, to: 0, arrows: "to" }
 ]);
@@ -373,3 +377,9 @@ var options = {
 
 var network = new vis.Network(container, data, options);
 
+network.on("click", function(params) {
+    var node = nodes.get(params.nodes[0]);
+    if (typeof node.URL != 'undefined') {
+        window.open(node.URL,'_blank');
+    }
+});
