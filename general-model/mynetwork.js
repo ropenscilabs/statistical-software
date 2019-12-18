@@ -116,7 +116,10 @@ var nodes = new vis.DataSet([
   { id: 160, group: 11, label: "Program Graphs and Paths", title: "... and all of the CS stuff that goes along with<br>formal treatments of testing" },
 
   { id: 2, label: "Review", shape: "circle", group: 2},
-  { id: 21, label: "Start and End", group: 2, title: "A critical component that is a fundmental part of<br>the FDA's 'Good Practices in Software Validation'"},
+  { id: 21, label: "Start and End", group: 2,
+      title: "A critical component that is a fundmental part of<br>the FDA's 'Good Practices in Software Validation'",
+      URL: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/general-principles-software-validation"
+  },
   { id: 22, label: "Code Inpsection", group: 2},
 
   { id: 3, label: "Software Life Cycles", group: 3, shape: "circle" },
@@ -134,7 +137,9 @@ var nodes = new vis.DataSet([
   { id: 42, label: "Meta", group: 4 },
   { id: 421, label: "Reputation", group: 4 },
   { id: 422, label: "Breadth of Use", group: 4 },
-  { id: 43, label: "Formal CS Metrics", group: 4, title: "Mostly from Mili & Tchier (2015)" },
+  { id: 43, label: "Formal CS Metrics", group: 4, title: "Mostly from Mili & Tchier (2015)",
+      URL: "https://www.wiley.com/en-us/Software+Testing%3A+Concepts+and+Operations-p-9781119065593"
+  },
   { id: 431, label: "Fault Proneness", group: 4 },
   { id: 432, label: "Fault Detectability", group: 4 },
   { id: 433, label: "Error Detectability", group: 4 },
@@ -146,13 +151,17 @@ var nodes = new vis.DataSet([
 
   { id: 5, label: "Design", group: 5},
   { id: 51, label: "Planning", group: 5},
-  { id: 52, label: "Useability", group: 5, title: "Most apsects from Ammann & Offutt (2017)"},
+  { id: 52, label: "Useability", group: 5, title: "Most apsects from Ammann & Offutt (2017)",
+      URL: "https://www.cambridge.org/de/academic/subjects/computer-science/software-engineering-and-development/introduction-software-testing-2nd-edition"
+  },
   { id: 521, label: "Ease of Use", group: 5},
   { id: 522, label: "Ease of Learning", group: 5},
   { id: 523, label: "Customizability", group: 5},
   { id: 524, label: "Calibrability", group: 5},
   { id: 525, label: "Interoperability", group: 5},
-  { id: 53, label: "Structure", group: 5, title: "Most apsects from Mili & Tchier (2015)"},
+  { id: 53, label: "Structure", group: 5, title: "Most apsects from Mili & Tchier (2015)",
+      URL: "https://www.wiley.com/en-us/Software+Testing%3A+Concepts+and+Operations-p-9781119065593"
+  },
   { id: 531, label: "Design Integrity", group: 5, title: "Simplicity, Orthogonality, Economy of Concept<br>Cohesiveness of Design (Mili & Tchier, 2015)" },
   { id: 532, label: "Modularity", group: 5},
   { id: 5321, label: "Cohesion", group: 5, title: "Volume of Information Flow within a Component" },
@@ -161,7 +170,10 @@ var nodes = new vis.DataSet([
   { id: 534, label: "Adaptability", group: 5},
   { id: 54, label: "Example: Tidyverse Design Guide", group: 5, URL: "https://principles.tidyverse.org/" },
 
-  { id: 6, label: "Risk", group: 6, title: "It is therefore suggested that a risk assessment<br>exercise be conducted to establish the level to which<br>individual package maintainers have gone to ensure the<br>accuracy / validity of their packages and the level of<br>community usage and testing that packages have been<br>exposed to. (Pharmar White Paper)" }
+  { id: 6, label: "Risk", group: 6,
+      title: "It is therefore suggested that a risk assessment<br>exercise be conducted to establish the level to which<br>individual package maintainers have gone to ensure the<br>accuracy / validity of their packages and the level of<br>community usage and testing that packages have been<br>exposed to. (Pharmar White Paper)",
+      URL: "https://github.com/pharmaR/white_paper"
+  }
 
   /*
    {
