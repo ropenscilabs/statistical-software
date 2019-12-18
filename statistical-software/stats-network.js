@@ -14,22 +14,24 @@ var nodes = new vis.DataSet([
     group: 0,
     shape: "circle",
     label: "Statistical Software",
-    title: "Statistical software, \"refers to any package that<br>implements statistical/machine learning algorithms,<br>even if that is not the primary purpose of the package\"<br>(Pharmar White Paper, 2019)"
+    title: "Statistical software, \"refers to any package that<br>implements statistical/machine learning algorithms,<br>even if that is not the primary purpose of the package\"<br>(Pharmar White Paper, 2019)",
+    URL: "https://github.com/pharmaR/white_paper"
   },
   {
     id: 1,
     group: 1,
     shape: "circle",
     label: "Statistical Packages",
-    title: "\"Statistical packages present a greater degree<br>of risk than Non-statistical packages.\"<br>(Pharmar White Paper, 2019)"
+    title: "\"Statistical packages present a greater degree<br>of risk than Non-statistical packages.\"<br>(Pharmar White Paper, 2019)",
+    URL: "https://github.com/pharmaR/white_paper"
   },
   {
     id: 2,
     group: 2,
     shape: "box",
     label: "Testing",
-    URL: "https://archlinux.org",
-    title: "\"The more exposure a package has had to the user<br>community, the more ad-hoc testing it has been<br>exposed to.\" (Pharmar White Paper, 2019)"
+    title: "\"The more exposure a package has had to the user<br>community, the more ad-hoc testing it has been<br>exposed to.\" (Pharmar White Paper, 2019)",
+    URL: "https://github.com/pharmaR/white_paper"
   }
 ]);
 
