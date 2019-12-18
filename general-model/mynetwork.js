@@ -115,7 +115,10 @@ var nodes = new vis.DataSet([
   { id: 150, group: 1, label: "How Many Users / Testers?", title: "Empirical formula from Meyers &c (2011):<br>Generally not so many" },
   { id: 160, group: 11, label: "Program Graphs and Paths", title: "... and all of the CS stuff that goes along with<br>formal treatments of testing" },
 
-  { id: 2, label: "Review", shape: "circle", group: 2},
+  { id: 2, label: "Review", shape: "circle", group: 2,
+      title: "\"... as R is released under the terms of the GPL,<br>all of the source code underlying R, whether it be<br>in R, C or FORTRAN, is available for peer review<br>by all members of the R user community. Thus, all<br>of the functionality embodied within R is subject<br>to continuous critique and improvement relative<br>to its accuracy, reliability and consistency.\"<br>(<i>R: Regulatory Compliance and Validation Issues</i><br>The R Foundation, 2018)",
+    URL: "https://www.r-project.org/doc/R-FDA.pdf"
+  },
   { id: 21, label: "Start and End", group: 2,
       title: "A critical component that is a fundmental part of<br>the FDA's 'Good Practices in Software Validation'",
       URL: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/general-principles-software-validation"
