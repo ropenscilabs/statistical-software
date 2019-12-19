@@ -1,11 +1,4 @@
-``` r
-knitr::opts_chunk$set(
-  out.width = "100%",
-  collapse = TRUE,
-  comment = "#>",
-  fig.path="figures/"
-)
-```
+# Analyses of Journal of Statistical Software Abstracts
 
 ## Scrape the Abstracts
 
@@ -112,7 +105,7 @@ current_vol ()
 Get all abstracts:
 
 ``` r
-#get_all_abstracts <- function () {
+get_all_abstracts <- function () {
     vmax <- current_vol ()
     res <- tibble::tibble (date = character (),
                            volume = integer (),
@@ -138,9 +131,11 @@ Get all abstracts:
     close (pb)
 
     return (res)
-#}
-#a <- get_all_abstracts ()
-saveRDS (res, file = "jss-abstracts.Rds")
+}
+if (!file.exists ("jss-abstracts.Rds")) {
+    a <- get_all_abstracts ()
+    saveRDS (a, file = "jss-abstracts.Rds")
+}
 ```
 
 ## Analyses
@@ -170,29 +165,30 @@ my_lda <- LDA (d, k = 5)
 knitr::kable (get_terms (my_lda, 20))
 ```
 
-| Topic 1      | Topic 2         | Topic 3          | Topic 4     | Topic 5     |
-| :----------- | :-------------- | :--------------- | :---------- | :---------- |
-| package      | models          | r                | package     | data        |
-| models       | can             | data             | data        | r           |
-| model        | data            | analysis         | methods     | methods     |
-| can          | using           | paper            | functions   | model       |
-| use          | model           | can              | r           | models      |
-| estimation   | used            | used             | using       | software    |
-| also         | r               | provides         | statistical | statistical |
-| different    | regression      | provide          | two         | paper       |
-| examples     | also            | based            | estimation  | functions   |
-| using        | approach        | also             | used        | use         |
-| several      | time            | function         | provides    | analysis    |
-| based        | available       | functions        | can         | variables   |
-| provides     | use             | method           | developed   | several     |
-| likelihood   | inference       | provided         | multiple    | also        |
-| analysis     | distribution    | implementation   | time        | well        |
-| regression   | may             | algorithm        | analysis    | one         |
-| available    | methods         | software         | software    | method      |
-| bayesian     | function        | set              | paper       | random      |
-| standard     | functions       | test             | examples    | tools       |
-| linear       | one             | algorithms       | many        | can         |
-| spacy-parsed | nouns and verbs | also don’t revea | l anything: |             |
+| Topic 1      | Topic 2     | Topic 3     | Topic 4    | Topic 5        |
+| :----------- | :---------- | :---------- | :--------- | :------------- |
+| data         | models      | package     | models     | data           |
+| package      | r           | model       | package    | package        |
+| functions    | package     | data        | methods    | r              |
+| r            | can         | r           | data       | statistical    |
+| can          | data        | models      | used       | provides       |
+| paper        | using       | used        | analysis   | software       |
+| also         | analysis    | can         | can        | using          |
+| using        | model       | methods     | available  | also           |
+| time         | statistical | analysis    | paper      | can            |
+| provides     | methods     | software    | regression | use            |
+| linear       | paper       | available   | many       | analysis       |
+| multivariate | estimation  | also        | using      | functions      |
+| software     | algorithm   | algorithm   | use        | two            |
+| regression   | regression  | method      | linear     | model          |
+| new          | time        | statistical | r          | tools          |
+| function     | set         | based       | modeling   | one            |
+| model        | one         | test        | effects    | set            |
+| analysis     | use         | computing   | approach   | modeling       |
+| based        | several     | different   | functions  | packages       |
+| method       | maximum     | provide     | different  | implementation |
+
+spacy-parsed nouns and verbs also don’t reveal anything:
 
 ``` r
 library (spacyr)
@@ -208,53 +204,63 @@ nouns <- unlist (lapply (nv, function (i) paste0 (i$noun, collapse = " ")))
 verbs <- unlist (lapply (nv, function (i) paste0 (i$verb, collapse = " ")))
 dn <- dfm (nouns, remove = stopwords (), remove_punct = TRUE)
 dv <- dfm (verbs, remove = stopwords (), remove_punct = TRUE)
-textplot_wordcloud (dn)
 ```
 
-<img src="figures/spacy-1.png" width="100%" />
+### Word cloud of all nouns
 
 ``` r
-textplot_wordcloud (dv)
+textplot_wordcloud (dn, max_words = 200, max_size = 8)
 ```
 
-<img src="figures/spacy-2.png" width="100%" />
+<img src="figures/wordcloud-nouns-1.png" width="100%" />
+
+### Word cloud of all verbs
 
 ``` r
+textplot_wordcloud (dv, max_words = 200, max_size = 9)
+```
 
+<img src="figures/wordcloud-verbs-1.png" width="100%" />
+
+### Topic Models of Nouns and Verbs
+
+``` r
 lda_n <- LDA (dn, k = 5)
 knitr::kable (get_terms (lda_n, 10))
 ```
 
-| Topic 1    | Topic 2    | Topic 3   | Topic 4       | Topic 5   |
-| :--------- | :--------- | :-------- | :------------ | :-------- |
-| data       | models     | data      | r             | package   |
-| model      | r          | package   | package       | data      |
-| package    | package    | methods   | methods       | models    |
-| regression | analysis   | model     | models        | r         |
-| models     | algorithm  | models    | paper         | analysis  |
-| analysis   | estimation | analysis  | model         | functions |
-| functions  | paper      | r         | software      | time      |
-| r          | time       | software  | analysis      | software  |
-| user       | user       | functions | distributions | model     |
-| estimation | functions  | tools     | approach      | method    |
+| Topic 1  | Topic 2  | Topic 3    | Topic 4    | Topic 5      |
+| :------- | :------- | :--------- | :--------- | :----------- |
+| package  | package  | models     | package    | models       |
+| data     | data     | model      | data       | package      |
+| r        | methods  | data       | methods    | data         |
+| analysis | r        | analysis   | functions  | model        |
+| models   | analysis | r          | r          | r            |
+| time     | software | time       | paper      | functions    |
+| paper    | user     | approach   | estimation | function     |
+| method   | use      | regression | tests      | regression   |
+| methods  | number   | estimation | models     | software     |
+| function | program  | methods    | method     | distribution |
 
 ``` r
 lda_v <- LDA (dv, k = 5)
 knitr::kable (get_terms (lda_v, 10))
 ```
 
-| Topic 1     | Topic 2     | Topic 3    | Topic 4    | Topic 5    |
-| :---------- | :---------- | :--------- | :--------- | :--------- |
-| can         | can         | using      | based      | can        |
-| based       | includes    | used       | using      | using      |
-| provides    | implemented | provides   | used       | developed  |
-| allows      | used        | can        | provide    | provides   |
-| used        | illustrated | including  | describe   | proposed   |
-| implemented | use         | illustrate | provided   | may        |
-| using       | describe    | provided   | can        | provide    |
-| called      | presented   | provide    | illustrate | including  |
-| implements  | using       | may        | may        | implements |
-| describes   | provided    | introduce  | present    | given      |
+| Topic 1     | Topic 2    | Topic 3     | Topic 4     | Topic 5    |
+| :---------- | :--------- | :---------- | :---------- | :--------- |
+| used        | provides   | can         | can         | can        |
+| based       | used       | using       | based       | using      |
+| can         | can        | based       | provide     | describe   |
+| using       | provided   | used        | provides    | present    |
+| implemented | based      | provides    | implemented | provide    |
+| present     | using      | may         | provided    | including  |
+| allows      | illustrate | developed   | describes   | used       |
+| proposed    | implements | proposed    | allows      | illustrate |
+| use         | developed  | implemented | estimated   | given      |
+| includes    | presented  | including   | may         | implements |
+
+… none of those reveal anything useful.
 
 ## changes over time
 
@@ -320,3 +326,7 @@ ggplot (dat, aes (x = year, y = r2)) +
 ```
 
 <img src="figures/annual-correlations-1.png" width="100%" />
+
+And that finally reveals one useful insights: The abstracts have over
+time become very notably *more* similar, and converted towards a very
+pronounced uniformity (R<sup>2</sup> \> 0.98).

@@ -10,7 +10,7 @@ output:
         theme: flatly
 ---
 
-```{r}
+```{r options, echo = FALSE}
 knitr::opts_chunk$set(
   out.width = "100%",
   collapse = TRUE,
@@ -111,8 +111,8 @@ current_vol ()
 
 
 Get all abstracts:
-```{r get_all_abstracts, eval = FALSE}
-#get_all_abstracts <- function () {
+```{r get_all_abstracts, eval = TRUE}
+get_all_abstracts <- function () {
     vmax <- current_vol ()
     res <- tibble::tibble (date = character (),
                            volume = integer (),
@@ -138,9 +138,11 @@ Get all abstracts:
     close (pb)
 
     return (res)
-#}
-#a <- get_all_abstracts ()
-saveRDS (res, file = "jss-abstracts.Rds")
+}
+if (!file.exists ("jss-abstracts.Rds")) {
+    a <- get_all_abstracts ()
+    saveRDS (a, file = "jss-abstracts.Rds")
+}
 ```
 
 ## Analyses
@@ -167,6 +169,7 @@ d <- dfm_trim (d, min_termfreq = 10)
 my_lda <- LDA (d, k = 5)
 knitr::kable (get_terms (my_lda, 20))
 ```
+
 spacy-parsed nouns and verbs also don't reveal anything:
 ```{r spacy, eval = TRUE, message = FALSE}
 library (spacyr)
@@ -182,14 +185,30 @@ nouns <- unlist (lapply (nv, function (i) paste0 (i$noun, collapse = " ")))
 verbs <- unlist (lapply (nv, function (i) paste0 (i$verb, collapse = " ")))
 dn <- dfm (nouns, remove = stopwords (), remove_punct = TRUE)
 dv <- dfm (verbs, remove = stopwords (), remove_punct = TRUE)
-textplot_wordcloud (dn)
-textplot_wordcloud (dv)
+```
 
+### Word cloud of all nouns
+
+```{r wordcloud-nouns}
+textplot_wordcloud (dn, max_words = 200, max_size = 8)
+```
+
+### Word cloud of all verbs
+
+```{r wordcloud-verbs}
+textplot_wordcloud (dv, max_words = 200, max_size = 9)
+```
+
+### Topic Models of Nouns and Verbs
+
+```{r lda}
 lda_n <- LDA (dn, k = 5)
 knitr::kable (get_terms (lda_n, 10))
 lda_v <- LDA (dv, k = 5)
 knitr::kable (get_terms (lda_v, 10))
 ```
+
+... none of those reveal anything useful.
 
 ## changes over time
 
@@ -252,3 +271,8 @@ ggplot (dat, aes (x = year, y = r2)) +
     ylab ("Similarity in abstract texts to previous year") +
     theme (axis.title.y = element_text (angle = 90))
 ```
+
+And that finally reveals one useful insights: The abstracts have over time
+become very notably *more* similar, and converted towards a very pronounced
+uniformity (R<sup>2</sup> > `r signif (tail (dat$r2, 1), 2)`).
+
