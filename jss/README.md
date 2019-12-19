@@ -1,3 +1,12 @@
+``` r
+knitr::opts_chunk$set(
+  out.width = "100%",
+  collapse = TRUE,
+  comment = "#>",
+  fig.path="figures/"
+)
+```
+
 ## Scrape the Abstracts
 
 This code gets the number of papers for each volume:
@@ -37,9 +46,8 @@ num_papers <- function (volume = 13) {
 volume <- 1
 npapers <- num_papers (volume)
 message ("Volume ", volume, " has ", npapers, " papers")
+#> Volume 1 has 4 papers
 ```
-
-    ## Volume 1 has 4 papers
 
 This extracts the title and abstract for one paper:
 
@@ -74,16 +82,15 @@ get_abstract <- function (volume = 13, paper = 1) {
     return (ret)
 }
 get_abstract (1, 3)
+#> $title
+#> [1] "XLISP-Stat Tools for Building Generalised Estimating Equation Models"
+#> 
+#> $abstract
+#> [1] "This paper describes a set of Lisp-Stat tools for building Generalised Estimating Equation models to analyse longitudinal or clustered measurements. The user interface is based on the built-in regression and generalised linear model prototypes, with the addition of object-based error functions, correlation structures and model formula tools. Residual and deletion diagnostic plots are available on the cluster and observation level and use the dynamic graphics capabilities of Lisp-Stat."
+#> 
+#> $date
+#> [1] "1996-08-16"
 ```
-
-    ## $title
-    ## [1] "XLISP-Stat Tools for Building Generalised Estimating Equation Models"
-    ## 
-    ## $abstract
-    ## [1] "This paper describes a set of Lisp-Stat tools for building Generalised Estimating Equation models to analyse longitudinal or clustered measurements. The user interface is based on the built-in regression and generalised linear model prototypes, with the addition of object-based error functions, correlation structures and model formula tools. Residual and deletion diagnostic plots are available on the cluster and observation level and use the dynamic graphics capabilities of Lisp-Stat."
-    ## 
-    ## $date
-    ## [1] "1996-08-16"
 
 Get the current—and therefore maximal—volume number:
 
@@ -99,9 +106,8 @@ current_vol <- function () {
     as.integer (gsub ("issue-", "", n [grep ("issue-", n)]) [1])
 }
 current_vol ()
+#> [1] 91
 ```
-
-    ## [1] 91
 
 Get all abstracts:
 
@@ -143,42 +149,174 @@ These presume all of the above to have been run, and a local
 `"jss-abstracts.Rds"` file to have been created.
 
 ``` r
+library (magrittr)
+library (quanteda)
+library (topicmodels)
 a <- readRDS ("jss-abstracts.Rds")
-d <- quanteda::dfm (a$abstracts)
-s <- sort (quanteda::colSums (d), decreasing = TRUE)
-sp0 <- spacyr::spacy_parse (names (s))
-getnoun <- function (pos, token) {
-    if (length (pos) > 2 & pos [length (pos)] == "NOUN")
-        return (token [length (token)])
-    else if (length (pos) <= 2)
-        return (paste0 (token, collapse = " "))
-    else
-        return (token [pos == "NOUN"] [1])
-}
-sp <- sp0 %>%
-    dplyr::group_by (doc_id) %>%
-    dplyr::summarise (noun = getnoun (pos, token))
-index <- match (unique (sp0$doc_id), sp$doc_id)
-nouns <- sp$noun [index]
-nouns [is.na (nouns)] <- names (s) [is.na (nouns)]
+q <- corpus (a$abstract)
+docvars (q, "year") <- as.integer (substring (a$date, 1, 4))
+docvars (q, "volume") <- as.integer (a$volume)
+docvars (q, "number") <- as.integer (a$number)
 
-names (s) <- nouns
-s <- data.frame (noun = names (s),
-                 n = as.integer (s),
-                 stringsAsFactors = FALSE) %>%
-    dplyr::group_by (noun) %>%
-    dplyr::summarise (n = sum (n)) %>%
-    dplyr::arrange (desc (n))
-
-for (i in nouns)
-{
-    index <- grep (i, s$noun)
-    s$n [index [1]] <- sum (s$n [index])
-    if (length (index) > 1)
-    {
-        index2 <- seq (nrow (s)) [!seq (nrow (s)) %in% index [-1] ]
-        s <- s [index2, ]
-    }
-}
-s <- dplyr::arrange (s, desc (n))
+d <- dfm (q, remove = quanteda::stopwords (), remove_punct = TRUE)
 ```
+
+topic models don’t reveal anything:
+
+``` r
+#quanteda::textplot_wordcloud (d)
+d <- dfm_trim (d, min_termfreq = 10)
+my_lda <- LDA (d, k = 5)
+knitr::kable (get_terms (my_lda, 20))
+```
+
+| Topic 1      | Topic 2         | Topic 3          | Topic 4     | Topic 5     |
+| :----------- | :-------------- | :--------------- | :---------- | :---------- |
+| package      | models          | r                | package     | data        |
+| models       | can             | data             | data        | r           |
+| model        | data            | analysis         | methods     | methods     |
+| can          | using           | paper            | functions   | model       |
+| use          | model           | can              | r           | models      |
+| estimation   | used            | used             | using       | software    |
+| also         | r               | provides         | statistical | statistical |
+| different    | regression      | provide          | two         | paper       |
+| examples     | also            | based            | estimation  | functions   |
+| using        | approach        | also             | used        | use         |
+| several      | time            | function         | provides    | analysis    |
+| based        | available       | functions        | can         | variables   |
+| provides     | use             | method           | developed   | several     |
+| likelihood   | inference       | provided         | multiple    | also        |
+| analysis     | distribution    | implementation   | time        | well        |
+| regression   | may             | algorithm        | analysis    | one         |
+| available    | methods         | software         | software    | method      |
+| bayesian     | function        | set              | paper       | random      |
+| standard     | functions       | test             | examples    | tools       |
+| linear       | one             | algorithms       | many        | can         |
+| spacy-parsed | nouns and verbs | also don’t revea | l anything: |             |
+
+``` r
+library (spacyr)
+spacy_initialize ()
+
+# extract lists of nouns and verbs:
+nv <- pbapply::pblapply (a$abstract, function (i) {
+    s <- spacy_parse (i)
+    list (noun = s$token [grep ("NOUN", s$pos)],
+          verb = s$token [grep ("VERB", s$pos)])
+                           })
+nouns <- unlist (lapply (nv, function (i) paste0 (i$noun, collapse = " ")))
+verbs <- unlist (lapply (nv, function (i) paste0 (i$verb, collapse = " ")))
+dn <- dfm (nouns, remove = stopwords (), remove_punct = TRUE)
+dv <- dfm (verbs, remove = stopwords (), remove_punct = TRUE)
+textplot_wordcloud (dn)
+```
+
+<img src="figures/spacy-1.png" width="100%" />
+
+``` r
+textplot_wordcloud (dv)
+```
+
+<img src="figures/spacy-2.png" width="100%" />
+
+``` r
+
+lda_n <- LDA (dn, k = 5)
+knitr::kable (get_terms (lda_n, 10))
+```
+
+| Topic 1    | Topic 2    | Topic 3   | Topic 4       | Topic 5   |
+| :--------- | :--------- | :-------- | :------------ | :-------- |
+| data       | models     | data      | r             | package   |
+| model      | r          | package   | package       | data      |
+| package    | package    | methods   | methods       | models    |
+| regression | analysis   | model     | models        | r         |
+| models     | algorithm  | models    | paper         | analysis  |
+| analysis   | estimation | analysis  | model         | functions |
+| functions  | paper      | r         | software      | time      |
+| r          | time       | software  | analysis      | software  |
+| user       | user       | functions | distributions | model     |
+| estimation | functions  | tools     | approach      | method    |
+
+``` r
+lda_v <- LDA (dv, k = 5)
+knitr::kable (get_terms (lda_v, 10))
+```
+
+| Topic 1     | Topic 2     | Topic 3    | Topic 4    | Topic 5    |
+| :---------- | :---------- | :--------- | :--------- | :--------- |
+| can         | can         | using      | based      | can        |
+| based       | includes    | used       | using      | using      |
+| provides    | implemented | provides   | used       | developed  |
+| allows      | used        | can        | provide    | provides   |
+| used        | illustrated | including  | describe   | proposed   |
+| implemented | use         | illustrate | provided   | may        |
+| using       | describe    | provided   | can        | provide    |
+| called      | presented   | provide    | illustrate | including  |
+| implements  | using       | may        | may        | implements |
+| describes   | provided    | introduce  | present    | given      |
+
+## changes over time
+
+First collate the abstract on annual bases:
+
+``` r
+a <- readRDS ("jss-abstracts.Rds")
+library (stringr)
+# The vectorized version of stringr::str_replace_all is nearly 10 times faster
+# than gsub on stops <- paste0 (stops, collapse = "|"). Note that it needs the
+# vector of patterns to be named.
+collate_abstracts <- function (a) {
+    a$year <- as.integer (substring (a$date, 1, 4))
+    years <- sort (unique (a$year))
+    abstracts <- rep (NA, length (years))
+    #stops <- paste0 (paste0 ("\\s", quanteda::stopwords (), "\\s"), collapse = "|")
+    stops <- paste0 ("\\s", quanteda::stopwords (), "\\s")
+    repl <- rep ("", length (stops))
+    names (stops) <- names (repl) <- paste0 (seq_along (stops)) # necessary!
+    for (y in seq (years)) {
+        ab <- paste0 (a$abstract [a$year == years [y]], collapse = " ")
+        #ab <- gsub (stops, " ", ab)
+        #ab <- gsub ("[[:punct:]]", "", ab)
+        ab <- str_replace_all (ab, stops, repl)
+        ab <- str_replace_all (ab, "[[:punct:]]", "")
+        abstracts [y] <- ab
+    }
+    names (abstracts) <- years
+    return (abstracts)
+}
+abstracts <- collate_abstracts (a)
+```
+
+Then convert to word-frequency tables and correlate inter-annual
+frequencies between word frequencies (for all words with freq \> 1).
+
+``` r
+library (ggplot2)
+abstract_freqs <- lapply (abstracts, function (i) {
+            res <- table (paste0 (tolower (tokens (i))))
+            freqs <- as.integer (res)
+            names (freqs) <- names (res)
+            res <- stats::aggregate (freqs, by = list (names (freqs)), FUN = sum)
+            names (res) <- c ("token", "n")
+            return (res)
+            })
+a1 <- abstract_freqs [-length (abstract_freqs)]
+a2 <- abstract_freqs [-1]
+r2 <- rep (NA, length (a1))
+for (i in seq_along (a1)) {
+    a1i <- a1 [[i]] [a1 [[i]]$n > 1, ]
+    a2i <- a2 [[i]] [a2 [[i]]$n > 1, ]
+    a <- dplyr::inner_join (a1i, a2i, by = "token")
+    r2 [i] <- cor (a [, 2], a [, 3])
+}
+dat <- data.frame (year = as.integer (names (a2)),
+                   r2 = r2 ^ 2)
+ggplot (dat, aes (x = year, y = r2)) +
+    geom_point (col = "#D24373", cex = 2) +
+    geom_line (col = "#FF4373") +
+    ylab ("Similarity in abstract texts to previous year") +
+    theme (axis.title.y = element_text (angle = 90))
+```
+
+<img src="figures/annual-correlations-1.png" width="100%" />
