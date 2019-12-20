@@ -379,13 +379,22 @@ wlim <- 100
 res <- res [res$n > wlim, ]
 
 # output the remaining nodes
-nodes <- rbind (data.frame (node = res$from, i = res$fromi),
-                data.frame (node = res$to, i = res$toi))
+nodes <- rbind (data.frame (node = res$from,
+                            i = res$fromi,
+                            stringsAsFactors = FALSE),
+                data.frame (node = res$to,
+                            i = res$toi,
+                            stringsAsFactors = FALSE))
 nodes <- nodes [which (!duplicated (nodes)), ]
+# add results from clustering analysis below, to assign nodes to groups
+nodes$group <- 0
+#for (i in seq (cl)) {
+#    nodes$group [which (nodes$node %in% cl [[i]])] <- i
+#}
 out <- "var nodes = new vis.DataSet(["
 for (i in seq (nrow (nodes)))
     out <- c (out, paste0 ("    { id: ", nodes$i [i], ",",
-                           "group: 0,",
+                           "group: ", nodes$group [i], ",",
                            "label: \"", nodes$node [i], "\" },"))
 
 out <- c (out, "]);", "", "", "var edges = new vis.DataSet([")
@@ -442,41 +451,88 @@ interpret intelligibly at all.
 A "cheaper" way to view relationships within the network might be to generate
 simple clusters from the feature co-occurrence matrix. This can be done by
 adapting the above code to generate a relationship matrix between the nodes,
-and use that to define clusters.
+and use that to define clusters. The following code applies `dbscan`
+iteratively until all clusters have < 100 members, and automatically adjusted
+the `eps` parameter to achieve the greatest numbers of clusters that are most
+evenly distributed.
 
 ```{r net-clustering}
-m <- as.matrix (fcmat)
-m <- m + t (m) # render to symmetric matrix:
-#m [lower.tri (m)] <- 0 # reduce to upper tri only
-diag (m) <- 0
-m <- 1 - m / max (m) # convert to a measure of distance
 library (dbscan)
-x <- dbscan (m, eps = 0.002)
-cl <- rownames (m)
-split (cl, f = as.factor (x$cluster))
-```
-Then take the largest cluster and examine that in isolation
-```{r net-clustering1}
-index <- which (x$cluster == 0)
-msub <- m [index, index]
-x <- dbscan (msub, eps = 0.01)
-cl <- rownames (msub)
-split (cl, f = as.factor (x$cluster))
-```
-Split each of those again
-```{r net-clustering2}
-index0 <- which (x$cluster == 0)
-index1 <- which (x$cluster == 1)
-msub0 <- msub [index0, index0]
-msub1 <- msub [index1, index1]
-x0 <- dbscan (msub0, eps = 0.03)
-cl0 <- rownames (msub0)
-split (cl0, f = as.factor (x0$cluster))
-x1 <- dbscan (msub1, eps = 0.0007)
-cl1 <- rownames (msub1)
-split (cl1, f = as.factor (x1$cluster))
+# function to find optimal value of eps, as the value giving the longest
+# table with smallest dominant cluster size This can't use `optimise`,
+# because the response is not smooth
+# @param m A dissimilarity matrix
+opteps <- function (m, minPts = 10) {
+    clstats <- function (m, eps, minPts) {
+        vapply (eps, function (i) {
+                       x <- dbscan (m, eps = i, minPts = minPts)
+                       tab <- table (x$cluster)
+                       if (length (tab) == 1)
+                           ret <- -1
+                       else
+                           ret <- length (tab) / max (tab)
+                       return (ret) }, numeric (1))
+    }
+    eps <- 10 ^ ((-10:-2) / 2)
+    val <- clstats (m, eps, minPts = minPts)
+    if (all (val < 0))
+        return (NULL)
+
+    eps <- eps [which.max (val)] + (-5:5) * eps [which.max (val)] / 5
+    eps <- eps [eps > 0]
+    val <- clstats (m, eps, minPts = minPts)
+    eps [which.max (val)]
+}
+
+# Then the meta-function to divide fcmat into clusters between minPts and maxPts
+cluster_net <- function (fcmat, minPts = 10, maxPts = 100) {
+    m <- as.matrix (fcmat)
+    m <- m + t (m) # render to symmetric matrix:
+    #m [lower.tri (m)] <- 0 # reduce to upper tri only
+    diag (m) <- 0
+    m <- 1 - m / max (m) # convert to a measure of distance
+    minPts <- 10
+    eps <- opteps (m, minPts = minPts)
+    x <- dbscan (m, eps = eps, minPts = minPts)
+    s <- split (rownames (m), f = as.factor (x$cluster))
+
+    index <- which (vapply (s, length, integer (1)) > 100)
+    indivisible <- rep (FALSE, length (s))
+    while (length (index) > 0) {
+        sadd <- list ()
+        indiv_add <- NULL
+        for (i in index) {
+            si <- s [[i]]
+            index2 <- match (si, rownames (m))
+            msub <- m [index2, index2]
+            eps <- opteps (msub, minPts = minPts)
+            if (is.null (eps)) {
+                indiv_add <-  c (indiv_add, TRUE)
+                sadd <- c (sadd, list (si))
+            } else {
+                x <- dbscan (msub, eps = eps, minPts = minPts)
+                indiv_add <- c (indiv_add, rep (FALSE, length (unique (x$cluster))))
+                sadd <- c (sadd, split (rownames (msub), as.factor (x$cluster)))
+            }
+        }
+        s [index] <- NULL
+        indivisible <- indivisible [!seq (indivisible) %in% index]
+        s <- c (s, sadd)
+        indivisible <- c (indivisible, indiv_add)
+        index <- which (vapply (s, length, integer (1)) > 100)
+        indiv_i <- seq (indivisible) [indivisible]
+        index <- index [!index %in% indiv_i]
+    }
+    names (s) <- NULL
+
+    return (s)
+}
+
+cl <- cluster_net (fcmat, minPts = 10, maxPts = 100)
+print (cl)
 ```
 
-
-
+Those results can then be fed back in to the above `visjs` graph, although
+doing that only reveals that almost all of the highly-connected groups belong
+to one single cluster, so it doesn't help much.
 
