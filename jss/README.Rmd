@@ -276,3 +276,207 @@ And that finally reveals one useful insights: The abstracts have over time
 become very notably *more* similar, and converted towards a very pronounced
 uniformity (R<sup>2</sup> > `r signif (tail (dat$r2, 1), 2)`).
 
+## Unique Words
+
+The uniformity, and the generic nature of the wordclouds and topic models, may
+indicate that differences between abstracts actually arise in their focal nouns
+or verbs, and that these are actually used very infrequently. The following
+analysis extracts the unique words from each abstract.
+
+```{r unique-words}
+library (quanteda)
+library (spacyr)
+spacy_initialize ()
+a <- readRDS ("jss-abstracts.Rds")
+toks <- paste0 (a$abstract, collapse = " ") %>%
+    tolower () %>%
+    tokens () %>%
+    paste0 ()
+toks <- toks [!toks %in% stopwords () & nchar (toks) > 2]
+# remove a few non-words
+toks <- toks [!grepl ("^www|[1-9]", toks)]
+temp <- table (toks)
+tok_n <- as.integer (temp)
+names (tok_n) <- names (temp)
+toks1 <- spacy_parse (names (tok_n [tok_n == 1]))
+verbs <- toks1$token [grep ("VERB", toks1$pos)]
+nouns <- toks1$token [grep ("NOUN", toks1$pos)]
+```
+
+Then take the nouns and construct a network by measuring textual positions
+between each. Note that `spacy_parse` parses some uniquely identified tokens
+into multiple spacy-equivalent tokens, and so not all of these are necessarily
+unique. This code generates a distance matrix of the minimal textual distance
+between each pair of unique words within the entire corpus of abstracts. 
+
+
+```{r word-network, eval = FALSE}
+library (stringr)
+nouns <- nouns [nchar (nouns) > 1]
+res <- str_locate_all (paste0 (toks, collapse = " "), pattern = nouns)
+for (i in seq_along (res)) res [[i]] <- cbind (res [[i]], i)
+res <- data.frame (do.call (rbind, res) [, c (1, 3)])
+res$noun <- nouns [res$i]
+```
+That then gives a `data.frame` with 3 columns of (1) start position of each of
+the `r length (nouns)` nouns; an index `i` enumerating the nouns, and the nouns
+themselves.
+```{r textplot_network}
+abstracts <- corpus (a$abstract) %>%
+    tokens (remove_punct = TRUE) %>%
+    tokens_tolower () %>%
+    tokens_remove (pattern = stopwords ("English"))
+# make dictionary of nouns
+nouns <- unique (nouns)
+dict <- as.list (nouns)
+names (dict) <- nouns
+dict <- dictionary (dict)
+fcmat <- fcm (abstracts)
+fcmat <- fcm_select (fcmat, pattern = dict)
+rs <- rowSums (fcmat)
+lens <- vapply (0:10, function (i) length (which (rs > i)), integer (1))
+rsi <- (0:10) [which (lens < 1000) [1]]
+index <- which (rs > rsi)
+fcmat <- fcmat [index, index]
+#textplot_network (fcmat, min_freq = 0.9)
+```
+
+The `textplot_network` function is unintelligible because it's static and
+illegibly complex. Need to convert it to a dynamic representation, which the
+following code does through constructing a `.js` representation suitable for
+visualization via `visjs`. (Note that other options including the `networkD3`
+and `sigmajs` packages are not at all responsive for networks of
+this size.)
+
+
+```{r make-visjs}
+# convert the matrix to non-zero edges:
+m <- as.matrix (fcmat)
+m <- m + t (m) # render to symmetric matrix:
+m [lower.tri (m)] <- 0 # reduce to upper tri only
+diag (m) <- 0
+res <- rep (list (NULL), nrow (m))
+names (res) <- rownames (m)
+for (i in seq (nrow (m))) {
+    index <- which (m [i, ] > 0)
+    res [[i]] <- m [i, index, drop = FALSE]
+}
+res <- res [which (lapply (res, length) > 0)]
+from <- lapply (res, function (i) rep (rownames (i), ncol (i))) %>%
+    unlist () %>%
+    unname ()
+to <- lapply (res, function (i) colnames (i)) %>%
+    unlist () %>%
+    unname ()
+res <- data.frame (from = from,
+                   to = to,
+                   fromi = match (from, rownames (fcmat)),
+                   toi = match (to, rownames (fcmat)),
+                   n = unname (unlist (res)),
+                   stringsAsFactors = FALSE)
+# reduce to edges above defined weight limit:
+wlim <- 100
+res <- res [res$n > wlim, ]
+
+# output the remaining nodes
+nodes <- rbind (data.frame (node = res$from, i = res$fromi),
+                data.frame (node = res$to, i = res$toi))
+nodes <- nodes [which (!duplicated (nodes)), ]
+out <- "var nodes = new vis.DataSet(["
+for (i in seq (nrow (nodes)))
+    out <- c (out, paste0 ("    { id: ", nodes$i [i], ",",
+                           "group: 0,",
+                           "label: \"", nodes$node [i], "\" },"))
+
+out <- c (out, "]);", "", "", "var edges = new vis.DataSet([")
+res_str <- apply (res, 1, function (i)
+                  paste0 ("    { from: ", i [3],
+                           ", to: ", i [4],
+                           #", arrows: \"to\"",
+                           ", value: ", i [5], " },"))
+out <- c (out, res_str, "]);")
+
+out <- c (out, "", "",
+          "var container = document.getElementById(\"mynetwork\");",
+          "var data = {",
+          "    nodes: nodes,",
+          "    edges: edges",
+          "};",
+          "var options = {",
+          "    nodes: {",
+          "        shape: \"box\",",
+          "        margin: 10,",
+          "        widthConstraint: {",
+          "            maximum: 200",
+          "        },",
+          "        shadow: true",
+          "    },",
+          "    edges: {",
+          "        shadow: true,",
+          "        smooth: true",
+          "    },",
+          "    physics: {",
+          "        barnesHut: { gravitationalConstant: -20000 },",
+          "        stabilization: { iterations: 2500 }",
+          "    }",
+          "};",
+          "",
+          "",
+          "var network = new vis.Network(container, data, options);")
+```
+dump that to a file
+```{r, eval = FALSE}
+con <- file ("./network.js", "w")
+writeLines (out, con = con)
+close (con)
+```
+That works, at least with the high threshold of `wlim = 100`, but the initial
+rendering is still quite slow, and so there seems no way to visualise anything
+like the full network. That threshold results in 81 nodes and 253 edges.
+Dropping to `wlim = 50` increases those to 140 nodes and 616 edges. The
+resultant network does appear after some time, but is the quite hard to
+interpret intelligibly at all.
+
+## Network clustering
+
+A "cheaper" way to view relationships within the network might be to generate
+simple clusters from the feature co-occurrence matrix. This can be done by
+adapting the above code to generate a relationship matrix between the nodes,
+and use that to define clusters.
+
+```{r net-clustering}
+m <- as.matrix (fcmat)
+m <- m + t (m) # render to symmetric matrix:
+#m [lower.tri (m)] <- 0 # reduce to upper tri only
+diag (m) <- 0
+m <- 1 - m / max (m) # convert to a measure of distance
+library (dbscan)
+x <- dbscan (m, eps = 0.002)
+cl <- rownames (m)
+split (cl, f = as.factor (x$cluster))
+```
+Then take the largest cluster and examine that in isolation
+```{r net-clustering1}
+index <- which (x$cluster == 0)
+msub <- m [index, index]
+x <- dbscan (msub, eps = 0.01)
+cl <- rownames (msub)
+split (cl, f = as.factor (x$cluster))
+```
+Split each of those again
+```{r net-clustering2}
+index0 <- which (x$cluster == 0)
+index1 <- which (x$cluster == 1)
+msub0 <- msub [index0, index0]
+msub1 <- msub [index1, index1]
+x0 <- dbscan (msub0, eps = 0.03)
+cl0 <- rownames (msub0)
+split (cl0, f = as.factor (x0$cluster))
+x1 <- dbscan (msub1, eps = 0.0007)
+cl1 <- rownames (msub1)
+split (cl1, f = as.factor (x1$cluster))
+```
+
+
+
+
