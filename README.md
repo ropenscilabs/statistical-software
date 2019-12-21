@@ -10,7 +10,7 @@ No concrete developments to date
 
 ## 2\. Statistical Software
 
-### Summary
+### 2.1 Summary
 
 The project requires a degree of consensus on the scope of “Statistical
 Software”. One of the primary, coherent bodies of reference for
@@ -27,6 +27,8 @@ discern topics, clusters, or other textual phenomena which might help to
 distinguish categories of statistical software. The following
 nevertheless provides a brief list of nouns which define potentially
 distinct topics within the broader realm of statistical software:
+
+### 2.2 Terms Defining Statistical Software (from JSS Abstracts)
 
 #### Applications
 
@@ -108,5 +110,7 @@ distinct topics within the broader realm of statistical software:
     infarction, aesthetics, heritability, declaration,
     parameterizations, tensors, wraps, differentiates, archives,
     geology, continuum, ingredient
+
+### 2.3 Approaches to Defining Statistical Software
 
 ## 3\. Software Reviews, Testing and Validation
