@@ -203,7 +203,9 @@ generate meaningful output.
 ### 2.4d Summary
 
 The following table summarises these three brief classes of statistical
-software, and the potential problems they encapsulate.
+software, and the potential problems they encapsulate, where “No” is to
+be interpreted to imply “Not necessarily”, and “Yes” merely some
+sufficient degree of surety.
 
 | Algorithm  | Reproducible? | Unbiased? | Meaningful? |
 | ---------- | ------------- | --------- | ----------- |
@@ -243,7 +245,8 @@ lines of the row names in the above table, and associate a list of
 potential problems or shortcomings with each of the given categories; or
 to categorise software directly according to the column names of
 potential problems or shortcomings, regardless of the explicit category
-to which it may be judged to belong
+to which it may be judged to belong. These potential problems are given
+further, explicit consideration within the following sections.
 
 # 3\. Software Reviews, Testing and Validation
 
