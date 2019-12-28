@@ -338,8 +338,8 @@ independence, it is important to note that current review practices only
 partially overlap conventional or traditional domains of “software
 review”. In particular, software review is traditionally very directly
 focussed on explicit review of code, and less so on broader or more
-general aspects of functionality and usage. All of these aspects are
-entwined ([click here to view interactive network
+general aspects of functionality and usage. All of these aspects are so
+intimately entwined ([click here to view interactive network
 diagram](https://mpadge.github.io/statistical-software/testing-and-validation/)),
 that such entwinement should rightly be interpreted to reflect a need to
 clearly clarify the scope and design of review itself.
@@ -348,11 +348,11 @@ It should also be noted in relation to the interactive network diagram
 that the centrality of review within that network likely reflects a
 pervasive difficulty within the extant literature in defining the scope
 of review. This difficulty in definition translates into the concept of
-review being tentatively related to many more diverse aspects that
-other, more readily defined aspects such as testing. Whether or not the
-centrality of review is an artefact, the following two important aspects
-emerge as subsets, and direct repeats, of the more general questions
-considered under the general topic of “Review” at the outset:
+review being tentatively related to many other, more diverse yet readily
+defined aspects (such as testing). Whether or not the centrality of
+review is an artefact, the following two important aspects emerge as
+subsets, and direct repeats, of the more general questions considered
+under the general topic of “Review” at the outset:
 
 1.  At what point(s) during the development of software should review
     start and end?
@@ -445,19 +445,29 @@ for which Mili (2015) provides a notably comprehensive overview.
 
 It ought to be particularly emphasised that unit testing is very
 generally considered an activity conducted by developers and relevant to
-developers (only). Testing of software minimally requires *Integration
-Testing* in addition to, and beyond, Unit Testing. The structure of R
-packages makes for a particularly clear distinction between these two:
+developers (only). It seems regrettably necessary to note that this
+practice gained its nomenclature to indicate nothing more than testing
+software at the *smallest possible scale* of “fundamental” units,
+regardless of any inter-dependence between those units. The testing of
+such inter-dependence between units is accordingly referred to as
+“integration testing”, while testing of explicit functions within a
+piece of code is referred to “functional testing.” These categories can
+of course not generally be clearly defined, but the distinction between
+lowest level “unit testing” and any form of higher level (functional or
+integration) testing is nevertheless useful. The structure of R packages
+makes for a particularly clear distinction between these two:
 
 1.  Unit Testing tests all functions and functionality *internal* to a
     package
 2.  Integration Testing tests all *exported* functions of a package—and
     only those functions.
 
-That consideration alone highlights the importance of explicitly
-determining whether tests of and within an R package should best focus
-on testing *exported* functions (only), or whether they should focus on
-testing internal (non-exported) functions?
+(Along with a potential corollary that “functional testing” is, or is
+agreed to be, largely meaningless for R packages.) Those consideration
+alone highlight the importance of explicitly determining whether tests
+of and within an R package should best focus on testing *exported*
+functions (only), or whether they should focus on testing internal
+(non-exported) functions?
 
 There are many other taxonomies and types of tests, with most texts on
 the subject emphasising the importance of explicitly developing a schema
@@ -518,7 +528,7 @@ expected outputs. In contrast, symbolic tests are exceedingly difficult,
 and examine and test the “impact of execution on symbolic data”, while
 “stochastic” testing aims to statistically summarise the expected
 output of full symbolic tests, obviating the necessity of implementing
-full symbolic tests.
+full symbolic tests, as explored further in the following sub-section.
 
 ### 3.4c Property-Based Testing
 
@@ -553,27 +563,31 @@ instantiation test with a univariate input such as,
 
 ``` r
 output <- my_function(input = 31)
+expect(output == <expected_single_output>)
 ```
 
 with a property-based equivalent,
 
 ``` r
 output <- my_function(input = rnorm(1, mean = 0, sd = 1))
+expect(output == <expected_distributional_output>)
 ```
 
 or more powerfully,
 
 ``` r
 output <- my_function(input = norm_dist)
+expect(output == <expected_distributional_output>)
 ```
 
-where `norm_dist` is ascribed some set of defined properties. These
-properties then form the basis of the “property-based testing” of
-`my_function`, and may include, for example, the extent to which the
-input might deviate from strict normality. There have been previous
-attempts to devise such systems for R packages, perhaps most notably the
-[`fuzzr` package](https://github.com/mdlincoln/fuzzr), and the
-[`quickcheck`
+where `norm_dist` is ascribed some set of defined properties, as are the
+instances of `<expected_distributional_output>`. These properties then
+form the basis of the “property-based testing” of `my_function`, and may
+include, for example, the extent to which one or both of input and
+output might deviate from stated or expected distributional forms. There
+have been previous attempts to devise such systems for R packages,
+perhaps most notably the [`fuzzr`
+package](https://github.com/mdlincoln/fuzzr), and the [`quickcheck`
 package](https://github.com/RevolutionAnalytics/quickcheck) by
 RevolutionAnalytics, both of which appear to have long been abandoned.
 The software which appears to best encapsulate current best practices in
@@ -584,8 +598,8 @@ using its own internal grammar of assumptions or pre-conditions, defined
 by a series of `@given` statements, a definition of what is being
 tested, and a statement of expected output (generally via one or more
 `@assert` statements). This is a far more powerful framework than
-anything currently considered or possible within R (the two packages
-mentioned above notwithstanding).
+anything currently considered or possible within R (notwithstanding the
+two packages mentioned above).
 
 ### 3.4d Testing Grammar
 
@@ -612,8 +626,9 @@ Development”](https://cucumber.io). This grammar enables plain
 English-style statements to be made both for test expectations and for
 pre-conditions or assumptions. Importantly, these are embedded within
 statements of “Scenarios”, which means that the crucial component of
-`gherkin`-type systems for open-source software is that precisely the
-same grammar is shared by all of:
+[`gherkin`](https://cucumber.io/docs/gherkin/)-type systems for
+open-source software is that precisely the same grammar is shared by all
+of:
 
 1.  Software tests;
 2.  Software specifications;
@@ -627,7 +642,62 @@ concurrent developments in python. It ought to especially be noted that
 the `@given` statements of both `hypothesis` and `gherkin/cucumber` very
 frequently translate to expectation of *statistical properties*, and are
 thus likely to be of particularly direct relevance to statistical
+software. We now consider further arguments for serious consideration of
+such systems within the context of statistical software, with particular
+reference to the foregoing considerations of types of statistical
 software.
+
+### 3.5e Property-Based Testing and Statistical Software
+
+Implementing property-based testing within or for R package may be
+judged too ambitious within the scope of the present project, yet this
+sub-section presents a brief argument for serious consideration. We
+consider by way of example, with reference to the above categories of
+statistical software, considered in this context in terms of the column
+names of the preceding table, defining whether software generates
+results that are (i) Reproducible? (ii) Unbiased? and (iii) Meaningful?
+Consider, for example, reproducibility which, among other important
+aspects, should only ever be defined (in the best possible
+circumstances) within some degree of machine precision, and so can in
+this trite yet strict sense only rightly be considered a phenomenon of
+distribution rather than instantiation, Testing reproducibility thus
+requires some form of distributional–or *property-based*–testing. More
+generally, many of the problems encapsulated in the foregoing
+considerations of “difficult” categories of statistical software could
+be effectively addressed by specifying software capabilities in
+distributional or property-based terms.
+
+Continuing with the above example, software that fails to generate
+“reproducible” results according to some “standard” definition of that
+concept could nevertheless be specified to transform a given
+distributional input into an expected distributional output, with that
+output encapsulating the distributional uncertainty associated with some
+explicitly acknowledged degree of irreproducibility. Similarly, software
+that (potentially) generates biased results could readily and explicitly
+acknowledge such via an appropriate property-based grammar of testing
+along such lines as,
+
+``` r
+given(my_input1 = <our_training_data>)
+output1 <- my_function(input = my_input1)
+expect(output1 == <expected_distributional_output1>)
+given(my_input2 = <different_training_data>)
+output2 <- my_function(input = my_input2)
+expect(output2 == <expected_distributional_output2>)
+expect(<expected_distributional_output1> != <expected_distributional_output2>)
+```
+
+Specification of expected distributional differences in output would
+then amount to an explicit specification of expected bias.
+
+This brief sub-section hopefully suffices to illustrate how the
+unavoidable problems identified above in regard to classifying types of
+statistical software might be very effectively overcome through
+implementation of an appropriate grammar for property-based testing, and
+that doing so could go a long way towards obviating much need to
+delineate and categorise either different types of statistical software,
+or different types of expected divergence from generally expected
+behaviour of statistical software.
 
 # 4\. Software Design
 
