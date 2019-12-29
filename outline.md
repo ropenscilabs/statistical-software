@@ -119,3 +119,4 @@ Lots to put here, but some in addition to stuff in current document:
    -  https://www.alexpghayes.com/blog/type-stable-estimation/, https://www.alexpghayes.com/blog/testing-statistical-software/
    -  https://tidymodels.github.io/model-implementation-principles/
    -  https://github.com/pharmaR/white_paper
+   -  https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md
