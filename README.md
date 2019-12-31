@@ -733,6 +733,54 @@ technical aspects of package development at the expense of the more
 general concepts listed above, particularly those listed under
 “Useability Attributes”.
 
+## 4.1 Software Lifecycles
+
+A key determinant and constraint of software design arises through it
+being explicitly embedded within a defined “software lifecycle”. There
+has been a great deal written about software lifecycles, and a large
+variety of models proposed to describe or define “software lifecycles.”
+All of these models are unavoidably generic, and most of them—one might
+justifiably assert, “merely”—serve to enable a visual diagram that
+connects various components deemed to be important to consider
+throughout an ongoing process of software development and improvement.
+None of these proposed models ought be considered any more or less worth
+of consideration than any other, and with that no particular model ought
+be considered worthy of any particular, explicit consideration. What
+nevertheless unites all such models is their universal basis in a
+conceptualisation of software development as an inherently *commercial*
+activity, and as such a great deal of most such models is arguably not
+directly applicable to notions of software lifecycles which might be
+typical of open source software. A few general comments are nevertheless
+instructive, including the following:
+
+> The software life cycle contains software engineering tasks and
+> documentation necessary to support the software validation effort. In
+> addition, the software life cycle contains specific verification and
+> validation tasks that are appropriate for the intended use of the
+> software (for Devices and adiological Health (2019)).
+
+Vogel (2011) further provides the following list of components of a
+software lifecycle, done while importantly emphasising that one ought
+never presume the universal applicability of a single model of a
+software lifecycle:
+
+  - Quality Planning
+  - System Requirements Definition
+  - Detailed Software Requirements Specification
+  - Software Design Specification
+  - Construction or Coding
+  - Testing
+  - Installation
+  - Operation and Support
+  - Maintenance
+  - Retirement
+
+## 4.2 Software Testing Lifecycles
+
+Mili (2015) discusses the potentially important concept of a Software
+*Testing* Lifecycle, although the discussion points themselves are quite
+generic.
+
 # 5\. Community
 
 This section considers aspects related to community engagement,
