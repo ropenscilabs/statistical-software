@@ -804,7 +804,7 @@ and referring to such a model.
 
 Open source software may often be initially conceived of and designed to
 meet or fulfil some specific goal of one or more (initial) primary
-developers, but its ongoing development is very frequently and strongly
+developers, but its ongoing development is frequently and strongly
 influenced by open and ongoing community engagement with the software.
 Such engagement is inherently unpredictable, and arguably leads to
 developmental trajectories being less predictable than for equivalent,
@@ -813,13 +813,6 @@ in terms of simplified models. For the purposes of understanding the
 potential form of a model for the lifecycle of open source software, it
 nevertheless seems reasonable to initially distinguish between the
 following three primary developmental phases:
-
-1.  Initial conception and “internal” development; followed in response
-    to some sufficient degree of community engagement and interaction
-    with the software by:
-2.  Open, and often inherently unpredictable, ongoing development as a
-    living piece of software in the “open”, before
-3.  Senescence, decline (in use), and abandonment.
 
 **1. Initial Conception and “Internal” Development** This is perhaps the
 single stage in the development of open source software which has
@@ -838,15 +831,16 @@ by conventional models of software lifecycles, because the ongoing
 engagement of a truly open community must lead to some degree of
 uncontrollability in the process of ongoing development. Beyond central,
 technical questions defining development platforms, version control
-systems, and platforms for community engagement and contribution,
-equally important “meta-questions” which must likely be confronted
-during this phase include:
+systems, update and release frequencies and strategies, and platforms
+for community engagement and contribution, equally important
+“meta-questions” which must likely be confronted during this phase
+include:
 
 1.  The extent to which control over the developmental trajectory of
-    software will, can, or might best be granted to non-primary
+    software can, will, or might best be granted to non-primary
     (“community”) developers;
-2.  What is the *desired* extent of community engagement in development,
-    and is it desired that such engagement increase over time? (And
+2.  The *desired* extent of community engagement in development, and
+    whether it is desired that such engagement increase over time? (And
     potentially: if so, how?)
 3.  The extent to which development might be defined by bug reports,
     feature requests, and similar input which nevertheless may or will
@@ -863,10 +857,22 @@ reflection. The intent of the present section is to explore the extent
 to which an explicit model of an open source software lifecycle might be
 useful, for which we will return to these questions immediately below,
 keeping in mind that their primary function here in intended to be
-*exemplary*.
+*exemplary*. In doing so, it may nevertheless be instructive to consider
+the possibility of two distinct (sub-)phases:
+
+1.  Active, open development with significant changes in structure and
+    function; potentially leading to:
+2.  Stability in structure and function, with subsequent development
+    primarily responding or being directed to finding and fixing faults,
+    increasing software stability or performance, or other periheral
+    functional embellishments.
 
 **3. Decline to Senescence, Abandonment, Integration, and other possible
-end fates** This phase might broadly typify a terminal phase for both
+end fates** (where Integration is intended to imply that the software
+becomes integrated as a part of the ongoing development of some other,
+effectively independent piece of software, thereby handing over
+responsibility for subsequent development to a different set of
+developers.) This phase might broadly typify a terminal phase for both
 open and closed source software, yet the dynamics likely differ, because
 open source software can approach and traverse this phase through three
 categorically different processes of disengagement of (primary)
@@ -882,27 +888,51 @@ between the three categories of:
 2.  Disengagement of non-primary developes; and/or
 3.  Disengagement of users
 
-The actual end point of cessation (or equivalent) of software
-development, whether senescence, abandonment, integration, or other
-possible fates, is likely not particularly important in characterising a
-lifecycle model. (And note that Integration is intended to imply that
-the software becomes integrated as a part of the ongoing development of
-some other, effectively independent piece of software, thereby handing
-over responsibility for subsequent development to a different set of
-developers.) Common to all potential modes of disengagement lie
-questions such as
+One distinct possibility might be that primary developers disengage to
+some significant degree from ongoing development due to development
+having reached a stable developmental state as described immediately
+above. Thus, although such a state may be desirable from a developer
+perspective, it may also represent a danger in that decreased need for
+ongoing active engagement may translate into disengagement sufficient
+for software to approach a state of senescence. Whether software
+development approaches or enters a terminal phase through this or other
+processes, negotiating and planning for traversal of such a phase likely
+requires addressing the following kinds of questions:
 
 1.  What might cause such disengagement?
 2.  What might be the potential consequences of such disengagement?
 3.  How might the primary developer(s) respond to such disengagement?
 
 Each of these questions could potentially be anticipated during the
-first or second preceding phases, and so the question which once again
-this present sub-section is intended to address is the extent to which
-doing so may actually aid the development of software during any one, or
-indeed all, of these stages?
+first or second preceding phases, perhaps usefully embedded within a
+risk-based assessment whereby each question could be addressed in terms
+of likelihood and consequence, with risk “scores” quantified as the
+product of likelihood times consequence.
 
-### 4.3b How might a model of an Open Source Software Lifecycle help the project?
+### 4.3b How might a model of an Open Source Software Lifecycle help this and other projects?
+
+We note at the outset that answering that question likely necessitates
+some kind of answer to the more general question of how models of
+software lifecycles in general have helped software development in
+general. We simultaneously acknowledge that it is not likely possible to
+answer that question. Having done so, we nevertheless attempt within the
+present sub-section the following two, related questions:
+
+1.  To what extent might a lifecycle model of open source software
+    actually aid the development of software during any one, or indeed
+    all, of these stages?
+2.  To what extent might a lifecycle model of open source software aid
+    the process of peer-review?
+
+The second of these might seem, at least superficially, relatively easy
+to address. A model can very likely aid the identification of effective
+entry and exit points for the peer review process. Yet such a statement
+is of course itself not free of tautology: any such model which serves
+such a purpose can in effect not differ from direct identification of
+entry and exit points for the peer review process. Such a model can only
+be deemed useful to the extent that elements beyond those defining these
+entry and exit points are usefully influence and informed by the peer
+review process itself.
 
 # 5\. Community
 
