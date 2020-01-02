@@ -804,9 +804,9 @@ and referring to such a model.
 
 Open source software may often be initially conceived of and designed to
 meet or fulfil some specific goal of one or more (initial) primary
-developers, but its ongoing development is frequently and strongly
+developers, yet its ongoing development is frequently and strongly
 influenced by open and ongoing community engagement with the software.
-Such engagement is inherently unpredictable, and arguably leads to
+Such engagement is inherently unpredictable, and arguably must lead to
 developmental trajectories being less predictable than for equivalent,
 closed source software, and therefore less amenable to being represented
 in terms of simplified models. For the purposes of understanding the
@@ -850,15 +850,16 @@ include:
 
 Many similar questions could be added to that list, but these are
 intended to be interpreted as illustrative of the kinds of decisions
-that could be, and likely often are, make which directly determine the
-developmental trajectories of open source software, and yet which are
-likely often made only implicitly, or absent explicit conscious
+that could be, and likely often are, made and which directly determine
+the developmental trajectories of open source software, and yet which
+are likely often made only implicitly, or absent explicit awareness or
 reflection. The intent of the present section is to explore the extent
 to which an explicit model of an open source software lifecycle might be
 useful, for which we will return to these questions immediately below,
 keeping in mind that their primary function here in intended to be
 *exemplary*. In doing so, it may nevertheless be instructive to consider
-the possibility of two distinct (sub-)phases:
+the possibility of two distinct (sub-)phases within this second, general
+phase:
 
 1.  Active, open development with significant changes in structure and
     function; potentially leading to:
@@ -866,6 +867,10 @@ the possibility of two distinct (sub-)phases:
     primarily responding or being directed to finding and fixing faults,
     increasing software stability or performance, or other periheral
     functional embellishments.
+
+Those two phases may, of course, often cycle in sequence, with phases of
+relative stability followed by additional, subsequent phases of active
+development.
 
 **3. Decline to Senescence, Abandonment, Integration, and other possible
 end fates** (where Integration is intended to imply that the software
@@ -916,7 +921,7 @@ some kind of answer to the more general question of how models of
 software lifecycles in general have helped software development in
 general. We simultaneously acknowledge that it is not likely possible to
 answer that question. Having done so, we nevertheless attempt within the
-present sub-section the following two, related questions:
+present sub-section to address the following two, related questions:
 
 1.  To what extent might a lifecycle model of open source software
     actually aid the development of software during any one, or indeed
@@ -931,7 +936,7 @@ is of course itself not free of tautology: any such model which serves
 such a purpose can in effect not differ from direct identification of
 entry and exit points for the peer review process. Such a model can only
 be deemed useful to the extent that elements beyond those defining these
-entry and exit points are usefully influence and informed by the peer
+entry and exit points are usefully influenced and informed by the peer
 review process itself.
 
 # 5\. Community
