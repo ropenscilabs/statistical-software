@@ -939,6 +939,104 @@ be deemed useful to the extent that elements beyond those defining these
 entry and exit points are usefully influenced and informed by the peer
 review process itself.
 
+Software lifecycle models can be usefully embedded within a risk-based
+framework, with each component attributed its own risk, and thereby
+serving to elucidate and emphasis different risks presented by and for
+different developmental phases. To illustrate, we now consider risks
+associated with the various phases of the lifecycle model sketched
+above, initially through attempting to identify potential risks, and
+quantifying their associated likelihoods and consequences. Each phase
+and sub-phase is also associated with an estimated duration, enabling an
+overall estimate of software lifespan.
+
+1.  Initial Conception and “Internal” Development: 1 year
+
+2.  Ongoing, Open Development, with explicit desires for (i) community
+    engagement to increase over time; and (ii) major community input to
+    code development (pull requests and/or similar). Four sub-phases
+    identified:
+    
+    2a. Phase of active, open development: 1 year<br> 2b. Phase of
+    initial stability and expansion in use: 1 year<br> 2c. Secondary
+    phase on active, open development and consolidation: 1 year<br> 2d.
+    Secondary phase of stability: 2+ years<br>
+
+3.  Decline to Senescence, Abandonment, Integration, and other possible
+    end fates: \>6 years
+
+| Phase | Year Number | Risk Factor                                               | Likelihood | Consequence |
+| ----- | ----------- | --------------------------------------------------------- | ---------- | ----------- |
+| 1     | 1           | Development too slow                                      | medium     | low         |
+| 1     | 1           | Development misdirected; software ineffective             | low        | high        |
+| 1     | 1           | Development misdirected; software inefficient             | high       | low         |
+| 1     | 1           | Insufficient developer expertise                          | medium     | high        |
+| 1     | 1           | Competing software unexpectedly developed                 | low        | high        |
+| 2a    | 2           | Insufficient community engagement                         | high       | medium      |
+| 2a    | 2           | Unexpectedly high community engagement                    | low        | low         |
+| 2a    | 2           | Community needs & desires differ from developers’ visions | medium     | low         |
+| 2a    | 2           | Competing software unexpectedly developed                 | low        | high        |
+| 2b    | 3           | Users lose interest                                       | medium     | low         |
+| 2b    | 3           | Developers lose interest                                  | low        | high        |
+| 2b    | 3           | Developers no longer able to devote time to project       | medium     | high        |
+| 2b    | 3           | Competing software unexpectedly developed                 | medium     | high        |
+| 2c    | 4           | Insufficient ideas from developers / community            | high       | low         |
+| 2d    | 5           | Users lose interest                                       | high       | medium      |
+| 2d    | 5           | Developers lose interest                                  | high       | medium      |
+| 2d    | 5           | Developers no longer able to devote time to project       | medium     | medium      |
+| 2d    | 5           | Competing software unexpectedly developed                 | high       | high        |
+| 3     | 6           | Users lose interest                                       | high       | high        |
+| 3     | 6           | Develpers lose interest                                   | high       | high        |
+| 3     | 6           | Developers no longer able to devote time to project       | medium     | high        |
+| 3     | 6           | Competing software unexpectedly developed                 | high       | low         |
+
+Many more factors could be added to this list, but that table suffices
+to illustrate how the construction of this software lifecycle in terms
+of distinct phases of defined durations has allowed quite concrete
+identification of risk factors associated with each phase. In
+particular, note that if the qualitative values of “low”, “medium”, and
+“high”, are translated into respective numeric values of 1, 2, and 3,
+then the overall risk across the anticipated lifespan of this
+hypothetical software can be immediately visualised, as shown in the
+following graph.
+
+<img src="README_files/figure-gfm/lifespan-risk-1.png" width="100%" />
+
+That graph usefully reveals the greatest risk to arise in the firth year
+of development, prior to anticipated terminal phase in year six. (This
+terminal phase is of course associated with a high overall risk, because
+it is the phase in which the software is anticipated to be abandoned.)
+The fifth phase was projected to be the second phase of stable
+development—the phase during which the developers might otherwise be
+able to “sit back and enjoy” widespread use of and acclaim for their
+software with relatively little effort required on their part. This
+graph might therefore be considered very useful in highlighting the need
+to strategically anticipate and plan to mitigate the risks associated
+with this phase.
+
+Prior to approaching a stable state in the fifth year, the graph
+indicates the phase of lowest risk to be during the fourth year, and so
+also usefully highlights the need to ensure the comparatively elevated
+risks associated with the first three phases are successfully managed to
+ensure the greatest chance of transitioning into this fourth phase. This
+highly simplified demonstration of an explicit lifecycle model thus
+demonstrates one immediate utility in enabling the identification of
+distinct risks, thereby naturally enabling and empowering effective
+action to be taken against such risks.
+
+This risk-based framework is intended to demonstrate how such a concrete
+reference for the distinct phases of a software lifecycle model might
+allow for effective analysis, planning, anticipation, and amelioration
+of potential negative effects on the success of a software project.
+There are of course many other frameworks which might be considered,
+such as quantifying expected numbers of users or active contributors,
+Regardless of how a developmental trajectory might be analysed and
+quantified, this model reveals the immediate utility of explicitly
+considering and identifying distinct phases of development, in order to
+examine each in terms of risk (or whatever other metrics might be deemed
+appropriate for a particular project), and ultimately to enable an
+explicit and quantitative analysis of the kind presented in the above
+graph.
+
 # 5\. Community
 
 This section considers aspects related to community engagement,
