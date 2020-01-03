@@ -891,54 +891,26 @@ Each of these questions could potentially be anticipated during the first or
 second preceding phases, perhaps usefully embedded within a risk-based
 assessment whereby each question could be addressed in terms of likelihood and
 consequence, with risk "scores" quantified as the product of likelihood times
-consequence.
+consequence. The remainder of this sub-sections illustrates what a potential
+risk-based model of an open source software lifecycle might look like.
 
+The risk-based framework is developed by assigning a risk to each component, in
+order to elucidate and emphasise different risks presented by and for different
+developmental phases. Each phase and sub-phase is also associated with an
+estimated duration, enabling an overall estimate of software lifespan.
 
+Phase | Description | Duration (years) | Cumulative Development Time (years)
+--- | --- | --- | ---
+1 | Initial Conception and "Internal" Development | 1 | 1
+2a | Phase of active, open development | 1 | 2
+2b | Phase of initial stability and expansion in use | 1 | 3
+2c | Secondary phase on active, open development and consolidation | 1 | 4
+2d | Secondary phase of stability | 2 | 6
+3 | Decline to Senescence, Abandonment, Integration, and other possible end fates | 1 | 7
 
-### 4.3b How might a model of an Open Source Software Lifecycle help this and other projects?
-
-We note at the outset that answering that question likely necessitates some
-kind of answer to the more general question of how models of software
-lifecycles in general have helped software development in general. We
-simultaneously acknowledge that it is not likely possible to answer that
-question. Having done so, we nevertheless attempt within the present
-sub-section to address the following two, related questions:
-
-1. To what extent might a lifecycle model of open source software actually aid
-   the development of software during any one, or indeed all, of these stages?
-2. To what extent might a lifecycle model of open source software aid the
-   process of peer-review?
-
-The second of these might seem, at least superficially, relatively easy to
-address. A model can very likely aid the identification of effective entry and
-exit points for the peer review process. Yet such a statement is of course
-itself not free of tautology: any such model which serves such a purpose can in
-effect not differ from direct identification of entry and exit points for the
-peer review process. Such a model can only be deemed useful to the extent that
-elements beyond those defining these entry and exit points are usefully
-influenced and informed by the peer review process itself.
-
-Software lifecycle models can be usefully embedded within a risk-based
-framework, with each component attributed its own risk, and thereby serving to
-elucidate and emphasis different risks presented by and for different
-developmental phases. To illustrate, we now consider risks associated with the
-various phases of the lifecycle model sketched above, initially through
-attempting to identify potential risks, and quantifying their associated
-likelihoods and consequences. Each phase and sub-phase is also associated with
-an estimated duration, enabling an overall estimate of software lifespan.
-
-1. Initial Conception and "Internal" Development: 1 year
-
-2.  Ongoing, Open Development, with explicit desires for (i) community
-    engagement to increase over time; and (ii) major community input to code
-    development (pull requests and/or similar). Four sub-phases identified:
-
-    2a. Phase of active, open development: 1 year<br>
-    2b. Phase of initial stability and expansion in use: 1 year<br>
-    2c. Secondary phase on active, open development and consolidation: 1 year<br>
-    2d. Secondary phase of stability: 2+ years<br>
-3. Decline to Senescence, Abandonment, Integration, and other possible end
-fates: >6 years
+The following table elucidates a number of potential risks associated with each
+phase, and quantifies their associated likelihoods and consequences in
+qualitative terms of either "low", "medium", or "high". 
 
 Phase | Year Number | Risk Factor | Likelihood | Consequence
 --- | --- | --- | --- | ---
@@ -956,14 +928,14 @@ Phase | Year Number | Risk Factor | Likelihood | Consequence
 2b | 3 | Developers no longer able to devote time to project | medium | high
 2b | 3 | Competing software unexpectedly developed | medium | high
 2c | 4 | Insufficient ideas from developers / community | high | low
-2d | 5 | Users lose interest | high | medium
-2d | 5 | Developers lose interest | high | medium
-2d | 5 | Developers no longer able to devote time to project | medium | medium
-2d | 5 | Competing software unexpectedly developed | high | high
-3 | 6 | Users lose interest | high | high
-3 | 6 | Develpers lose interest | high | high
-3 | 6 | Developers no longer able to devote time to project | medium | high
-3 | 6 | Competing software unexpectedly developed | high | low
+2d | 6 | Users lose interest | high | medium
+2d | 6 | Developers lose interest | high | medium
+2d | 6 | Developers no longer able to devote time to project | medium | medium
+2d | 6 | Competing software unexpectedly developed | high | high
+3 | 7 | Users lose interest | high | high
+3 | 7 | Develpers lose interest | high | high
+3 | 7 | Developers no longer able to devote time to project | medium | high
+3 | 7 | Competing software unexpectedly developed | high | low
 
 
 Many more factors could be added to this list, but that table suffices to
@@ -972,8 +944,8 @@ phases of defined durations has allowed quite concrete identification of risk
 factors associated with each phase. In particular, note that if the qualitative
 values of "low", "medium", and "high", are translated into respective numeric
 values of 1, 2, and 3, then the overall risk across the anticipated lifespan of
-this hypothetical software can be immediately visualised, as shown in the
-following graph.
+this hypothetical software can be immediately quantified and visualised, as
+shown in the following graph.
 
 ```{r lifespan-risk, echo = FALSE}
 x <- rbind (c (1, 2, 1),
@@ -994,31 +966,36 @@ x <- rbind (c (1, 2, 1),
             c (5, 3, 2),
             c (5, 2, 2),
             c (5, 3, 3),
+            c (6, 3, 2),
+            c (6, 3, 2),
+            c (6, 2, 2),
             c (6, 3, 3),
-            c (6, 3, 3),
-            c (6, 2, 3),
-            c (6, 3, 1))
+            c (7, 3, 3),
+            c (7, 3, 3),
+            c (7, 2, 3),
+            c (7, 3, 1))
 x <- data.frame (x)
 names (x) <- c ("year", "likelihood", "consequence")
 x$risk <- x$likelihood * x$consequence
 ggplot (x, aes (x = year, y = risk)) +
     geom_point (col = "#D24373", cex = 2) +
-    geom_smooth (method = "loess", span = 0.9, col = "#FF4373") +
+    geom_smooth (method = "loess", span = 0.75, col = "#FF4373") +
     theme (axis.title.y = element_text (angle = 90))
 ```
 
-That graph usefully reveals the greatest risk to arise in the firth year of
-development, prior to anticipated terminal phase in year six. (This terminal
-phase is of course associated with a high overall risk, because it is the phase
-in which the software is anticipated to be abandoned.) The fifth phase was
-projected to be the second phase of stable development---the phase during which
-the developers might otherwise be able to "sit back and enjoy" widespread use
-of and acclaim for their software with relatively little effort required on
-their part. This graph might therefore be considered very useful in
-highlighting the need to strategically anticipate and plan to mitigate the
-risks associated with this phase.
+That graph usefully reveals the greatest risk to arise in the fifth and sixth
+years of development, prior to anticipated terminal phase in year seven. (This
+terminal phase is of course associated with a high overall risk, because it is
+the phase in which the software is anticipated to be abandoned.) The fifth
+phase of development encompassing the fifth and sixth years was projected to be
+the second phase of stable development---the phase during which the developers
+might otherwise be able to "sit back and enjoy" widespread use of and acclaim
+for their software with relatively little effort required on their part. This
+graph might therefore be considered very useful in highlighting the need to
+strategically anticipate and plan to mitigate the risks associated with this
+notionally "easy" phase.
 
-Prior to approaching a stable state in the fifth year, the graph indicates the
+Prior to approaching a stable state in the sixth year, the graph indicates the
 phase of lowest risk to be during the fourth year, and so also usefully
 highlights the need to ensure the comparatively elevated risks associated with
 the first three phases are successfully managed to ensure the greatest chance
@@ -1031,22 +1008,131 @@ This risk-based framework is intended to demonstrate how such a concrete
 reference for the distinct phases of a software lifecycle model might allow for
 effective analysis, planning, anticipation, and amelioration of potential
 negative effects on the success of a software project. There are of course many
-other frameworks which might be considered, such as quantifying expected
-numbers of users or active contributors, Regardless of how a developmental
+other possible models of a software lifecycle, as well as many other frameworks
+which might be considered, such as quantifying expected or desired numbers of
+users or active contributors, Regardless of how a lifecycle or developmental
 trajectory might be analysed and quantified, this model reveals the immediate
 utility of explicitly considering and identifying distinct phases of
 development, in order to examine each in terms of risk (or whatever other
-metrics might be deemed appropriate for a particular project), and ultimately
-to enable an explicit and quantitative analysis of the kind presented in the
-above graph.
+metrics might be deemed appropriate for a particular project), and ultimately to
+enable an explicit and quantitative analysis of the kind presented in the above
+graph.
 
+
+### 4.3b How might a model of an Open Source Software Lifecycle help this and other projects?
+
+We note at the outset that answering that question likely necessitates some
+kind of answer to the more general question of how models of software
+lifecycles in general have helped software development in general. We
+simultaneously acknowledge that it is not likely possible to answer that
+question. Having done so, we nevertheless attempt within the present
+sub-section to address the following two, related questions:
+
+**1. To what extent might a lifecycle model of open source software actually aid
+the development of software during any one, or indeed all, of these stages?**
+The preceding sub-section has demonstrated the ease with which a software
+lifecycle model might enable the identification and assessment of risks
+associated with each phase of development. The identification of risk is, as
+always, the first necessary step required to effectively anticipate, ameliorate,
+and reduce risks associated with development, and thus a lifecycle model could
+clearly be used to reduce risks associated with and during any identified
+developmental phases. In such cases, the explicit identification of lifecycle
+phases simplifies the task of identifying associated risks, through constraining
+those risks to finer-scale and thus conceptual simpler developmental phases. The
+question then naturally arises as to what other kinds of frameworks might be
+usefully developed and applied?
+
+**2. To what extent might a lifecycle model of open source software aid the
+process of peer-review?** This question is, at least superficially, relatively
+easy to address. A model can very likely aid the identification of effective
+entry and exit points for the peer review process. (Such a statement is of
+course itself not free of tautology: any such model which *only* serves such
+a purpose can not differ substantially from direct identification of entry and
+exit points; we ignore such potential tautology here under the assumption that
+our models also serve additional purposes.) The obviously most appropriate phase
+for software review would be the transition between the first and second phase,
+from the end of "internal" development to the second phase of open community
+engagement in both use and further development. This also seems to generally
+coincide with the majority of rOpenSci packages, particularly following the
+current recommendation that packages not only CRAN only be submitted following
+successful review and acceptance by rOpenSci.
+
+Developers might reasonably be required to formalise a lifecycle model for their
+software for the purposes of review. Doing to would very likely only aid
+developers by providing a concrete structure within which they might express and
+codify visions for future package development (with associated benefit likely
+being greater the earlier in the development process a lifecycle model is
+developed). The above table and graph demonstrate the usefulness of doing so,
+even when such visions can only be expressed in broad, generic terms, and only
+ultimately considered within the single framework of risk. It would seem fair to
+assume that being mandated to develop such an explicit model would generally be
+of some finite benefit both to developers and to the software itself.
+
+Perhaps more importantly, such a model would also aid the task of peer-review.
+The software lifecycle model itself, along with associated risks, could itself
+become subject to scrutiny by reviewers. At what might arguably be considered
+one level of generalisation above that, review might also serve a useful
+function during any of the subsequent phases. One additional level of
+generalisation or abstraction beyond that might then involve the identification
+of some "utility of review" to each phase of development, as a simple,
+additional column on the above risk table. This suggests the following three
+classes of possibilities for incorporating lifecycle models within the peer
+review process:
+
+1. Require a software lifecycle model to be included within a package, and
+   itself to be subject to review, with review generally presumed to occur
+   between some equivalent of the first and second of the above phases (absent
+   explicit, alternative specification);
+2. Require a lifecycle model to also indicate perceived or anticipated utility
+   of review for each phase, with the entire review process adapting to and
+   extending across any and all nominated phases.
+
+Entry points in both cases might be the same (and likely most usefully occur
+towards the end of the first, initial phase of "internal" development), yet the
+end points would then differ, with the second option extending the end point
+across much of the entire software lifecycle (and potentially also having
+several concrete or recurring exit and re-entry points).
+
+(It must also be noted that while the latter might be of considerable benefit,
+using the same reviewers throughout would also progressively increase their
+familiarity both with the code itself, and with its developmental history,
+rendering them increasing less capable of offering truly "external" review. This
+process would itself then introduce and entail an additional risk of decreasing
+the required degree of "external" objectivity on the part of reviewers. It
+nevertheless seems very likely that any such risk would have to be ignored, as
+finding new reviewers for each and every review phase would place an excessively
+onerous burden on each of these reviewers, particularly through them having to
+familiarise themselves not only with unfamiliar code, but with all prior reviews
+and responses to such, as well as on editors responsible for finding greater
+numbers of reviewers for each package. For now, we merely acknowledge the likely
+presence and unavailability of such an effect.)
+
+We close this section by simply noting that the current rOpenSci practice of
+effectively having entry and exit points for peer-review between the first and
+second of the above phases places that process in the middle of the relatively
+low risk phase of overall development of the above figure. Although that figure
+was only intended to be illustrative, and although the data behind it were not
+intended to be anything other than exemplary of the kinds of risk factors which
+might be associated with each hypothetical developmental phase, these phases and
+associated risks might nevertheless be considered sufficiently generic as to be
+of some general applicability. This being the case, the figure graphically
+illustrates that the current review process ceases prior to entering what might
+actually be the highest risk phase of software development. That alone may be
+interpreted to argue strongly for the second of the above options rather than
+the first: that is, for a review process which includes lifecycle models which
+(may) themselves identify multiple phases, or multiple entry and exit points,
+for review.
 
 
 
 # 5. Community
 
 This section considers aspects related to community engagement, equality,
-reach, fairness, representativeness, and other related aspects.
+reach, fairness, representativeness, and other related aspects. It considers
+community both in terms of the two distinct aspects of users and contributors to
+packages, and developers themselves. The first communities coalesce around
+individual packages; the second around rOpenSci itself and its general package
+ecosystem.
 
 ## 5.1 Passive Community Construction and Engagement
 
