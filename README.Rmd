@@ -18,7 +18,8 @@ library (ggplot2)
 knitr::opts_chunk$set(
   out.width = "100%",
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.path="figures/"
 )
 ```
 ```{r getbib, echo = FALSE}
@@ -1129,8 +1130,8 @@ for review.
 
 This section considers aspects related to community engagement, equality,
 reach, fairness, representativeness, and other related aspects. It considers
-community both in terms of the two distinct aspects of users and contributors to
-packages, and developers themselves. The first communities coalesce around
+community both in terms of the two distinct aspects of users and contributors
+to packages, and developers themselves. The first communities coalesce around
 individual packages; the second around rOpenSci itself and its general package
 ecosystem.
 
@@ -1138,6 +1139,7 @@ ecosystem.
 
 ## 5.2 Active Community Construction and Engagement
 
-## 5.3 Metrics of Construction and Engagement
+## 5.3 Metrics of Community Construction and Engagement
+
 
 # 6. References

@@ -970,7 +970,7 @@ then the overall risk across the anticipated lifespan of this
 hypothetical software can be immediately quantified and visualised, as
 shown in the following graph.
 
-<img src="README_files/figure-gfm/lifespan-risk-1.png" width="100%" />
+<img src="figures/lifespan-risk-1.png" width="100%" />
 
 That graph usefully reveals the greatest risk to arise in the fifth and
 sixth years of development, prior to anticipated terminal phase in year
@@ -1137,7 +1137,7 @@ the second around rOpenSci itself and its general package ecosystem.
 
 ## 5.2 Active Community Construction and Engagement
 
-## 5.3 Metrics of Construction and Engagement
+## 5.3 Metrics of Community Construction and Engagement
 
 # 6\. References
 
