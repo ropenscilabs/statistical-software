@@ -11,7 +11,9 @@ output:
 bibliography: statsoft.bib
 ---
 
+<!-- uncomment to render title in github markdown
 # What is (open-source) statistical software and how can it be validated, tested, and reviewed?
+-->
 
 ```{r setup, include = FALSE, echo = FALSE}
 library (ggplot2)
@@ -1129,17 +1131,155 @@ for review.
 # 5. Community
 
 This section considers aspects related to community engagement, equality,
-reach, fairness, representativeness, and other related aspects. It considers
-community both in terms of the two distinct aspects of users and contributors
-to packages, and developers themselves. The first communities coalesce around
-individual packages; the second around rOpenSci itself and its general package
-ecosystem.
+reach, fairness, and representativeness. It considers community in terms of the
+threee distinct aspects of:
 
-## 5.1 Passive Community Construction and Engagement
+1. Communities of users and contributors to packages; 
+2. Communities of developers; and
+3. Communities of reviewers for software submissions.
 
-## 5.2 Active Community Construction and Engagement
+The first communities coalesce around individual packages; the second around
+rOpenSci itself and its general package ecosystem, and the third may be drawn
+from the second, yet will likely require additional, active cultivation. Prior
+to directly addressing these communities, we begin this section by considering
+the kinds of metrics which may be able to be empirically derived and used to
+quantify users, contributors, contributions, packages, and potential reviewers.
 
-## 5.3 Metrics of Community Construction and Engagement
+
+## 5.1 Metrics of Community Construction and Engagement
+
+The project under consideration here arguably attempts to improve upon an
+historical, and historically documented, process leading to the construction of
+the current and ongoing community surround the rOpenSci peer review process.
+Much might accordingly be gained by examining the historical developmental
+dynamics of rOpenSci, both of individual packages, and of more general
+communities surrounding the general peer-review process and entity of rOpenSci
+itself. An example of the kind of analysis possible via git commit histories as
+uploaded to github is [our analysis of contributions by non-primary authors to
+rOpenSci packages](https://github.com/mpadge/ros-pkg-authors). Such analyses
+can readily be adapted and extended to a variety of other modes and measures.
+
+### 5.1a Metrics of package use and contributions
+
+The single generally used proxy for usage of R packages is the number of
+downloads obtained from RStudio's CRAN mirror, and provided by the cranlogs
+service. Although is it possible to obtain additional numbers of downloads from
+github itself, the cranlogs values are likely sufficient for most analytic
+purposes. Many metrics of contributions could be derived along the lines of the
+code contained in the repository linked to above, including:
+
+- Numbers and/or proportions of non-primary contributors
+- Numbers and/or proportions of issues opened by non-primary contributors
+- Numbers of commits and/or lines of code by non-primary contributors
+- Numbers and/or proportions of pull requests by non-primary contributors
+- Numbers of visitors to github page and/or rOpenSci docs pages for each
+  repository
+
+### 5.1b Metrics of developer activity and/or engagement
+
+Note that primary developers may be identified in a number of ways, potentially
+yielding different results. Perhaps the least ambiguous way is to identify
+primary develops as those listed in the `DESCRIPTION` file with `role = "aut"`,
+*and who have also actively contributed lines of code to a package*. (The
+latter is necessary because authors of any internally bundled code should also
+be acknowledged as package authors, yet such authors make no active
+contribution.) Other statistical approaches may be also be derived and
+implemented as appropriate.
+
+- Numbers of lines of code
+- Temporal developments in numbers of lines of code (such as rates of change)
+- Proportion of lines of code in package under consideration compared with all
+  lines of code committed by primary authors to all other repositories or
+  packages
+- Numbers of issues (total numbers, total open issues, total closed issues,
+  rates of issue turnover, times between opening and closing, and other
+  measures)
+- Numbers of bug reports and metrics analgous to the above
+
+### 5.1c Metrics for Potential or Actual Reviewers
+
+The search for reviewers may well be aided by some kind of quantification. It
+may also be of more general utility for the project, and for rOpenSci in
+general, to quantify aspects of reviewer activity, reviewer networks, or some
+of the other attributes now listed.
+
+- Number of repositories and/or packages developed by a reviewer
+- Contributions by a reviewer to other repositories/packages
+
+It must be noted, however, that such metrics will likely lead to some kind of
+ranking system for reviewers, and that such rankings may be considered
+generally undesirable, particularly as rankings may effectively exclude people
+new to coding, new to R, and/or new to the concept of peer reviewed code. Such
+people may in fact be desirable, particularly as the inclusion of ever more
+people can only increase the diversity of reviewers, and hopefully with that,
+through each reviewer connecting their own personal networks within those of
+rOpenSci, increase the overall diversity of participants and software in
+general within rOpenSci.
+
+In lieu of potentially problematic metrics of the kind listed above, it may
+also be useful to derive metrics to use in directly searching for potential
+reviewers for a submission. Such metrics may include measures of similarity or
+overlap between the code contained in the submission and a reviewer's own code.
+This may be achieved by, for example, extracting all functional calls within
+a package, and within a reviewer's own code, and assessing similarity or
+overlap in functional calls. More complex and potentially---although not
+necessarily---comprehensive metrics could be derived by tracing networks of
+functional calls both within a submission and reviewers' code, and correlating
+overall frequencies of functional calls. Similarity in underlying functional
+call networks might usefully highlight reviewers likely to be particularly
+capable of reviewing a given package. However such an approach might be
+developed and employed, it would very likely provide an effective way to
+overcome problems associated with the kinds of coarse-scale individual metrics
+described above that likely and inevitably lead to ranking (potential)
+reviewers.
+
+## 5.2 Constructing and Maintaining a Community of Reviewers
+
+One important question that extends directly from the preceding considerations
+is how to *first* identify reviewers who might be subject to the kinds of
+analyses proposed there? The most convenient way is likely to be to compile
+a list of all individuals who are either members of rOpenSci's slack community;
+or who have contributed to or commented upon any rOpenSci repository, whether
+through code, or opening or commenting upon issues within github repositories.
+Such an approach may nevertheless be less than ideal because these communities
+themselves may be biased, or may not manifest some property such as diversity
+or global coverage otherwise desired by rOpenSci. Searches might be extended
+through considering all people who follow rOpenSci on twitter, or all who have
+liked or retweeted an rOpenSci tweet.
+
+Perhaps the greatest problem that may arise in pursuing any of these
+suggestions might be the potential exclusion of people who do not habitually
+upload code to public sites such as github or gitlab. It is nevertheless the
+remit of rOpenSci to encourage and cultivate an *open source* community, and
+such people might arguably be considered as making less of a contribution to
+open source communities than those who do regularly upload code, therefore
+justifying their potential exclusion. It is likely nevertheless important to
+acknowledge any such sources of bias or effective exclusion in developing or
+implementing any system to aid searching for reviewers.
+
+One potential way to overcome the kinds of limitations described immediately
+above might be to identify an initial community pool, and then contact via
+email or some other suitable forum all individuals within that community and
+ask them to nominate additional people they may know and who they might
+consider appropriate to review software.
+
+
+Of course, for this and many other projects, there would ideally be extant
+comparisons between various methods of passive and active community construction
+and engagements, along with demonstrations of the transferrability of (aspects
+of) approaches employed. The intractable complexity of community dynamics
+renders such general comparisons either impossible or meaningless, or both. It
+might nevertheless be possible to consider and contrast sub-ecosystems
+surrounding specific (collections of) R packages, and to examine dynamics of
+community growth and engagement, along with potential metrics of passive or
+active engagement. The present document will nevertheless not propose any
+particular approach to doing so; it suffices here merely to note the distinct
+possibility, particularly in order to emphasise the general point that many
+assumptions or hypotheses regarding community dynamics may be amenable to
+empirical enquiry, and that no particular models, assumptions, or hypotheses of
+such ought to be necessarily accepted absent empirical (or other external)
+support.
+
 
 
 # 6. References

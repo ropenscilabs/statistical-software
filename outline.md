@@ -28,7 +28,7 @@ output: html_document
   - Specific to our own peer review
       - R packages with standard structure implementing the above.
       - Primary interface in R code, some code written in a limited set of
-        compiled languages
+        other compiled and non-compiled (e.g. javascript) languages
 
 ## Key considerations
 
@@ -46,7 +46,8 @@ How should the review process be organized and managed?
 ## Key considerations
 
   - Are we reviewing full packages or only limited pieces of packages?
-  - What is the outcome of review? Binary, rating, checklist, acceptance/rejection?
+  - What is the outcome of review? Binary, rating, checklist,
+    acceptance/rejection?
   - To what extent should the review process be automated or self-certified?
   - Reviewer pool and qualifications
      - Extent and type of effort expected of reviewers
@@ -62,7 +63,9 @@ _This somewhat parallels the Design section_
 ## Statistical
 
    - Numerical issues
-   - Method validity (i.e., is the method itself valid, independent of implementation? Has to do with, perhaps, whether there's literature supporting the method.)
+   - Method validity (i.e., is the method itself valid, independent of
+     implementation? Has to do with, perhaps, whether there's literature
+     supporting the method.)
    - Scope of applicability of the software / method
 
 ## Interface / API
