@@ -23,74 +23,163 @@ if (!file.exists ("statsoft.bib")) {
 }
 ```
 
-# Project Goals:
+# 1. Introduction
 
-  - Foster a community of practice in which users and developers of statistical
-    software mutually improve quality, reproducibility, and reliability of
-    research.
-  - Provide software creators with a set of tools to assess the quality of their
-    work and a process by which to improve it.
-  - Provide users of statistical software a discoverable "badge" that
+This document primarily serves to pose a number of questions regarding
+rOpenSci's incipient project for peer-review of statistical software. The
+organization itself is, and is likely to largely remain, primarily focussed on
+the R language for statistical computing. While the project under consideration
+here will likely evolve towards a system for peer review of *R packages*, it
+may also consider review of other forms for bundling R software, or other
+languages. Moreover, R packages often contain code from a variety of other
+languages, traditionally Fortran and C, now very commonly also C++, as well as
+other non-compiled languages such as javascript, and compiled languages such as
+Rust. It is accordingly expected that software review will encompass several
+languages, whether or not bundled in the form of R packages. Moreover, the
+project aims to develop a set of language-independent standards able to be
+transferred to other languages and systems for peer review.
+
+Peer-review plays a key role in ensuring the sustainability of scientific
+software [@downs_community_2015]. rOpenSci has a well-developed system for peer
+review of R packages, primarily through their ["software-review" repository on
+github](https://github.com/ropensci/software-review), to which packages may be
+submitted by opening an issue on that github repository. The review process is
+entirely open, with each issue used to manage the entire process, coordinated
+by rOpenSci's own editorial committee. Two features of this peer review system
+in its current state are important to note here:
+
+1. Statistical software is explicitly *excluded* from current scope; and
+2. Tasks associated with peer review are not automated, and require manual
+   control and determination of each step.
+
+There are many stages associated with software development and peer-review that
+may effectively be automated, and aspects of such automation is expected to be
+integrated within the present project. An important question throughout the
+remainder of this document is accordingly the extent to which automation may
+enhance either the development or implementation of the various stages
+considered below. A good example for the effectiveness of automation in the
+kinds of peer review processes envisioned to emerge from this process is
+provided by submissions to the [Journal of Open Source
+Software](https://joss.theoj.org/), which features [open
+reviews](https://github.com/openjournals/joss-reviews/issues), many aspects of
+which are automated by a custom-developed bot called
+["whedon"](https://github.com/whedon).
+
+
+## 1.1 Project Goals:
+
+  - To foster a community of practice in which users and developers of
+    statistical software mutually improve quality, reproducibility, and
+    reliability of research.
+  - To provide software creators with a set of tools to assess the quality of
+    their work, and a process by which to improve it.
+  - To provide users of statistical software a discoverable "badge" that
     transparently conveys a level of assurance of software quality.
-  - Create a set of standards that may be adopted and adapted by open source and
-    private groups, academic journals, or other statistical software evaluation
-    projects.
-  - Focus on R as primary language, but separate language-specific from
+  - To create a set of standards that may be adopted and adapted by open source
+    and private groups, academic journals, or other statistical software
+    evaluation projects.
+  - To focus on R as primary language, but separate language-specific from
     language- agnostic components so as to maximize adaptability to other
     contexts
-  - Focus on problems specific to statistical software
+  - To focus on problems and solutions specific to statistical software
 
 ---
 
-# Scope: What counts as "statistical software" in the context of peer review
+# 2. Scope: What counts as "statistical software" in the context of peer review
 
-  - We analysed all historical submissions to Journal of Statistical Software,
-    but little insight gained.
-  - Specific to our own peer review
-      - R packages with standard structure implementing the above.
-      - Primary interface in R code, some code written in a limited set of
-        other compiled and non-compiled (e.g. javascript) languages
+There is no ready definition for "statistical software", but nor may such
+a definition be essential to the success of the present project. An
+[analysis](https://github.com/mpadge/statistical-software/tree/master/jss)
+conducted in preparing this document of all historical submissions to the
+Journal of Statistical Software revealed a notable *homogeneity* in textual
+descriptions of software, with no notable phrases or topics which might be
+useful to define or categorise statistical software, other than topics
+pertaining to particular areas of application. That journal defines [its
+own scope](https://www.jstatsoft.org/pages/view/mission) as, 
 
-## Key considerations
+> statistical computing in all areas of empirical research.
 
-  - Purpose and scope of use of the software
-  - Lifecycles of software, and at which point in development peer review
-    occurs, or might best occur.
-  - Do we need to define broad sub-categories of statistical software, in order
-    to potentially develop different approaches for these categories?
-    Categories might include:
-     - Visualization and exploratory data analysis?
-     - Summary statistics reporters?
-     - Only analytically tractable methods?
-  - An alternative might be to identify general attributes of software or
-    algorithms, such as reproducibility, potential sources and degrees of bias,
-    or measures of verifiability, and to assess or categorise software based on
-    these rather than potentially ambiguous categories per se?
+It may suffice, at least initially, to simply provide broad definitions of what
+might lie *beyond* the scope of the present project, or even to assert that
+statistical software must at heart implement some kind of statistical algorithm
+(or perhaps *employ* or otherwise interface with such in sufficiently novel
+form). This is nevertheless a categorical exercise, and so one way or another we anticipate having to address the fundamental quesion(s) of:
+
+1. What categories of statistical software might be considered *in scope*?
+2. What categories of statistical software might be considered *out of scope*?
+
+More specific questions of scope which will also need to be addressed include
+the potential acceptability of the following different external forms of
+software:
+
+  - R packages
+  - Other forms of bundling or presenting R code other than standard packages
+  - Formats appropriate for other languages (such as python) yet with some
+    interface with the R language
+  - Independently-developed software in different languages which the
+    submission exposes to the R environment ("wrapper" packages)
+
+It considering both of these issues of definition, it will be important to
+consider whether it may be advantageous or necessary to develop different
+procedures for different categories, whether in terms of categories of external
+form or categories of statistical software.
+
 
 ---
 
-# Review Process
+# 3. Review Process
 
-How should the review process be organized and managed?
+Peer review as currently implemented by rOpenSci effectively functions in
+a manner directly analogous to more conventional peer review of academic
+manuscripts: A piece of software is submitted for review and, once accepted, is
+"published" by rOpenSci, with publication symbolized both through a badge
+system, and through transferring the software from an author's private domain
+to the [`github.com/ropensci` domain](https://github.com/ropensci). It is very
+important for the current project to note that this is only one of many
+potential models for peer review of software, and particularly that a long
+history and tradition in both practice and published literature on software
+review [for example, @mili_software_2015; @ammann_introduction_2017] generally
+concludes that software review is most effective when it is an ongoing process
+that occurs as frequently as possible---a practice which contrasts strongly with
+the singular nature of review as currently implemented by rOpenSci.
 
-## Key considerations
+An effective system for peer review of statistical software is thus likely to
+lie somewhere between current "one-off" practices typical of academic
+manuscripts, and frequent, ongoing review typical of software development. The
+abiding question to be considered within the present section is thus how the
+review process might best be structured, organized, and managed.
+
+There is obviously a direct analogy with the review process as developed by
+rOpenSci. That process has itself developed and changed over the years since
+its inception, through progressively introducing more formal structures
+ultimately leading to [rOpenSci's Guide to *Development, Maintenance and Peer
+Review* of R packages](https://devguide.ropensci.org/). The history of
+development leading to these formalised guidelines can be followed through
+extracting the histories of all rOpenSci packages, along with the histories of
+the associated [software-review](https://github.com/ropensci/software-review)
+issues. Such an analyses was conducted by staff member [Maëlle
+Salmon](https://github.com/maelle), and presented in a series of [rOpenSci blog
+entries](https://ropensci.org/blog/2018/04/26/a-satrday-ct-series/).
+
+## 3.1 Key considerations
 
   - Are we reviewing full packages or only limited pieces of packages?
   - What is the outcome of review? Binary, rating, checklist,
     acceptance/rejection?
   - To what extent should the review process be automated or self-certified?
-  - Reviewer pool and qualifications
-    - Extent and type of effort expected of reviewers
+  - Reviewer pool and qualifications:
+    - What is the extent and type of effort expected of reviewers?
     - To what extent might searches for suitable reviewers be automated?
-    - What sort of metrics might be useful in such searches? (Noting that code
-      analyses can quantify such aspects as commonality in functional calls,
-      but generally only within single languages.)
-  - Open or closed parts of the process
+    - What sort of metrics might be useful in such searches?
+  - Which parts of the process should be open and which closed?
   - Should review be a one-off phenomenon, or should there be multiple review
     phases throughout the software lifecycle?
+  - Might there be advantage in considering "micro-review" or inline systems
+    like [`watson-ruby`](https://github.com/nhmood/watson-ruby)
+    [@spencer_open-source_2015]?
   - If multiple review phases, should there also be different reviewers for
     different phases?
-  - Is it likely to be important to maintain separation/independence of
+  - Is it likely to be important to maintain the separation or independence of
     reviewers from code development, or might it be better to encourage direct
     engagement of reviewers with ongoing code development?
 
@@ -147,12 +236,18 @@ principles is provided by @mili_software_2015:
 
 ## Documentation
 
-  - Standard documentation metrics:
+In contrast to scientific, software in general, statistical software might be
+argued to be associated with some specific kinds of input and output data. This
+observation alone suggests the likely importance of some kind of metadata
+associated with statistical software which documents the nature of (expected,
+permitted, or accepted) input and output data [@lenhardt_data_2014].
+
+  - Standard software documentation metrics:
     - Numbers of lines per function
     - proportion of documentation to code lines
     - presence of examples
     - coverage of examples
-    - vignettes.
+    - vignettes
 
 ## Testing
 
@@ -205,11 +300,17 @@ just concrete values.
 ## Metrics
 
 -  Code structure
-     - Cyclomatic complexity
-     - Codebase size
-     - Function size / number
-     - Exported / non exported functions
+    - Cyclomatic complexity
+    - Codebase size
+    - Function size / number
+    - Numbers of external calls within functions
+    - Exported / non exported functions
+    - Code consistency
 -  Documentation metrics detailed above
+- Meta struture
+    - Dependencies
+    - Reverse dependencies
+    - License
 -  Meta metrics
     - Version control?
     - Availability of website
@@ -219,8 +320,12 @@ just concrete values.
         - Numbers of active contributors
         - Numbers or rates of issues reported
     - Maintenance:
-        - Release rate
+        - Rate/Numbers of releases
         - Rate of response to reported issues
+        - Last commit
+        - Commit rate
+    - stars
+    - forks
 -  Extent of testing
     - Code coverage
     - Examples
