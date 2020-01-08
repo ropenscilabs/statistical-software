@@ -1,6 +1,4 @@
-<!-- uncomment to render title in github markdown
 # What is (open-source) statistical software and how can it be validated, tested, and reviewed?
--->
 
 A repo of ideas and explorations for rOpenSci’s project on peer-reviewed
 statistical software. The current form of this document summarises
@@ -740,7 +738,8 @@ general concepts listed above, particularly those listed under
 A key determinant and constraint of software design arises through it
 being explicitly embedded within a defined “software lifecycle”. There
 has been a great deal written about software lifecycles, and a large
-variety of models proposed to describe or define “software lifecycles.”
+variety of models proposed to describe or define “software lifecycles”
+(Mohammed, Munassar, and Govardhan 2010; Kumar, Mishra, and Mehta 2016).
 All of these models are unavoidably generic, and most of them—one might
 justifiably assert, “merely”—serve to enable a visual diagram that
 connects various components deemed to be important to consider
@@ -752,8 +751,9 @@ nevertheless unites all such models is their universal basis in a
 conceptualisation of software development as an inherently *commercial*
 activity, and as such a great deal of most such models is arguably not
 directly applicable to notions of software lifecycles which might be
-typical of open source software. A few general comments are nevertheless
-instructive, including the following:
+typical of open source software (although see Spencer et al. 2015 for an
+example). A few general comments are nevertheless instructive, including
+the following:
 
 > The software life cycle contains software engineering tasks and
 > documentation necessary to support the software validation effort. In
@@ -1290,7 +1290,7 @@ absent empirical (or other external) support.
 
 # 6\. References
 
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 
 <div id="ref-ammann_introduction_2017">
 
@@ -1307,9 +1307,26 @@ of Software Validation.” *U.S. Food and Drug Administration*.
 
 </div>
 
+<div id="ref-kumar_critical_2016">
+
+Kumar, Subodh, N. K. Mishra, and Sarkar Sharan Mehta. 2016. “Critical
+Analysis of Software Process Models.” *IJCA Proceedings on National
+Conference on Advances in Computing Applications* NCACA 2016 (2): 12–14.
+<https://www.ijcaonline.org/proceedings/ncaca2016/number2/26176-1043>.
+
+</div>
+
 <div id="ref-mili_software_2015">
 
 Mili, Ali. 2015. *Software Testing: Concepts and Operations*.
+
+</div>
+
+<div id="ref-mohammed_comparison_2010">
+
+Mohammed, Nabil, Ali Munassar, and A. Govardhan. 2010. “A Comparison
+Between Five Models of Software Engineering.” *International Journal of
+Computer Science* 7 (5).
 
 </div>
 
@@ -1317,6 +1334,16 @@ Mili, Ali. 2015. *Software Testing: Concepts and Operations*.
 
 Myers, Glenford J, Tom Badgett, and Corey Sandler. 2012. *The Art of
 Software Testing*. Hoboken, NJ: Wiley.
+
+</div>
+
+<div id="ref-spencer_open-source_2015">
+
+Spencer, J. S., N. S. Blunt, W. A. Vigor, Fionn D. Malone, W. M. C.
+Foulkes, James J. Shepherd, and A. J. W. Thom. 2015. “Open-Source
+Development Experiences in Scientific Software: The HANDE Quantum Monte
+Carlo Project.” *Journal of Open Research Software* 3 (1): e9.
+<https://doi.org/10.5334/jors.bw>.
 
 </div>
 
