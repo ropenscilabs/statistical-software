@@ -156,7 +156,7 @@ other than topics pertaining to particular areas of application. That
 journal defines [its own
 scope](https://www.jstatsoft.org/pages/view/mission) as,
 
-statistical computing in all areas of empirical research.
+> statistical computing in all areas of empirical research.
 
 -   Supervised / regression models and algorithms
 
@@ -248,24 +248,20 @@ practices](https://github.com/coreinfrastructure/best-practices-badge/blob/maste
 Badges are graded (passing/silver/gold), and awarded by package authors
 self-certifying that they have implemented items on a checklist.
 
-A long history and tradition in both practice and published literature
-on software review \[for example, (Mili 2015){.redoc
-\#redoc-citation-2}; (Ammann and Offutt 2017){.redoc
-\#redoc-citation-3}\] generally concludes that software review is most
-effective when it is an ongoing process that occurs as frequently as
-possible---a practice which contrasts strongly with the singular nature
-of review as currently implemented by rOpenSci. Other systems, such as
-pull-request reviews or inline systems (e.g.,
-[watson-ruby](https://github.com/nhmood/watson-ruby)), focus review on
-much more granular scale both in terms of the scale of code reviewed and
-time frame.
+A long history and tradition in both practice and published literature on
+software review [for example, @mili_software_2015;@ammann_introduction_2017]
+generally concludes that software review is most effective when it is an
+ongoing process that occurs as frequently as possible---a practice which
+contrasts strongly with the singular nature of review as currently implemented
+by rOpenSci. Other systems, such as pull-request reviews or inline systems
+(e.g., [watson-ruby](https://github.com/nhmood/watson-ruby)), focus review on
+much more granular scale both in terms of the scale of code reviewed and time
+frame.
 
 In addition, ongoing "review" may be explicit in considering the role of
 user feedback, for instance, in defining and updating the scope of
 statistical routines (see "statistical standards" below).
 
-3.1 Key considerations
-----------------------
 
 Standards for Statistical Software
 ==================================
@@ -365,9 +361,6 @@ following kinds of questions which will likely have to be addressed:
     of statistical software, and understanding the potential effects of
     such a categorization?
 
-Categories of Standards
------------------------
-
 ### Statistical Standards
 
 -   Numerical issues
@@ -381,7 +374,8 @@ Categories of Standards
 -   Is a submission intended to support future or subsequent
     publications?
 
-4.5. Specific Aspects of Software
+Specific Aspects of Software
+========================
 
 To additionally inform the general considerations described in the
 preceding sections, this section presents a general (yet non-exhaustive)
