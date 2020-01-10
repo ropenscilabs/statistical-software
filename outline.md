@@ -1,11 +1,97 @@
-# rOpenSci Statistical Software Review: Scoping Document
+Introduction
+============
 
-# 1\. Introduction
+Background
+----------
 
-This document primarily serves to pose a number of questions regarding
-rOpenSci’s incipient project for peer-review of statistical software.
+This document serves as an organizing framework for rOpenSci's project
+for peer-review of statistical software. It lays out key considerations,
+outstanding questions, and tasks for our first year of work, for
+purposes of generating community feedback.
+
+Project Goals:
+--------------
+
+-   To foster a community of practice in which users and developers of
+    statistical software mutually improve quality, reproducibility, and
+    reliability of research.
+
+-   To provide software creators with a set of tools to assess the
+    quality of their work, and a process by which to improve it.
+
+-   To provide statistical software developers, users, and consumers of
+    results a discoverable "badge" that transparently conveys a level of
+    assurance of software quality may be usable as professional credit.
+
+-   To create a set of standards that may be adopted and adapted by open
+    source and private groups, academic journals, or other statistical
+    software evaluation projects.
+
+-   To focus on R as primary language, but separate language-specific
+    from language- agnostic components so as to maximize adaptability to
+    other contexts.
+
+-   To focus on problems and solutions specific to statistical software.
+
+Related projects and initiatives
+--------------------------------
+
+rOpenSci is simultaneously working on improving the automation and
+documentation of infrastructure to support software peer reviews. This
+will support many of the processes described herein, initially those in
+metrics and diagnostic reports (below), as well as in managing the
+review process.
+
+Secondly, [under a separate project funded by the Moore
+Foundation](https://ropensci.org/blog/2019/11/06/scientific-package-ecosystem/),
+rOpenSci is building a system to automate the retrieval of information
+related to use of software in published literature and automate
+reporting of software impact as part of metadata in software
+repositories. This builds on [Depsy](http://depsy.org/) and
+[CiteAs](http://citeas.org/about) projects and may be leveraged for our
+work on metrics (below).
+
+Third, an initiative organized under the R Consortium, the [R Validation
+Hub](https://www.pharmar.org/), seeks to provide guidance primarily to R
+users in the pharmaceutical industry on validating R packages in
+regulated contexts. We are working closely with that group to share
+products and avoid duplicated efforts.
+
+Scope of Statistical Software Review
+====================================
+
+A core task is to define the set of software that will be covered by our
+review process and standards.
+
+It may suffice, at least initially, to simply provide broad definitions
+of what might lie *beyond* the scope of the present project, or even to
+assert that statistical software must at heart implement some kind of
+statistical algorithm (or perhaps *employ* or otherwise interface with
+such in sufficiently novel form). This is nevertheless a categorical
+exercise, and so one way or another we anticipate having to address the
+fundamental question of:
+
+-   What categories of statistical software might be considered *in
+    scope*?
+
+-   What categories of statistical software might be considered *out of
+    scope*?
+
+-   How would these vary between a useful definition and typology for
+    general use, and the specific case of our R-focused peer review
+    system?
+
+-   It considering both of these issues of definition, it will be
+    important to consider whether it may be advantageous or necessary to
+    develop different procedures for different categories, whether in
+    terms of categories of external form or categories of statistical
+    software.
+
+Computer Languages and Package Structures
+-----------------------------------------
+
 The organization itself is, and is likely to largely remain, primarily
-focussed on the R language for statistical computing. While the project
+focused on the R language for statistical computing. While the project
 under consideration here will likely evolve towards a system for peer
 review of *R packages*, it may also consider review of other forms for
 bundling R software, or software primarily written in other languages.
@@ -18,58 +104,25 @@ R packages. Moreover, the project aims to develop a set of
 language-independent standards able to be transferred to other languages
 and systems for peer review.
 
-Peer-review plays a key role in ensuring the sustainability of
-scientific software (Downs et al. 2015). rOpenSci has a well-developed
-system for peer review of R packages, primarily through their
-[“software-review” repository on
-github](https://github.com/ropensci/software-review), to which packages
-may be submitted by opening an issue on that github repository. The
-review process is entirely open, with each issue used to manage the
-entire process, coordinated by rOpenSci’s own editorial committee. Two
-features of this peer review system in its current state are important
-to note here:
+More specific questions of scope which will also need to be addressed
+include the potential acceptability of the following different external
+forms of software:
 
-1.  Statistical software is explicitly *excluded* from current scope;
-    and
-2.  Tasks associated with peer review are not automated, and require
-    manual control and determination of each step.
+-   R packages
 
-There are many stages associated with software development and
-peer-review that may effectively be automated, and aspects of such
-automation is expected to be integrated within the present project. An
-important question throughout the remainder of this document is
-accordingly the extent to which automation may enhance either the
-development or implementation of the various stages considered below. A
-good example for the effectiveness of automation in the kinds of peer
-review processes envisioned to emerge from this process is provided by
-submissions to the [Journal of Open Source
-Software](https://joss.theoj.org/), which features [open
-reviews](https://github.com/openjournals/joss-reviews/issues), many
-aspects of which are automated by a custom-developed bot called
-[“whedon”](https://github.com/whedon).
+-   Other forms of bundling or presenting R code other than standard
+    packages
 
-## 1.1 Project Goals:
+-   Formats appropriate for other languages (such as python) yet with
+    some interface with the R language
 
-  - To foster a community of practice in which users and developers of
-    statistical software mutually improve quality, reproducibility, and
-    reliability of research.
-  - To provide software creators with a set of tools to assess the
-    quality of their work, and a process by which to improve it.
-  - To provide users of statistical software a discoverable “badge” that
-    transparently conveys a level of assurance of software quality.
-  - To create a set of standards that may be adopted and adapted by open
-    source and private groups, academic journals, or other statistical
-    software evaluation projects.
-  - To focus on R as primary language, but separate language-specific
-    from language- agnostic components so as to maximize adaptability to
-    other contexts
-  - To focus on problems and solutions specific to statistical software
+-   Independently-developed software in different languages which the
+    submission exposes to the R environment ("wrapper" packages)
 
------
+Defining "Statistical Software"
+-------------------------------
 
-# 2\. Scope: What counts as “statistical software” in the context of peer review
-
-There is no ready definition for “statistical software”, but nor may
+There is no ready definition for "statistical software", but nor may
 such a definition be essential to the success of the present project. An
 [analysis](https://github.com/mpadge/statistical-software/tree/master/jss)
 conducted in preparing this document of all historical submissions to
@@ -80,62 +133,77 @@ other than topics pertaining to particular areas of application. That
 journal defines [its own
 scope](https://www.jstatsoft.org/pages/view/mission) as,
 
-> statistical computing in all areas of empirical research.
+statistical computing in all areas of empirical research.
 
-It may suffice, at least initially, to simply provide broad definitions
-of what might lie *beyond* the scope of the present project, or even to
-assert that statistical software must at heart implement some kind of
-statistical algorithm (or perhaps *employ* or otherwise interface with
-such in sufficiently novel form). This is nevertheless a categorical
-exercise, and so one way or another we anticipate having to address the
-fundamental quesion(s) of:
+-   Supervised / regression models and algorithms
 
-1.  What categories of statistical software might be considered *in
-    scope*?
-2.  What categories of statistical software might be considered *out of
-    scope*?
+-   Unsupervised models and algorithms
 
-More specific questions of scope which will also need to be addressed
-include the potential acceptability of the following different external
-forms of software:
+-   Predictive / black box approaches
 
-  - R packages
-  - Other forms of bundling or presenting R code other than standard
-    packages
-  - Formats appropriate for other languages (such as python) yet with
-    some interface with the R language
-  - Independently-developed software in different languages which the
-    submission exposes to the R environment (“wrapper” packages)
+-   Parametric and analytically tractable approaches
 
-It considering both of these issues of definition, it will be important
-to consider whether it may be advantageous or necessary to develop
-different procedures for different categories, whether in terms of
-categories of external form or categories of statistical software.
+-   Summary statistic calculation
 
------
+-   Statistical visualization and diagnostics
 
-# 3\. Review Process
+-   Power analysis and study design
+
+-   Workflow support
+
+Statistical Software Peer Review Process
+========================================
+
+Our point of departure for our process is the rOpenSci software peer
+review process. However, we aim to reassess this process in light of
+other models and needs specific to statistical software. Some core
+questions we seek to resolve are:
+
+-   Are we reviewing full packages or only limited pieces of packages?
+
+-   What is the outcome of review? Binary, rating, checklist,
+    acceptance/rejection?
+
+-   To what extent should the review process be automated or
+    self-certified?
+
+-   Which parts of the process should be open and which closed?
+
+-   Should review be a one-off phenomenon, or should there be multiple
+    review phases throughout the software lifecycle?
+
+-   Is it likely to be important to maintain the separation or
+    independence of reviewers from code development, or might it be
+    better to encourage direct engagement of reviewers with ongoing code
+    development?
+
+-   Who should be in the pool of software reviewers and editors?
+
+Current Models
+--------------
+
+rOpenSci's current software peer-review process has a well-developed
+system for peer review of R packages, primarily through their
+["software-review" repository on
+github](https://github.com/ropensci/software-review), to which packages
+may be submitted by opening an issue on that github repository. The
+review process is entirely open, with each issue used to manage the
+entire process, coordinated by rOpenSci's own editorial committee. Two
+features of this peer review system in its current state are important
+to note here:
 
 Peer review as currently implemented by rOpenSci effectively functions
 in a manner directly analogous to more conventional peer review of
 academic manuscripts: A piece of software is submitted for review and,
-once accepted, is “published” by rOpenSci, with publication symbolized
+once accepted, is "published" by rOpenSci, with publication symbolized
 both through a badge system, and (generally) through transferring the
-software from an author’s private domain to the [`github.com/ropensci`
-domain](https://github.com/ropensci). It is very important with regard
-to the current project to note that this is only one of many potential
-models for peer review of software, and particularly that a long history
-and tradition in both practice and published literature on software
-review (for example, Mili 2015; Ammann and Offutt 2017) generally
-concludes that software review is most effective when it is an ongoing
-process that occurs as frequently as possible—a practice which contrasts
-strongly with the singular nature of review as currently implemented by
-rOpenSci.
+software from an author's private domain to the [github.com/ropensci
+domain](https://github.com/ropensci).
 
 An effective system for peer review of statistical software is thus
-likely to lie somewhere between current “one-off” practices typical of
+likely to lie somewhere between current "one-off" practices typical of
 academic manuscripts, and frequent, ongoing review typical of software
-development. An [analysis of the effects of rOpenSci’s review process on
+development. An [analysis of the effects of rOpenSci's review process on
 a few metrics of software development
 activity](https://github.com/mpadge/statistical-software/tree/master/ros-review-effects)
 revealed that software development tends to stagnate following review.
@@ -147,40 +215,40 @@ empirical decreases in rates of software development following review
 are likely associated with concomitant, progressive decreases in
 community engagement. The abiding question to be considered within the
 present section is thus how the review process might best be structured,
-organized, and managed, keeping such potentially negative “side effects”
+organized, and managed, keeping such potentially negative "side effects"
 in mind.
 
-## 3.1 Key considerations
+For instance, the Linux [Core Infrastucture
+Initiative](https://www.coreinfrastructure.org/) provides badges to
+project meeting [development best
+practices](https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md).
+Badges are graded (passing/silver/gold), and awarded by package authors
+self-certifying that they have implemented items on a checklist.
 
-  - Are we reviewing full packages or only limited pieces of packages?
-  - What is the outcome of review? Binary, rating, checklist,
-    acceptance/rejection?
-  - To what extent should the review process be automated or
-    self-certified?
-  - Reviewer pool and qualifications:
-      - What is the extent and type of effort expected of reviewers?
-      - To what extent might searches for suitable reviewers be
-        automated?
-      - What sort of metrics might be useful in such searches?
-  - Which parts of the process should be open and which closed?
-  - Should review be a one-off phenomenon, or should there be multiple
-    review phases throughout the software lifecycle?
-  - Might there be advantage in considering “micro-review” or inline
-    systems like [`watson-ruby`](https://github.com/nhmood/watson-ruby)
-    (Spencer et al. 2015)?
-  - If multiple review phases, should there also be different reviewers
-    for different phases?
-  - Is it likely to be important to maintain the separation or
-    independence of reviewers from code development, or might it be
-    better to encourage direct engagement of reviewers with ongoing code
-    development?
+A long history and tradition in both practice and published literature
+on software review \[for example, (Mili 2015){.redoc
+\#redoc-citation-2}; (Ammann and Offutt 2017){.redoc
+\#redoc-citation-3}\] generally concludes that software review is most
+effective when it is an ongoing process that occurs as frequently as
+possible---a practice which contrasts strongly with the singular nature
+of review as currently implemented by rOpenSci. Other systems, such as
+pull-request reviews or inline systems (e.g.,
+[watson-ruby](https://github.com/nhmood/watson-ruby)), focus review on
+much more granular scale both in terms of the scale of code reviewed and
+time frame.
 
------
+In addition, ongoing "review" may be explicit in considering the role of
+user feedback, for instance, in defining and updating the scope of
+statistical routines (see "statistical standards" below).
 
-# 4\. Standards
+3.1 Key considerations
+----------------------
+
+Standards for Statistical Software
+==================================
 
 An important output of the present project is anticipated to be two set
-of “standards”, one pertaining to processes for peer review of software,
+of "standards", one pertaining to processes for peer review of software,
 and one pertaining to the software itself. The former of these is only
 indirectly addressed within this document, through the preceding
 sections, with concrete standards expected to emerge from latter phases
@@ -199,45 +267,40 @@ applied to any extant software in order to assess the extent to whether
 it meets those standards, while *prospective standards* represent a set
 of requirements which software is expected to fulfil. The extent to
 which standards developed for this project are retrospective versus
-prospective is likely to change throughout the project’s lifespan and
+prospective is likely to change throughout the project's lifespan and
 beyond.
 
 Standards are likely to emerge from a variety of concrete metrics of the
-types considered in the following section (“*Specific Aspects of
-Software*”), and are not considered in any technical detail in the
+types considered in the following section ("*Specific Aspects of
+Software*"), and are not considered in any technical detail in the
 present section. Important *general* questions regarding standards
 include the following:
 
-  - What kind of standards might apply to software in general?
-  - How might such standards differ between different languages?
-  - What kind of standards might specifically apply to statistical
+-   What kind of standards might apply to software in general?
+
+-   How might such standards differ between different languages?
+
+-   What kind of standards might specifically apply to statistical
     software? (See the following sub-section.)
-  - In what ways might any of the above differ with regard to retro-
+
+-   In what ways might any of the above differ with regard to retro-
     versus pro-spective standards?
-  - To what extent should we aim for “verification” or “validation” of
+
+-   To what extent should we aim for "verification" or "validation" of
     software?
 
-## 4.1 Statistical Standards
-
-  - Numerical issues
-  - Method validity (i.e., is the method itself valid, independent of
-    implementation? Has to do with, perhaps, whether there’s literature
-    supporting the method.)
-  - Scope of applicability of the software / method
-  - Is a submission intended to support future or subsequent
-    publications?
-
-## 4.2 Standards and Software Categories
+General and Specific Standards
+------------------------------
 
 Many of the metrics described in the following section can be
-“automatically” quantified, and thus procedures for assessing the
-extent to which software meets a given sets of standards are readily
-automated. Doing so nevertheless entails some degree of risk which it is
-important both to apperceive, and to consider within the present general
-context of standards. Such risk is particularly apparent with regard to
-the relationship between software categories and standards—although
-these kinds of considerations of risk are in no way restricted to this
-domain only.
+"automatically" quantified, and thus procedures for assessing the extent
+to which software meets a given sets of standards are readily automated.
+Doing so nevertheless entails some degree of risk which it is important
+both to apperceive, and to consider within the present general context
+of standards. Such risk is particularly apparent with regard to the
+relationship between software categories and standards---although these
+kinds of considerations of risk are in no way restricted to this domain
+only.
 
 The applicability of any concrete set of standards is likely to differ
 between different categories. In terms of concrete metrics, for example,
@@ -248,7 +311,7 @@ metrics derived from tests, which must be interpreted in *qualitatively*
 different ways for packages entirely dependent on their own internal
 code versus packages largely dependent on the results of calls to
 external data providers (along with additional differences between, for
-example, locally-installed “external” providers versus online sources of
+example, locally-installed "external" providers versus online sources of
 external data).
 
 Different metrics, and thus by extension very likely different
@@ -260,45 +323,42 @@ critical importance throughout the project. More concretely, attempts to
 devise a concrete categorization of statistical software will inevitably
 frustrate attempts to understand more *general* processes leading to the
 establishment of standards, and therefore negatively impact on the
-project’s desired goal stated at the outset of creating and providing a
+project's desired goal stated at the outset of creating and providing a
 truly *general* and *transferrable* set of standards. Conversely,
 attempts to counter this effect by striving for more generally
 applicable standards will likely weaken abilities to assess particular
 categories of statistical software. Such considerations lead to the
 following kinds of questions which will likely have to be addressed:
 
-  - To what extent ought we aim for general standards at the expense of
+-   To what extent ought we aim for general standards at the expense of
     specific ability to assess particular categories of statistical
     software?
-  - To what extent ought we strive for automation of software
+
+-   To what extent ought we strive for automation of software
     assessment, given the inherent risk of overseeing qualitative
     differences between different categories?
-  - How much effort should be expended both developing a categorization
+
+-   How much effort should be expended both developing a categorization
     of statistical software, and understanding the potential effects of
     such a categorization?
 
-The ultimate question which we would like to answer throughout such
-considerations concerns the kinds of tools this project might best focus
-on developing, whether those tools be:
+Categories of Standards
+-----------------------
 
-  - Qualitative descriptions and understanding of effects of the kinds
-    of compromises described above
-  - Tools useful in assessing or formalizing categories of software
-  - Quantitative tools to *retrospectively* assess such aspects as:
-      - Software “quality” (see the subsequent section)
-      - Community engagement
-      - Effectiveness (or other metrics) of review
-      - Other aspects pertinent to the general process of peer reviewing
-        open source statistical software
-  - Quantitative tools that can be *prospectively* used to
-      - Improve or assure software quality
-      - Document aspects of software quality
-      - Aid modularity or transferability either of software, or of the
-        tools themselves
-      - Formalize structural aspects of software such as tests (for
-        example, through implementing new frameworks or grammars)
+### Statistical Standards
 
-# 5\. Specific Aspects of Software
+-   Numerical issues
+
+-   Method validity (i.e., is the method itself valid, independent of
+    implementation? Has to do with, perhaps, whether there's literature
+    supporting the method.)
+
+-   Scope of applicability of the software / method
+
+-   Is a submission intended to support future or subsequent
+    publications?
+
+4.5. Specific Aspects of Software
 
 To additionally inform the general considerations described in the
 preceding sections, this section presents a general (yet non-exhaustive)
@@ -309,10 +369,10 @@ intended to address the two directly related questions of the extent to
 which the kinds of metrics described might be useful to both software
 developers, and to reviewers.
 
-## 5.1 General Software Interface
+### Software Interface
 
-There are likely aspects of overall software “design” that might be
-considered, reviewed, encouraged, or expected. rOpenSci’s guide on
+There are likely aspects of overall software "design" that might be
+considered, reviewed, encouraged, or expected. rOpenSci's guide on
 [package development, maintenance, and peer
 review](https://devguide.ropensci.org/) provides arguably one of the
 most prominent guides on the design of R packages, primarily with its
@@ -321,63 +381,85 @@ principles of R packages is the [tidyverse design
 guide](https://principles.tidyverse.org/). The following useful list of
 design principles is provided by Mili (2015):
 
-1.  Functional Attributes
-      - Correctness
-      - Robustness
-2.  Useability Attributes
-      - Ease of Use
-      - Ease of Learning
-      - Customizability
-      - Calibrability
-      - Interoperability
-3.  Structural Attributes
-      - Design Integrity
-      - Modularity
-      - Testability
-      - Adaptability
+-   Functional Attributes
 
-### 5.1a Key Considerations
+    -   Correctness
 
-  - Might there be an advantage to explicitly considering some of these
+    -   Robustness
+
+-   Useability Attributes
+
+    -   Ease of Use
+
+    -   Ease of Learning
+
+    -   Customizability
+
+    -   Calibrability
+
+    -   Interoperability
+
+-   Structural Attributes
+
+    -   Design Integrity
+
+    -   Modularity
+
+    -   Testability
+
+    -   Adaptability
+
+5.1a Key Considerations
+
+-   Might there be an advantage to explicitly considering some of these
     aspects of general software design?
-  - If so, which?
-  - At what point in the general lifecycle of software or review might
+
+<!-- -->
+
+-   If so, which?
+
+-   At what point in the general lifecycle of software or review might
     such design aspects best be considered or integrated?
 
-## 5.2 Documentation
+### Documentation
 
 In contrast to scientific, software in general, statistical software
 might be argued to be associated with some specific kinds of input and
 output data. This observation alone suggests the likely importance of
 some kind of metadata associated with statistical software which
 documents the nature of (expected, permitted, or accepted) input and
-output data (Lenhardt et al. 2014).
+output data (**???**).
 
-  - Standard software documentation metrics:
-      - Numbers of lines per function
-      - proportion of documentation to code lines
-      - presence of examples
-      - coverage of examples
-      - vignettes
+-   Standard software documentation metrics:
 
-## 5.3 Testing
+    -   Numbers of lines per function
+
+    -   proportion of documentation to code lines
+
+    -   presence of examples
+
+    -   coverage of examples
+
+    -   vignettes
+
+### Testing
 
 Vogel (2011) states: Software that
 
-> depends on testing alone for a defect-free \[state\] is depending on
-> perfection in testing
+depends on testing alone for a defect-free \[state\] is depending on
+perfection in testing
 
 There are no unambiguous categories of tests, but the structure of R
 packages which contain both external (exported) and internal
 (non-exported) functions provides for a convenient distinction between
-“unit tests” as tests of *internal* functions, and *functional* or
+"unit tests" as tests of *internal* functions, and *functional* or
 *integration tests* as tests of *exported* functions. Almost all testing
-as currently implemented in R is “concrete testing” (Mili 2015), and
-little consideration has been given in R to “stochastic” or
-“property-based” testing, in which expectation values of inputs and
+as currently implemented in R is "concrete testing" (Mili 2015), and
+little consideration has been given in R to "stochastic" or
+"property-based" testing, in which expectation values of inputs and
 outputs are tested, rather than concrete instantiations of such. Other
 languages have developed grammars for stochastic or property-based
-testing, notably through the [`hypothesis` package for
+testing, notably through the [hypothesis package for
 python](https://github.com/HypothesisWorks/hypothesis). These grammars
 enable specification of test assumptions as well as expected test
 outputs. Assumptions in `hypothesis` are declared through simple
@@ -387,134 +469,200 @@ through equivalent `@expect` statements that might, for example, specify
 expected *distributional properties* of an output rather than just
 concrete values.
 
-### 5.3a Key considerations
+5.3a Key considerations
 
-  - To what extend should testing focus on *functional* rather than
+-   To what extend should testing focus on *functional* rather than
     *unit* testing?
-  - What test reporter should be used? The `testthat` package and
+
+<!-- -->
+
+-   What test reporter should be used? The `testthat` package and
     similar, or might it be worth considering new test reporting
     systems?
-  - Is it sufficient to consider test execution as an integral part of
+
+-   Is it sufficient to consider test execution as an integral part of
     `R CMD check` only? Or might there by a case for developing
-    alternative, potentially longer-running, test execution
-    environments?
-  - Is it worthwhile concretely defining one or more goals of testing?
+    alternative test execution environments and approaches? For
+    instance, should there be an alternate workflow for long-running
+    tests, tests requiring large data, or tests intended to be executed
+    for purposes other than (e.g., scope delineation).
+
+-   Is it worthwhile concretely defining one or more goals of testing?
     (Such as error detection, error frequencies, error tolerance,
     accuracy.)
-  - What are the test data? And how easy is it to input alternative data
+
+-   What are the test data? And how easy is it to input alternative data
     to tests?
-  - Is there scope for “stochastic” or “property-based” testing?
 
-## 5.4 Metrics
+-   Is there scope for "stochastic" or "property-based" testing?
 
-  - Code structure
-      - Cyclomatic complexity
-      - Codebase size
-      - Function size / number
-      - Numbers of external calls within functions
-      - Exported / non exported functions
-      - Code consistency
-  - Documentation metrics detailed above
-  - Meta struture
-      - Dependencies
-      - Reverse dependencies
-      - License
-  - Meta metrics
-      - Version control?
-      - Availability of website
-      - Availability of source code (beyond CRAN or similar)
-      - Community:
-          - Software downloads and usage statistics
-          - Numbers of active contributors
-          - Numbers or rates of issues reported
-      - Maintenance:
-          - Rate/Numbers of releases
-          - Rate of response to reported issues
-          - Last commit
-          - Commit rate
-      - stars
-      - forks
-  - Extent of testing
-      - Code coverage
-      - Examples
-      - Range of inputs tested
-  - Dynamic metrics derived from function call networks
+Community
+=========
 
-## 5.5 Diagnostic reports
+A core goal of the project is the building and maintenance of a
+community of practice that will facilitate dissemination adoption, and
+improvement of standards and peer review.
 
-  - Extensions of packages such as **lintr**, **covr**, **goodpractice**
-  - Comparisons of package metrics to distributions for other packages
-  - Diagnostic and report aggregation, design, automatic creation
+-   What outreach should we conduct to maximize diversity and inclusion
+    in the process?
 
------
+-   How should this process involve other relevant communities in fields
+    including software development, statistics, applied statistics (in
+    various subfields)
 
-# Related Frameworks and Projects
+-   What fora should we manage for developers, users, reviewers and
+    editors to communicate? To what extent should we reuse existing fora
+    from rOpenSci or other organizations?
 
-## Risk-Based Validation
+Metrics {#metrics-1}
+=======
 
-  - R Validation Hub work
+-   Code structure
 
------
+    -   Cyclomatic complexity
 
-# Annotated Bibliography
+    -   Codebase size
+
+    -   Function size / number
+
+    -   Numbers of external calls within functions
+
+    -   Exported / non exported functions
+
+    -   Code consistency
+
+-   Documentation metrics detailed above
+
+-   Meta struture
+
+    -   Dependencies
+
+    -   Reverse dependencies
+
+    -   License
+
+-   Meta metrics
+
+    -   Version control?
+
+    -   Availability of website
+
+    -   Availability of source code (beyond CRAN or similar)
+
+    -   Community:
+
+        -   Software downloads and usage statistics
+
+        -   Numbers of active contributors
+
+        -   Numbers or rates of issues reported
+
+    -   Maintenance:
+
+        -   Rate/Numbers of releases
+
+        -   Rate of response to reported issues
+
+        -   Last commit
+
+        -   Commit rate
+
+    -   stars
+
+    -   forks
+
+-   Extent of testing
+
+    -   Code coverage
+
+    -   Examples
+
+    -   Range of inputs tested
+
+-   Dynamic metrics derived from function call networks
+
+Automation and Tooling
+======================
+
+The ultimate question which we would like to answer throughout such
+considerations concerns the kinds of tools this project might best focus
+on developing, whether those tools be:
+
+-   Qualitative descriptions and understanding of effects of the kinds
+    of compromises described above
+
+    -   Tools useful in assessing or formalizing categories of software
+
+-   Quantitative tools to *retrospectively* assess such aspects as:
+
+    -   Software "quality" (see the subsequent section)
+
+    -   Community engagement
+
+    -   Effectiveness (or other metrics) of review
+
+Other aspects pertinent to the general process of peer reviewing open
+source statistical software
+
+-   Quantitative tools that can be *prospectively* used to
+
+    -   Improve or assure software quality
+
+    -   Document aspects of software quality
+
+    -   Aid modularity or transferability either of software, or of the
+        tools themselves
+
+-   Formalize structural aspects of software such as tests (for example,
+    through implementing new frameworks or grammars)
+
+-   Extensions of packages such as **lintr**, **covr**, **goodpractice**
+
+-   Comparisons of package metrics to distributions for other packages
+
+-   Diagnostic and report aggregation, design, automatic creation
+
+There are many stages associated with software development and
+peer-review that may effectively be automated, and aspects of such
+automation is expected to be integrated within the present project. An
+important question throughout the remainder of this document is
+accordingly the extent to which automation may enhance either the
+development or implementation of the various stages considered below. A
+good example for the effectiveness of automation in the kinds of peer
+review processes envisioned to emerge from this process is provided by
+submissions to the [Journal of Open Source
+Software](https://joss.theoj.org/), which features [open
+reviews](https://github.com/openjournals/joss-reviews/issues), many
+aspects of which are automated by a custom-developed bot called
+["whedon"](https://github.com/whedon).
+
+Reviewer pool and qualifications:
+
+-   What is the extent and type of effort expected of reviewers?
+
+-   To what extent might searches for suitable reviewers be automated?
+
+-   What sort of metrics might be useful in such searches?
+
+Annotated Bibliography
+======================
 
 Lots to put here, but some in addition to stuff in current document:
 
-  - <https://www.alexpghayes.com/blog/type-stable-estimation/>,
+-   <https://www.alexpghayes.com/blog/type-stable-estimation/>,
     <https://www.alexpghayes.com/blog/testing-statistical-software/>
-  - <https://tidymodels.github.io/model-implementation-principles/>
-  - <https://github.com/pharmaR/white_paper>
-  - <https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md>
 
-<div id="refs" class="references hanging-indent">
+-   <https://tidymodels.github.io/model-implementation-principles/>
 
-<div id="ref-ammann_introduction_2017">
+-   <https://github.com/pharmaR/white_paper>
+
+-   <https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md>
 
 Ammann, Paul, and Jeff Offutt. 2017. *Introduction to Software Testing*.
 Cambridge University Press.
 
-</div>
-
-<div id="ref-downs_community_2015">
-
-Downs, Robert R., W. Christopher Lenhardt, Erin Robinson, Ethan Davis,
-and Nicholas Weber. 2015. “Community Recommendations for Sustainable
-Scientific Software.” *Journal of Open Research Software* 3 (1): e11.
-<https://doi.org/10.5334/jors.bt>.
-
-</div>
-
-<div id="ref-lenhardt_data_2014">
-
-Lenhardt, W., Stanley Ahalt, Brian Blanton, Laura Christopherson, and
-Ray Idaszak. 2014. “Data Management Lifecycle and Software Lifecycle
-Management in the Context of Conducting Science.” *Journal of Open
-Research Software* 2 (1): e15. <https://doi.org/10.5334/jors.ax>.
-
-</div>
-
-<div id="ref-mili_software_2015">
-
 Mili, Ali. 2015. *Software Testing: Concepts and Operations*.
-
-</div>
-
-<div id="ref-spencer_open-source_2015">
-
-Spencer, J. S., N. S. Blunt, W. A. Vigor, Fionn D. Malone, W. M. C.
-Foulkes, James J. Shepherd, and A. J. W. Thom. 2015. “Open-Source
-Development Experiences in Scientific Software: The HANDE Quantum Monte
-Carlo Project.” *Journal of Open Research Software* 3 (1): e9.
-<https://doi.org/10.5334/jors.bw>.
-
-</div>
-
-<div id="ref-vogel_medical_2011">
 
 Vogel, David A. 2011. *Medical Device Software Verification, Validation
 and Compliance*. Boston: Artech House.
 <http://site.ebrary.com/id/10436227>.
-
-</div>
-
-</div>
