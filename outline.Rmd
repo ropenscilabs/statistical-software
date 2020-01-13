@@ -230,7 +230,19 @@ Initiative](https://www.coreinfrastructure.org/) provides badges to project
 meeting [development best
 practices](https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md).
 Badges are graded (passing/silver/gold), and awarded by package authors
-self-certifying that they have implemented items on a checklist.
+self-certifying that they have implemented items on a checklist. The
+[Debian](https://debian.org) system has an extensive set of standards referred
+to as the ["Debian Policy"
+document](https://www.debian.org/doc/debian-policy/ch-source.html#standards-conformance).
+This document is versioned, and each Debian package must assert the latest
+version of the standards to which it conforms. This requirement enables
+potentially obsolete packages to be readily flagged, and readily ensures the
+active maintenance of software. A continuously updated ["Upgrading
+Checklist"](https://www.debian.org/doc/debian-policy/upgrading-checklist.html)
+explicitly describes the steps necessary to ensure conformance to each
+consecutive upgrade of the Policy Document. There are also language-specific
+policies, such as [for python
+packages](https://www.debian.org/doc/packaging-manuals/python-policy/module_packages.html).
 
 Software Life Cycle Considerations
 ----------------------------------
