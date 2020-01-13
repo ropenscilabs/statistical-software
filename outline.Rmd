@@ -206,12 +206,12 @@ guide](https://devguide.ropensci.org/softwarereviewintro.html), is based on a
 blend of practices from peer review of academic practices and code review in
 open-source projects. Review takes place via an issue thread in our
 ["software-review" repository on
-github](https://github.com/ropensci/software-review). The review process is
+GitHub](https://github.com/ropensci/software-review). The review process is
 entirely open, with each issue thread used to manage the entire process,
 coordinated by rOpenSci's editors. After initial screening for scope and minimal
 qualification by editors two reviewers provide comments and feedback on software
 packages. After one or more rounds of revisions, packages reach a point of
-approval, at which point they are "accepted " by by rOpenSci, symbolized both
+approval, at which point they are "accepted " by rOpenSci, symbolized both
 through a badge system, and (generally) through transferring the software from
 an author's private domain to the [github.com/ropensci
 domain](https://github.com/ropensci).
@@ -225,7 +225,7 @@ review](https://www.bioconductor.org/developers/package-submission/) primarily
 aimed at maintaining minimum standards and intercompatibilty.
 
 Other initiatives further afield from academic peer review may offer useful
-models. For instance, the Linux [Core Infrastucture
+models. For instance, the Linux [Core Infrastructure
 Initiative](https://www.coreinfrastructure.org/) provides badges to project
 meeting [development best
 practices](https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md).
@@ -245,7 +245,7 @@ reviews or inline systems (e.g.,
 granular scale both in terms of the scale of code reviewed and time frame.
 
 An effective system for peer review of statistical software is thus may lie
-somewhere between the"one-off" practices aboce, and frequent, ongoing review
+somewhere between the "one-off" practices above, and frequent, ongoing review
 typical of software development in active teams. An [analysis of the effects of
 rOpenSci's review process on a few metrics of software development
 activity](https://github.com/mpadge/statistical-software/tree/master/ros-review-effects)
@@ -465,12 +465,12 @@ languages have developed grammars for stochastic or property-based testing,
 notably through the [hypothesis package for
 python](https://github.com/HypothesisWorks/hypothesis). These grammars enable
 specification of test assumptions as well as expected test outputs. Assumptions
-in `hypothesis` are declared through simple `[@given]{.redoc #redoc-citation-2}`
-statements that might, for example, quantify an assumed probability distribution
-for input data, while outputs are specified through equivalent
-`[@expect]{.redoc #redoc-citation-3}` statements that might, for example,
-specify expected *distributional properties* of an output rather than just
-concrete values.
+in `hypothesis` are declared through simple
+`[@``given]{``.redoc #redoc-citation-2}` statements that might, for example,
+quantify an assumed probability distribution for input data, while outputs are
+specified through equivalent `[@expect]{.redoc #redoc-citation-3}` statements
+that might, for example, specify expected *distributional properties* of an
+output rather than just concrete values.
 
 5.3a Key considerations
 
