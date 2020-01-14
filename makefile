@@ -1,7 +1,7 @@
 RFILE = README
 BFILE = background
 
-all: knito
+all: knith
 #all: knith open 
 
 knith: $(RFILE).Rmd

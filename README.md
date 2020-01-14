@@ -117,6 +117,8 @@ defines [its own scope](https://www.jstatsoft.org/pages/view/mission) as
 articles describing “comprehensive open-source implementations of broad
 classes of statistical models and procedures or computational
 infrastructure upon which such implementations can be built.”\[1\]
+Categorical definitions of statistical software are considered further
+below with regard to standards specific to statistical software.
 
 ## Computer Languages and Package Structures
 
@@ -302,17 +304,28 @@ include the following:
   - To what extent should we aim for “verification” or “validation” of
     software?
 
-## General and Specific Standards
+The remainder of this document employs a convenient distinction between:
 
-Many of the metrics described in the following section can be
-“automatically” quantified, and thus procedures for assessing the
-extent to which software meets a given sets of standards are readily
-automated. Doing so nevertheless entails some degree of risk which it is
-important both to apperceive, and to consider within the present general
-context of standards. Such risk is particularly apparent with regard to
-the relationship between software categories and standards—although
-these kinds of considerations of risk are in no way restricted to this
-domain only.
+  - “*General Standards*” which may be applied to all software
+    considered within this project, irrespective of how it may be
+    categorized under the times of categories of statistical software
+    listed above; and
+  - “*Specific Standards*” which apply to different degrees to
+    statistical software depending on the software category.
+
+It is likely that standards developed under the first category may
+subsequently be deemed to be genuinely *Statistical Standards* yet which
+are applicable across all categories, and we thus anticipate a degree of
+fluidity between these two broad categories. Moreover, we do not pursue
+*General Standards* any further in the present document, and merely
+presume that these will emerge, or may be derived, from the following
+considerations of *Specific Aspects of Software*. The following
+sub-section considers potential types of *Statistical Standards*, aiming
+in particular to illustrate and explore how the development of such
+standards interacts with and is influenced by definitions and
+categorizations of statistical software.
+
+## Specific Standards
 
 The applicability of any concrete set of standards is likely to differ
 between different categories. In terms of concrete metrics, for example,
@@ -356,16 +369,48 @@ following kinds of questions which will likely have to be addressed:
 
 ### Statistical Standards
 
-  - Numerical issues
+The following exemplify a few categories of statistical standards which
+may be considered, emphasising restrictions of applicability to
+different kinds of software.
 
-  - Method validity (i.e., is the method itself valid, independent of
-    implementation? Has to do with, perhaps, whether there’s literature
-    supporting the method.)
+  - **Numerical standards such as precision or convergence.** These will
+    be applicable only to some restricted subset of all potential
+    categories of statistical software (likely including analytic
+    approaches, but potentially also categories of predictive routines,
+    and others). Moreover, even these two categories alone will likely
+    require differing standards for precision or convergence.
+  - **Method validity** It may be necessary or useful to develop
+    standards for the *validity* of a chosen method, independent of its
+    implementation. Questions of validity are commonly related to
+    domains of application, and therefore must relate directly to any
+    system for categorising statistical software. A method may (have
+    been demonstrated to) be valid for some particular domain of
+    application, and a software routine may be developed to adapt that
+    method to some previously untried domain. It may then be necessary
+    to consider potential (in)validity of that software, along with
+    potential validity in other domains, themselves potentially not
+    explicitly considered by the software authors.
+  - **Software scope** The preceding considerations extend directly to
+    general concerns of *scope*, whether in terms of domains of
+    applicability, properties of input or output data, authorial
+    intentions, or other contextual factors. Scope in all of these
+    senses obviously must directly affect and determine the kinds of
+    standards which may or may not apply to software, just as defining
+    scope in these senses is also effectively an exercise in
+    categorization of the kind described above.
 
-  - Scope of applicability of the software / method
-
-  - Is a submission intended to support future or subsequent
-    publications?
+These brief examples serve to illustrate the inextricable relationship
+between categorizations of, and standards for, statistical software. We
+envision the project proceeding from this initial stage by developing
+parallel definitions for both categories of software (defining both
+*in*-scope and *beyond*-scope), and specific standards. A simple way to
+proceed may be to develop lists for both, along with a representation of
+inter-connections between categories and standards. The final section of
+this document considers several examples of extant software submitted
+for peer-review, and uses these to illustrate in a concrete context how
+such such categories and standards may be developed. Prior to doing so,
+the following section lists several *Specific Aspects of Software* which
+may be usefully considered within both general and specific standards.
 
 # Specific Aspects of Software
 
