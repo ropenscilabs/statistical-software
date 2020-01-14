@@ -275,6 +275,32 @@ In addition, ongoing "review" may be explicit in considering the role of user
 feedback, for instance, in defining and updating the scope of statistical
 routines (see "statistical standards" below).
 
+Community
+---------
+
+A core goal of the project is the building and maintenance of a community of
+practice that will facilitate dissemination adoption, and improvement of
+standards and peer review.
+
+-   What outreach should we conduct to maximize diversity and inclusion in the
+    process?
+
+-   How should this process involve other relevant communities in fields
+    including software development, statistics, applied statistics (in various
+    subfields)
+
+-   What fora should we manage for developers, users, reviewers and editors to
+    communicate? To what extent should we reuse existing fora from rOpenSci or
+    other organizations?
+
+Reviewer pool and qualifications:
+
+-   What is the extent and type of effort expected of reviewers?
+
+-   To what extent might searches for suitable reviewers be automated?
+
+-   What sort of metrics might be useful in such searches?
+
 Standards for Statistical Software
 ==================================
 
@@ -425,12 +451,14 @@ Specific Aspects of Software
 ============================
 
 To additionally inform the general considerations described in the preceding
-sections, this section presents a general (yet non-exhaustive) overview of the
-kinds of metrics which may be usefully considered in assessing statistical
-software, and which may be usefully employed in deriving a set of standards for
-such software. This section is primarily intended to address the two directly
-related questions of the extent to which the kinds of metrics described might be
-useful to both software developers, and to reviewers.
+sections, this section presents a general (yet non-exhaustive) overview of
+aspects of software which may be usefully considered, both for (retrospective)
+peer review software, and for (prospective) use in developing software both in
+general, and in preparation for peer-review. It may be important to consider
+the extent to which the following aspects may be more or less applicable or
+relevant at different phases of a software lifecycle, or how expected values
+for, or results of applying, metrics may vary throughout a software lifecycle.
+
 
 ### Software Interface
 
@@ -440,78 +468,43 @@ maintenance, and peer review](https://devguide.ropensci.org/) provides arguably
 one of the most prominent guides on the design of R packages, primarily with its
 first chapter. One of the few other notable examples of guides to design
 principles of R packages is the [tidyverse design
-guide](https://principles.tidyverse.org/). The following useful list of design
-principles is provided by Mili (2015):
+guide](https://principles.tidyverse.org/). @mili_software_2015 also provides
+a useful, and far more general, list of software design principles, divided
+between *Functional Attributes* (including Correctness and Robustness),
+*Useability Attributes* (including Ease of Use, Ease of Learning,
+Customizability, Calibrability, and Interoperability), and *Structural
+Attributes* (including Design Integrity, Modularity, Testability, and
+Adaptability). These latter two categories extend beyond what is, or has been,
+generally considered within the context of R packages, and thus it is
+worthwhile considering whether such general aspects might be explicitly
+considered as part of the review process.
 
--   Functional Attributes
-
-    -   Correctness
-
-    -   Robustness
-
--   Useability Attributes
-
-    -   Ease of Use
-
-    -   Ease of Learning
-
-    -   Customizability
-
-    -   Calibrability
-
-    -   Interoperability
-
--   Structural Attributes
-
-    -   Design Integrity
-
-    -   Modularity
-
-    -   Testability
-
-    -   Adaptability
-
-5.1a Key Considerations
-
--   Might there be an advantage to explicitly considering some of these aspects
-    of general software design?
-
-<!-- -->
-
--   If so, which?
-
--   At what point in the general lifecycle of software or review might such
-    design aspects best be considered or integrated?
 
 ### Documentation
 
-In contrast to scientific, software in general, statistical software might be
+In contrast to scientific software in general, statistical software might be
 argued to be associated with some specific kinds of input and output data. This
 observation alone suggests the likely importance of some kind of metadata
 associated with statistical software which documents the nature of (expected,
-permitted, or accepted) input and output data (**???**).
+permitted, or accepted) input and output data [@lenhardt_data_2014].
 
--   Standard software documentation metrics:
-
-    -   Numbers of lines per function
-
-    -   proportion of documentation to code lines
-
-    -   presence of examples
-
-    -   coverage of examples
-
-    -   vignettes
+- Standard software documentation metrics:
+    - Numbers of documentation lines per function
+    - proportion of documentation to code lines
+    - presence of examples
+    - coverage of examples
+    - vignettes
+- Data documentation metrics
+    - Intended and/or permitted kinds of input data
+    - Nature of output data
+    - Description of data used in tests
 
 ### Testing
 
-Vogel (2011) states: Software that
+Vogel (2011) states:
 
-depends on testing alone for a defect-free
-
-$$\text{state}$$
-
-is depending on perfection in testing
+> Software that depends on testing alone for a defect-free [state] is depending
+on perfection in testing
 
 There are no unambiguous categories of tests, but the structure of R packages
 which contain both external (exported) and internal (non-exported) functions
@@ -525,29 +518,24 @@ languages have developed grammars for stochastic or property-based testing,
 notably through the [hypothesis package for
 python](https://github.com/HypothesisWorks/hypothesis). These grammars enable
 specification of test assumptions as well as expected test outputs. Assumptions
-in `hypothesis` are declared through simple
-`[@``given]{``.redoc #redoc-citation-2}` statements that might, for example,
-quantify an assumed probability distribution for input data, while outputs are
-specified through equivalent `[@expect]{.redoc #redoc-citation-3}` statements
-that might, for example, specify expected *distributional properties* of an
-output rather than just concrete values.
+in `hypothesis` are declared through simple `@given` statements that might, for
+example, quantify an assumed probability distribution for input data, while
+outputs are specified through equivalent `@expect` statements that might, for
+example, specify expected *distributional properties* of an output rather than
+just concrete values. Given such considerations, we see the following as key
+questions which we will need to address.
 
-5.3a Key considerations
-
--   To what extend should testing focus on *functional* rather than *unit*
+-   To what extent should testing focus on *functional* rather than *unit*
     testing?
 
-<!-- -->
-
--   What test reporter should be used? The `testthat` package and similar, or
-    might it be worth considering new test reporting systems?
+-   What test reporter should be used? Does the `testthat` package and similar
+    suffice? Or might it be worth considering new test reporting systems?
 
 -   Is it sufficient to consider test execution as an integral part of
     `R CMD check` only? Or might there by a case for developing alternative test
     execution environments and approaches? For instance, should there be an
     alternate workflow for long-running tests, tests requiring large data, or
-    tests intended to be executed for purposes other than (e.g., scope
-    delineation).
+    tests intended to be executed for other purposes.
 
 -   Is it worthwhile concretely defining one or more goals of testing? (Such as
     error detection, error frequencies, error tolerance, accuracy.)
@@ -557,152 +545,92 @@ output rather than just concrete values.
 
 -   Is there scope for "stochastic" or "property-based" testing?
 
-Community
-=========
+-   What aspects of tests and test data (both actual and permissible) might be
+    worthwhile documenting in some kind of metadata format?
 
-A core goal of the project is the building and maintenance of a community of
-practice that will facilitate dissemination adoption, and improvement of
-standards and peer review.
+### General Software Metrics
 
--   What outreach should we conduct to maximize diversity and inclusion in the
-    process?
-
--   How should this process involve other relevant communities in fields
-    including software development, statistics, applied statistics (in various
-    subfields)
-
--   What fora should we manage for developers, users, reviewers and editors to
-    communicate? To what extent should we reuse existing fora from rOpenSci or
-    other organizations?
-
-Metrics
-=======
+The following is an incomplete list of the kinds of metrics commonly used to
+evaluate software.
 
 -   Code structure
-
     -   Cyclomatic complexity
-
     -   Codebase size
-
     -   Function size / number
-
     -   Numbers of external calls within functions
-
     -   Exported / non exported functions
-
     -   Code consistency
-
 -   Documentation metrics detailed above
-
 -   Meta struture
-
     -   Dependencies
-
     -   Reverse dependencies
-
     -   License
-
 -   Meta metrics
-
     -   Version control?
-
     -   Availability of website
-
     -   Availability of source code (beyond CRAN or similar)
-
     -   Community:
-
         -   Software downloads and usage statistics
-
         -   Numbers of active contributors
-
         -   Numbers or rates of issues reported
-
     -   Maintenance:
-
         -   Rate/Numbers of releases
-
         -   Rate of response to reported issues
-
         -   Last commit
-
         -   Commit rate
-
     -   stars
-
     -   forks
-
 -   Extent of testing
-
     -   Code coverage
-
     -   Examples
-
     -   Range of inputs tested
-
 -   Dynamic metrics derived from function call networks
+    -   Graph-based metrics for each function, and for package as a whole
+    -   Functional overlap with other, extent packages
 
 Automation and Tooling
 ======================
 
-The ultimate question which we would like to answer throughout such
-considerations concerns the kinds of tools this project might best focus on
-developing, whether those tools be:
+A key question for this project concerns the kinds of tools this project might
+best focus on developing. It is useful in this context to distinguish between
+*collective* tools useful for, of applicable to, collections of software, of
+individuals, or of processes pertaining to either (here, primarily peer
+review), and *singular* tools of direct applicability to individual pieces of
+software. We envision needing to address the (likely relative) importance of
+some of the following kinds of tools which may be usefully developed.
 
--   Qualitative descriptions and understanding of effects of the kinds of
-    compromises described above
+**Collective Tools**
 
-    -   Tools useful in assessing or formalizing categories of software
-
+-   Qualitative tools useful in assessing or formalizing categories of software
 -   Quantitative tools to *retrospectively* assess such aspects as:
-
-    -   Software "quality" (see the subsequent section)
-
+    -   Collective "quality" of software
     -   Community engagement
-
     -   Effectiveness (or other metrics) of review
 
-Other aspects pertinent to the general process of peer reviewing open source
-statistical software
+**Singular Tools**
 
 -   Quantitative tools that can be *prospectively* used to
-
     -   Improve or assure software quality
-
     -   Document aspects of software quality
-
     -   Aid modularity or transferability either of software, or of the tools
         themselves
-
 -   Formalize structural aspects of software such as tests (for example, through
     implementing new frameworks or grammars)
+-   Extensions of extant packages such as **lintr**, **covr**, **goodpractice**
+-   Comparisons of package metrics to distributions for other packages (such as
+  the CRAN archive directories)
+-   Diagnostic and report aggregation, design, or automatic creation
 
--   Extensions of packages such as **lintr**, **covr**, **goodpractice**
-
--   Comparisons of package metrics to distributions for other packages
-
--   Diagnostic and report aggregation, design, automatic creation
-
-There are many stages associated with software development and peer-review that
-may effectively be automated, and aspects of such automation is expected to be
-integrated within the present project. An important question throughout the
-remainder of this document is accordingly the extent to which automation may
-enhance either the development or implementation of the various stages
-considered below. A good example for the effectiveness of automation in the
-kinds of peer review processes envisioned to emerge from this process is
-provided by submissions to the [Journal of Open Source
-Software](https://joss.theoj.org/), which features [open
-reviews](https://github.com/openjournals/joss-reviews/issues), many aspects of
-which are automated by a custom-developed bot called
+Tools developed under any of these categories may be used to aid the automation
+of both software development and peer review. An important question for this
+project is accordingly the extent to which automation via any such tools may
+enhance either software development, peer review thereof, or both. A good
+example for the effectiveness of automation in the kinds of peer review
+processes envisioned to emerge from this project is provided by submissions to
+the [Journal of Open Source Software](https://joss.theoj.org/), which features
+[open reviews](https://github.com/openjournals/joss-reviews/issues), many
+aspects of which are automated by a custom-developed bot called
 ["whedon"](https://github.com/whedon).
-
-Reviewer pool and qualifications:
-
--   What is the extent and type of effort expected of reviewers?
-
--   To what extent might searches for suitable reviewers be automated?
-
--   What sort of metrics might be useful in such searches?
 
 Annotated Bibliography
 ======================
