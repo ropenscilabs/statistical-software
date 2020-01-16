@@ -53,8 +53,8 @@ categories might look like:
 
 Software (down) / Standards (across) | viz | numerical | algorithm | method validity | data | summary stats | inference
 --- | --- | --- | --- | --- | --- | --- | --- | ---
-workflow | 3 | 1 | 1 | 1 | 1 | 6 | 1
 algorithm | 2 | 4 | 7 | 5 | 1 | - | -
+workflow | 3 | 1 | 1 | 1 | 1 | 6 | 1
 wrapper | - | - | 1 | 1 | - | 1 | 1
 summary stats | 1 | - | - | - | 1 | 5 | 1
 
@@ -64,5 +64,15 @@ The preceding explorations were intended to reveal what form a potential
 cross-tabulation like the above might take. The primary conclusion would seem
 to be that such a table can be conceived of and constructed in a roughly
 diagonal form (such that the highest entries are on or near the diagonal), yet
-that almost any off-diagonal cells may also contain non-zero values.
+that almost any off-diagonal cells may also contain non-zero values. There is
+thus a strong relationship between software and statistical categories, yet the
+two do differ in potentially important ways. Notable exceptions in this toy
+example appear to arise in regard to standards for *data* and *visualization*.
+
+That table is also useful to indicate the relative commonality of different
+categories of software, noting that single software packages may encompass
+multiple categories. The *algorithm* category arose 19 times; the *workflow*
+category 14 times, the *summary stats* category 8 times, and the *wrapper*
+category 4 times.
+
 
