@@ -1,0 +1,68 @@
+---
+title: "Examples of Categorizing Abstracts"
+author: "Mark Padgham"
+date: "`r Sys.Date()`"
+output: 
+    html_document:
+        toc: false
+        number_sections: false
+        theme: flatly
+---
+
+```{r options, echo = FALSE}
+knitr::opts_chunk$set(
+  out.width = "100%",
+  collapse = TRUE,
+  comment = "#>",
+  fig.path="figures/"
+)
+```
+
+This document explores example categorizations of abstracts from software or
+associated manuscripts submitted both to rOpenSci and the Journal of Open
+Source Software (JOSS). Categories are considered in two distinct domains:
+
+1. Categories of statistical software; and
+2. Categories of statistical standards that may be applied
+
+## Example Categorizations
+
+The categorizations that follow are illustrative only, and are not intended to
+be definitive statements of categorization. Rather, they are intended merely to
+illustrates the kinds of categories which may be usefully distinguished and
+applied.
+
+software | forum | software categories | standards categories
+--- | --- | --- | ---
+[`spatialwarnings`](https://github.com/ropensci/software-review/issues/197) | rOpenSci | workflow | numerical, algorithm, method validity, summary stats, viz
+[`heatwavers`](https://github.com/ropensci/software-review/issues/219) | rOpenSci | algorithm | numerical, algorithm, method validiy
+[`hhi`](https://github.com/ropensci/software-review/issues/275) | rOpenSci | algorithm | numerical, algorithm, viz
+[`economiccomplexity`](https://github.com/ropensci/software-review/issues/312) | rOpenSci | algorithm, wrapper | algorithm, method validigy
+[`windfarmGA`](https://github.com/ropensci/software-review/issues/331) | rOpenSci | (genetic) algorithm | algorithm
+[`gtsummary`](https://github.com/ropensci/software-review/issues/334) | rOpenSci | workflow, summary stats | summary stats
+[`ivis`](https://joss.theoj.org/papers/10.21105/joss.01596) | JOSS | (neural network) algorithm | algorithm, data, method
+[`greta`](https://joss.theoj.org/papers/10.21105/joss.01601) | JOSS | wrapper, workflow, summary stats | inference, summary stats
+[`survPen`](https://joss.theoj.org/papers/10.21105/joss.01434) | JOSS | algorithm | algorithm, numerical, methods
+[`smartEDA`](https://joss.theoj.org/papers/10.21105/joss.01509) | JOSS | workflow, summary stats | summary stats
+[`DscoreApp`](https://joss.theoj.org/papers/10.21105/joss.01764) | JOSS | algorithm | numerical, algorith, method validity, viz
+[`modelStudio`](https://joss.theoj.org/papers/10.21105/joss.01798) | JOSS | workflow, summary stats | summary stats, viz
+[`tabula`](https://joss.theoj.org/papers/10.21105/joss.01821) | JOSS | workflow, summary stats | summary stats, data
+
+That suffices to estimate what a cross-tabulation of software versus standards
+categories might look like:
+
+Software (down) / Standards (across) | viz | numerical | algorithm | method validity | data | summary stats | inference
+--- | --- | --- | --- | --- | --- | --- | --- | ---
+workflow | 3 | 1 | 1 | 1 | 1 | 6 | 1
+algorithm | 2 | 4 | 7 | 5 | 1 | - | -
+wrapper | - | - | 1 | 1 | - | 1 | 1
+summary stats | 1 | - | - | - | 1 | 5 | 1
+
+## Summary
+
+The preceding explorations were intended to reveal what form a potential
+cross-tabulation like the above might take. The primary conclusion would seem
+to be that such a table can be conceived of and constructed in a roughly
+diagonal form (such that the highest entries are on or near the diagonal), yet
+that almost any off-diagonal cells may also contain non-zero values.
+

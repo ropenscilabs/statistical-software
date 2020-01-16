@@ -1,4 +1,4 @@
-LFILE = README
+LFILE = categories
 
 all: knith
 #all: knith open 
