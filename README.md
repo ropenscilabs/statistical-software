@@ -60,7 +60,7 @@ products and avoid duplicated efforts.
 # Scope of Statistical Software Review
 
 A core task is to define the set of software that will be covered by our
-review process and standards.
+review process and standards, for which key questions are:
 
   - What categories of statistical software might be considered *in
     scope*?
@@ -101,7 +101,7 @@ Some but not all categories that may be included are
 
   - Implementation of new methods
 
-  - Re-implementation of methods
+  - Re-implementation or improvement of methods
 
   - Workflow support for multiple methods or specific contexts
 
@@ -116,9 +116,79 @@ defines [its own scope](https://www.jstatsoft.org/pages/view/mission) as
 “statistical computing in all areas of empirical research,” with
 articles describing “comprehensive open-source implementations of broad
 classes of statistical models and procedures or computational
-infrastructure upon which such implementations can be built.”\[1\]
-Categorical definitions of statistical software are considered further
-below with regard to standards specific to statistical software.
+infrastructure upon which such implementations can be built.”\[1\] It
+will likely be nevertheless important for the present project to develop
+some scheme for categorization, particularly because the set of
+standards envisioned by this project will be variably applicable to
+different categories, and understanding which standards may or may not
+apply to a particular piece of software will provide important
+information for review purposes.
+
+We now consider a few brief categorical examples, to illustrate the
+kinds of decisions such a process of categorisation will likely face.
+
+  - **[`gtsummary`](https://github.com/ropensci/software-review/issues/334)**,
+    submitted to rOpenSci and reject as out-of-scope.
+    
+    > Creates presentation-ready tables summarizing data sets,
+    > regression models, and more. The code to create the tables is
+    > concise and highly customizable. Data frames can be summarized
+    > with any function, e.g. mean(), median(), even user-written
+    > functions. Regression models are summarized and include the
+    > reference rows for categorical variables. Common regression
+    > models, such as logistic regression and Cox proportional hazards
+    > regression, are automatically identified and the tables are
+    > pre-filled with appropriate column headers.
+    
+    This package appears not to contain any algorithmic implementations,
+    yet is clearly aimed at enhancing a purely statistical workflow.
+
+  - [`greta`: simple and scalable statistical modelling in
+    R](https://joss.theoj.org/papers/10.21105/joss.01601), published in
+    JOSS.
+    
+    > greta is an package for statistical modelling in R (R Core Team,
+    > 2019) that has three core differences to commonly used statistical
+    > modelling software packages:
+    > 
+    >   - greta models are written interactively in R code rather than
+    >     in a compiled domain specific language.
+    > 
+    >   - greta can be extended by other R packages; providing a
+    >     fully-featured package management system for extensions.
+    > 
+    >   - greta performs statistical inference using TensorFlow (Abadi
+    >     et al., 2015), enabling it to scale across modern
+    >     high-performance computing systems.
+    
+    The `greta` package might be considered predominantly an interface
+    to TensorFlow, yet it provides a new way to specify and work with
+    purely statistical models.
+
+  - **[`modelStudio`](https://joss.theoj.org/papers/10.21105/joss.01798)**,
+    published in JOSS.
+    
+    > The `modelStudio`R package automates the process of model
+    > exploration. It generates advanced interactive and animated model
+    > explanations in the form of a serverless HTML site. It combines
+    > R(R Core Team, 2019) with D3.js (Bostock, 2016) to produce plots
+    > and descriptions for various local and global explanations. Tools
+    > for model exploration unite with tools for EDA to give a broad
+    > overview of the model behaviour.
+    
+    As with `gtsummary` above, this is clearly a package intended to
+    enhance a workflow, and furthermore one which primarily serves to
+    generate summary output as a `html` document, yet the models it
+    considers, and all aspects of output produced, are purely
+    statistica.
+
+We have compiled a list of the descriptions of [all packages rejected by
+rOpenSci](https://github.com/mpadge/statistical-software/blob/master/abstracts/ropensci-abstracts.md)
+as being out of current scope because of current inability to consider
+statistical packages, along with a selection of [recent statistical R
+packages](https://github.com/mpadge/statistical-software/blob/master/abstracts/joss-abstracts.md)
+accepted by JOSS. (The full list of all R package published by JOSS can
+be viewed at <https://joss.theoj.org/papers//in/R>).
 
 ## Computer Languages and Package Structures
 
@@ -162,13 +232,32 @@ packages primarily in the area of data lifecycle management. However, we
 aim to reassess this process in light of other models and needs specific
 to statistical software. Some core questions we seek to resolve are:
 
-  - Are we reviewing full packages or only limited pieces of packages?
+  - What are we reviewing? (Full packages? Only limited pieces of
+    packages? Other forms of softare?)
 
-  - What is the outcome of review? Binary, rating, checklist,
-    acceptance/rejection?
+  - What is the outcome of review?
+    
+      - Do we generally presume ultimate acceptance and work with
+        package authors to improve quality prior to acceptance, as
+        largely practiced in current rOpenSci system?
+      - Or ought there be some possibility of rejection following
+        review?
+      - Do we develop and use some kind of “checklist” system, with a
+        list of essential properties and practices which must be met
+        prior to acceptance, along with potentially additional items
+        reflecting current best practices which may be met?
 
   - To what extent should the review process be automated or
-    self-certified?
+    self-certified? Stages which might gain from automation include:
+    
+      - Compiling diagnostic reports throughout and following review
+      - Using these to populate checklists of the kind mentioned above
+      - Finding reviewers, through combinations of text mining, code
+        analyses, web scraping, and other means.
+      - Directly managing the review process, like current operations of
+        the Journal of Statistical Software.
+      - Monitoring ongoing use of, and community surrounding, our
+        peer-reviewed software.
 
   - Which parts of the process should be open and which closed?
 
@@ -179,7 +268,8 @@ to statistical software. Some core questions we seek to resolve are:
     code development, or might it be better to encourage direct
     engagement of reviewers with ongoing code development?
 
-  - Who should be in the pool of software reviewers and editors?
+  - Who should be in the pool of software reviewers and editors, and how
+    might be find and cultivate such a pool?
 
 ## Current Models
 
@@ -239,8 +329,8 @@ contrasts strongly with the singular nature of review as currently
 implemented by rOpenSci. Other systems, such as pull-request reviews or
 inline systems (e.g.,
 [watson-ruby](https://github.com/nhmood/watson-ruby)), focus review on
-much more granular scale both in terms of the scale of code reviewed and
-time frame.
+much more granular scales both in terms of the scales of code reviewed
+and time frames.
 
 An effective system for peer review of statistical software is thus may
 lie somewhere between the “one-off” practices above, and frequent,
@@ -250,11 +340,11 @@ of software development
 activity](https://github.com/mpadge/statistical-software/tree/master/ros-review-effects)
 revealed that software development tends to stagnate following review.
 This may be interpreted to reflect software having reached a
-sufficiently stable state. However, we note that metrics of community
-engagement with software are generally positively related to the metrics
-of development activity considered there. Slowing of software
-development following review may also result in decreases in community
-engagement.
+sufficiently stable state requiring relatively little ongoing
+maintenance. However, we note that metrics of community engagement with
+software are generally positively related to the metrics of development
+activity considered there. Slowing of software development following
+review may also result in decreases in community engagement.
 
 In addition, ongoing “review” may be explicit in considering the role of
 user feedback, for instance, in defining and updating the scope of
@@ -277,13 +367,39 @@ improvement of standards and peer review.
     editors to communicate? To what extent should we reuse existing fora
     from rOpenSci or other organizations?
 
-Reviewer pool and qualifications:
+We now briefly consider the three aspects of community relevant to this
+project: communities of users, of developers, and of reviewers. Note
+that several of the kinds of “metrics” alluded to in the following lines
+are given explicit consideration at the end of this document.
+
+**Software use and surrounding community:**
+
+  - What sort of metrics might provide insight into community use of
+    software?
+
+  - How might such community engagement be enhanced to improve such
+    metrics?
+
+**Software development and surrounding community:**
+
+  - What sort of metrics might provide insight into community
+    development of software?
+
+  - How might such community engagement be enhanced to improve such
+    metrics?
+
+**Reviewer pool and qualifications:**
 
   - What is the extent and type of effort expected of reviewers?
 
   - To what extent might searches for suitable reviewers be automated?
 
   - What sort of metrics might be useful in such searches?
+
+In each case the project will strive to cultivate diverse, inclusive,
+and geographically expansive communities, and metrics to describe such
+aspects may also be important, as may automated tools to monitor
+community engagement and development.
 
 # Standards for Statistical Software
 
@@ -344,25 +460,21 @@ are applicable across all categories, and we thus anticipate a degree of
 fluidity between these two broad categories. Moreover, we do not pursue
 *General Standards* any further in the present document, and merely
 presume that these will emerge, or may be derived, from the following
-considerations of *Specific Aspects of Software*. The following
-sub-section considers potential types of *Statistical Standards*, aiming
-in particular to illustrate and explore how the development of such
-standards interacts with and is influenced by definitions and
-categorizations of statistical software.
+considerations of *Specific Aspects of Software*.
 
 ## Specific Standards
 
 The applicability of any concrete set of standards is likely to differ
-between different categories. In terms of concrete metrics, for example,
-metrics of numerical accuracy will differ between categories primarily
-describing analytical algorithms and those describing less tractable
-routines which produce less directly reproducible results. Or consider
-metrics derived from tests, which must be interpreted in *qualitatively*
-different ways for packages entirely dependent on their own internal
-code versus packages largely dependent on the results of calls to
-external data providers (along with additional differences between, for
-example, locally-installed “external” providers versus online sources of
-external data).
+between different categories. For example, metrics of numerical accuracy
+will likely differ between categories primarily describing analytical
+algorithms and those describing less tractable routines which produce
+less directly reproducible results. Or consider metrics derived from
+tests, which must be interpreted in *qualitatively* different ways for
+packages entirely dependent on their own internal code versus packages
+largely dependent on the results of calls to external data providers
+(along with additional differences between, for example,
+locally-installed “external” providers versus online sources of external
+data).
 
 Different metrics, and thus by extension very likely different
 standards, must thus be considered to be of differential applicability
