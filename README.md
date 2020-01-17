@@ -1,13 +1,37 @@
-# Introduction
-
-## Background
+# 1\. Introduction
 
 This document serves as an organizing framework for rOpenSci’s project
 for peer-review of statistical software. It lays out key considerations,
 outstanding questions, and tasks for our first year of work, for
-purposes of generating community feedback.
+purposes of generating community feedback. The document consists of the
+following sections:
 
-## Project Aims
+  - **Scope of Statistical Software Review** in which we address the
+    scope of the project, and scopes of definition of “statistical
+    software”.
+  - **Statistical Software Peer Review Process** in which we consider
+    questions regarding the possible forms and practices a peer review
+    process might adopt.
+  - **Standards for Statistical Software** in which we consider the
+    kinds of standards which might be developed and applied to assess
+    statistical software.
+  - **Software Assessment** in which we provide a partial list of
+    attributes and measures of software which might be usefully
+    considered.
+  - **Automation and Tooling** in which we briefly consider which
+    aspects of the project might be amenable to, or might benefit the
+    most from, the development of automation processes and tools.
+
+The document aims to highlight what we consider some of the most
+important questions which the project will have to address. In its
+current form, this document does not aim to provide answers to any of
+these questions, rather to provide a framework for community feedback.
+The central questions which emerge from this document are given in
+condensed form in an accompanying document which may be used to
+structure and enable explicit feedback on the above aspects of the
+project.
+
+## 1.1 Project Aims
 
   - To foster a community of practice in which users and developers of
     statistical software mutually improve quality, reproducibility, and
@@ -31,7 +55,7 @@ purposes of generating community feedback.
 
   - To focus on problems and solutions specific to statistical software.
 
-## Related projects and initiatives
+## 1.2 Related projects and initiatives
 
 The following internal and external projects related projects have
 bearing on our work:
@@ -57,7 +81,7 @@ users in the pharmaceutical industry on validating R packages in
 regulated contexts. We are working closely with that group to share
 products and avoid duplicated efforts.
 
-# Scope of Statistical Software Review
+# 2\. Scope of Statistical Software Review
 
 A core task is to define the set of software that will be covered by our
 review process and standards, for which key questions are:
@@ -85,7 +109,7 @@ categories of external form or categories of statistical software. It
 may suffice, at least initially, to simply provide broad definitions of
 what might lie *beyond* the scope of the present project.
 
-## Defining “Statistical Software”
+## 2.1 Defining “Statistical Software”
 
 There is no ready definition for “statistical software”, but nor may
 such a definition be essential to the success of the present project.
@@ -190,7 +214,7 @@ packages](https://github.com/mpadge/statistical-software/blob/master/abstracts/j
 accepted by JOSS. (The full list of all R package published by JOSS can
 be viewed at <https://joss.theoj.org/papers//in/R>).
 
-## Computer Languages and Package Structures
+## 2.2 Computer Languages and Package Structures
 
 Our scope of work for this project is focused on developing peer-review
 for statistical software in the R language. This most likely will refer
@@ -224,7 +248,7 @@ standards able to be transferred to other languages and systems for peer
 review. In scoping and standards development, we will separate
 language-agnostic concepts from language-specific implantation.
 
-# Statistical Software Peer Review Process
+# 3\. Statistical Software Peer Review Process
 
 Our point of departure for our process is the rOpenSci software peer
 review process, which has operated for five years, reviewing \>200
@@ -271,7 +295,7 @@ to statistical software. Some core questions we seek to resolve are:
   - Who should be in the pool of software reviewers and editors, and how
     might be find and cultivate such a pool?
 
-## Current Models
+## 3.1 Current Models
 
 rOpenSci’s current software peer-review process, detailed in our
 [developer
@@ -319,7 +343,7 @@ consecutive upgrade of the Policy Document. There are also
 language-specific policies, such as [for python
 packages](https://www.debian.org/doc/packaging-manuals/python-policy/module_packages.html).
 
-## Software Life Cycle Considerations
+## 3.2 Software Life Cycle Considerations
 
 A long history and tradition in both practice and published literature
 on software review (for example, Mili 2015; Ammann and Offutt 2017)
@@ -350,7 +374,7 @@ In addition, ongoing “review” may be explicit in considering the role of
 user feedback, for instance, in defining and updating the scope of
 statistical routines (see “statistical standards” below).
 
-## Community
+## 3.3 Community
 
 A core goal of the project is the building and maintenance of a
 community of practice that will facilitate dissemination adoption, and
@@ -401,7 +425,7 @@ and geographically expansive communities, and metrics to describe such
 aspects may also be important, as may automated tools to monitor
 community engagement and development.
 
-# Standards for Statistical Software
+# 4\. Standards for Statistical Software
 
 An important output of the present project is anticipated to be two set
 of “standards”, one pertaining to processes for peer review of software,
@@ -462,7 +486,7 @@ fluidity between these two broad categories. Moreover, we do not pursue
 presume that these will emerge, or may be derived, from the following
 considerations of *Specific Aspects of Software*.
 
-## Specific Standards
+## 4.1 Specific Standards
 
 The applicability of any concrete set of standards is likely to differ
 between different categories. For example, metrics of numerical accuracy
@@ -504,7 +528,7 @@ following kinds of questions which will likely have to be addressed:
     of statistical software, and understanding the potential effects of
     such a categorization?
 
-### Statistical Standards
+## 4.2 Statistical Standards
 
 The following exemplify a few categories of statistical standards which
 may be considered, emphasising restrictions of applicability to
@@ -549,7 +573,7 @@ such such categories and standards may be developed. Prior to doing so,
 the following section lists several *Specific Aspects of Software* which
 may be usefully considered within both general and specific standards.
 
-# Specific Aspects of Software
+# 5\. Software Assessment
 
 To additionally inform the general considerations described in the
 preceding sections, this section presents a general (yet non-exhaustive)
@@ -561,7 +585,7 @@ aspects may be more or less applicable or relevant at different phases
 of a software lifecycle, or how expected values for, or results of
 applying, metrics may vary throughout a software lifecycle.
 
-### Software Interface
+## 5.1 Software Interface
 
 There are likely aspects of overall software “design” that might be
 considered, reviewed, encouraged, or expected. rOpenSci’s guide on
@@ -581,7 +605,7 @@ beyond what is, or has been, generally considered within the context of
 R packages, and thus it is worthwhile considering whether such general
 aspects might be explicitly considered as part of the review process.
 
-### Documentation
+## 5.2 Documentation
 
 In contrast to scientific software in general, statistical software
 might be argued to be associated with some specific kinds of input and
@@ -601,7 +625,7 @@ output data (Lenhardt et al. 2014).
       - Nature of output data
       - Description of data used in tests
 
-### Testing
+## 5.3 Testing
 
 Vogel (2011) states:
 
@@ -655,7 +679,7 @@ questions which we will need to address.
   - What aspects of tests and test data (both actual and permissible)
     might be worthwhile documenting in some kind of metadata format?
 
-### General Software Metrics
+## 5.4 General Software Metrics
 
 The following is an incomplete list of the kinds of metrics commonly
 used to evaluate software.
@@ -696,7 +720,7 @@ used to evaluate software.
         whole
       - Functional overlap with other, extent packages
 
-# Automation and Tooling
+# 6\. Automation and Tooling
 
 A key question for this project concerns the kinds of tools this project
 might best focus on developing. It is useful in this context to
@@ -743,7 +767,7 @@ reviews](https://github.com/openjournals/joss-reviews/issues), many
 aspects of which are automated by a custom-developed bot called
 [“whedon”](https://github.com/whedon).
 
-# Annotated Bibliography
+# 7\. Annotated Bibliography
 
 Lots to put here, but some in addition to stuff in current document:
 
