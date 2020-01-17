@@ -410,7 +410,7 @@ and systems for providing inline code reviews (such as
 [watson-ruby](https://github.com/nhmood/watson-ruby)). In addition,
 ongoing “review” may be explicit in considering the role of user
 feedback, for instance, in defining and updating the scope of
-statistical routines (see “statistical standards” below).
+statistical routines (see “Standards for Statistical Software” below).
 
 ## 3.3 Community
 
@@ -492,8 +492,8 @@ beyond.
 Standards are likely to emerge from a variety of concrete metrics of the
 types considered in the following section (“*Specific Aspects of
 Software*”), and are not considered in any technical detail in the
-present section. Important *general* questions regarding standards
-include the following:
+present section. Important general questions regarding standards include
+the following:
 
   - What kind of standards might apply to software in general?
 
@@ -525,7 +525,7 @@ fluidity between these two broad categories. Moreover, we do not pursue
 presume that these will emerge, or may be derived, from the following
 considerations of *Specific Aspects of Software*.
 
-## 4.1 Specific Standards
+## 4.1 Standards Specific to Statistical Software
 
 The applicability of any concrete set of standards is likely to differ
 between different categories. For example, metrics of numerical accuracy
@@ -540,8 +540,8 @@ locally-installed “external” providers versus online sources of external
 data).
 
 Different metrics, and thus by extension very likely different
-standards, must thus be considered to be of differential applicability
-for different categories of software, and thus the interplay between the
+standards, must thus be considered to be differentially applicable to
+different categories of software, and thus the interplay between the
 scope of statistical software considered above and throughout this
 project, and the standards emerging from the project, will be of
 critical importance throughout the project. More concretely, attempts to
@@ -567,18 +567,16 @@ following kinds of questions which will likely have to be addressed:
     of statistical software, and understanding the potential effects of
     such a categorization?
 
-## 4.2 Statistical Standards
-
 The following exemplify a few categories of statistical standards which
 may be considered, emphasising restrictions of applicability to
-different kinds of software.
+alernative kinds of software.
 
   - **Numerical standards such as precision or convergence.** These will
     be applicable only to some restricted subset of all potential
-    categories of statistical software (likely including analytic
-    approaches, but potentially also categories of predictive routines,
-    and others). Moreover, even these two categories alone will likely
-    require differing standards for precision or convergence.
+    categories of statistical software (likely including but not limited
+    to analytic and, to some extent, predictive routines) Moreover, even
+    these two categories alone will likely require differing standards
+    for precision or convergence.
   - **Method validity** It may be necessary or useful to develop
     standards for the *validity* of a chosen method, independent of its
     implementation. Questions of validity are commonly related to
@@ -608,18 +606,21 @@ proceed may be to develop lists for both, along with a representation of
 inter-connections between categories and standards. The final section of
 this document considers several examples of extant software submitted
 for peer-review, and uses these to illustrate in a concrete context how
-such such categories and standards may be developed. Prior to doing so,
-the following section lists several *Specific Aspects of Software* which
-may be usefully considered within both general and specific standards.
+such such categories and standards may be developed.\[2\] Prior to doing
+so, the following section lists several *Specific Aspects of Software*
+which may be usefully considered within both general and specific
+standards.
 
 # 5\. Software Assessment
 
 To additionally inform the general considerations described in the
 preceding sections, this section presents a general (yet non-exhaustive)
-overview of aspects of software which may be usefully considered, both
-for (retrospective) peer review software, and for (prospective) use in
-developing software both in general, and in preparation for peer-review.
-It may be important to consider the extent to which the following
+overview of aspects of software which may be usefully considered for
+standards-based assessment, both for (retrospective) purposes of peer
+review, and for (prospective) use in developing software both in
+general, and in preparation for peer-review. It will be important to
+consider the applicability of each metric to different categories of
+statistical software, as well as the extent to which the following
 aspects may be more or less applicable or relevant at different phases
 of a software lifecycle, or how expected values for, or results of
 applying, metrics may vary throughout a software lifecycle.
@@ -642,7 +643,8 @@ Learning, Customizability, Calibrability, and Interoperability), and
 Testability, and Adaptability). These latter two categories extend
 beyond what is, or has been, generally considered within the context of
 R packages, and thus it is worthwhile considering whether such general
-aspects might be explicitly considered as part of the review process.
+aspects might be explicitly considered as part of the review process,
+and/or potentially incorporated within a set of standards.
 
 ## 5.2 Documentation
 
@@ -651,7 +653,11 @@ might be argued to be associated with some specific kinds of input and
 output data. This observation alone suggests the likely importance of
 some kind of metadata associated with statistical software which
 documents the nature of (expected, permitted, or accepted) input and
-output data (Lenhardt et al. 2014).
+output data (Lenhardt et al. 2014). Given such, relationships between
+data and statistical software may be generally assumed to be structured
+in a sufficiently systematic way to permit systematic documentation. The
+following aspects of documentation may thus be considered for
+assessment:
 
   - Standard software documentation metrics:
       - Numbers of documentation lines per function
@@ -721,7 +727,8 @@ questions which we will need to address.
 ## 5.4 General Software Metrics
 
 The following is an incomplete list of the kinds of metrics commonly
-used to evaluate software.
+used to evaluate software, and which might provide useful for assessing
+statistical software in the present project.
 
   - Code structure
       - Cyclomatic complexity
@@ -748,7 +755,7 @@ used to evaluate software.
           - Rate of response to reported issues
           - Last commit
           - Commit rate
-      - stars
+      - stars (for github or equivalent)
       - forks
   - Extent of testing
       - Code coverage
@@ -757,7 +764,7 @@ used to evaluate software.
   - Dynamic metrics derived from function call networks
       - Graph-based metrics for each function, and for package as a
         whole
-      - Functional overlap with other, extent packages
+      - Functional overlap with other, extant packages
 
 # 6\. Automation and Tooling
 
@@ -791,7 +798,7 @@ of tools which may be usefully developed.
   - Extensions of extant packages such as **lintr**, **covr**,
     **goodpractice**
   - Comparisons of package metrics to distributions for other packages
-    (such as the CRAN archive directories)
+    or systems (such as the CRAN archive directories)
   - Diagnostic and report aggregation, design, or automatic creation
 
 Tools developed under any of these categories may be used to aid the
@@ -806,18 +813,20 @@ reviews](https://github.com/openjournals/joss-reviews/issues), many
 aspects of which are automated by a custom-developed bot called
 [“whedon”](https://github.com/whedon).
 
-# 7\. Annotated Bibliography
+# 7\. Bibliography
 
+<!---
 Lots to put here, but some in addition to stuff in current document:
 
-  - <https://www.alexpghayes.com/blog/type-stable-estimation/>,
+-   <https://www.alexpghayes.com/blog/type-stable-estimation/>,
     <https://www.alexpghayes.com/blog/testing-statistical-software/>
 
-  - <https://tidymodels.github.io/model-implementation-principles/>
+-   <https://tidymodels.github.io/model-implementation-principles/>
 
-  - <https://github.com/pharmaR/white_paper>
+-   <https://github.com/pharmaR/white_paper>
 
-  - <https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md>
+-   <https://github.com/coreinfrastructure/best-practices-badge/blob/master/doc/criteria.md>
+-->
 
 Ammann, Paul, and Jeff Offutt. 2017. *Introduction to Software Testing*.
 Cambridge University Press.
@@ -876,3 +885,5 @@ Publishing Series in Biomedicine. Woodhead Publishing.
     topics which might be useful to define or categorize statistical
     software, other than topics pertaining to particular areas of
     application.
+
+2.  Not yet incorporated within current document version.
