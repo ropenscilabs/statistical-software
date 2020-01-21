@@ -1,3 +1,6 @@
+Please provide comments and feedback via the [github
+repository](https://github.com/ropenscilabs/statistical-software).
+
 # 1\. Introduction
 
 This document serves as an organizing framework for rOpenSci’s project

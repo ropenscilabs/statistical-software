@@ -1,5 +1,5 @@
 ---
-title: 'rOpenSci Statistical Software Review: Scoping Document'
+title: 'rOpenSci Statistical Software Review: Draft Scoping Document'
 author: 'Noam Ross and Mark Padgham'
 date: '`r Sys.Date()`'
 output:
@@ -18,6 +18,9 @@ if (!file.exists ("statsoft.bib")) {
    RefManageR::WriteBib(refs, "statsoft.bib")
 }
 ```
+
+Please provide comments and feedback via the [github
+repository](https://github.com/ropenscilabs/statistical-software).
 
 1. Introduction
 ===============
