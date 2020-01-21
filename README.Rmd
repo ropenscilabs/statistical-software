@@ -11,7 +11,7 @@ output:
 bibliography: statsoft.bib
 ---
 
-```{r getbib, echo = FALSE, eval = FALSE}
+```{r getbib, echo = FALSE, eval = TRUE}
 if (!file.exists ("statsoft.bib")) {
    refs <- RefManageR::ReadZotero(group = "2416765",
                                  .params = list (limit = 100))
@@ -43,10 +43,6 @@ community feedback. The document consists of the following sections:
 
 -   **Software Assessment** in which we provide a partial list of attributes and
     measures of software which might be usefully considered.
-
--   **Automation and Tooling** in which we briefly consider which aspects of the
-    project might be amenable to, or might benefit the most from, the
-    development of automation processes and tools.
 
 The document aims to highlight what we consider some of the most important
 questions which the project will have to address. In its current form, this
