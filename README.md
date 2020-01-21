@@ -9,15 +9,19 @@ following sections:
   - **Scope of Statistical Software Review** in which we address the
     scope of the project, and scopes of definition of “statistical
     software”.
+
   - **Statistical Software Peer Review Process** in which we consider
     questions regarding the possible forms and practices a peer review
     process might adopt.
+
   - **Standards for Statistical Software** in which we consider the
     kinds of standards which might be developed and applied to assess
     statistical software.
+
   - **Software Assessment** in which we provide a partial list of
     attributes and measures of software which might be usefully
     considered.
+
   - **Automation and Tooling** in which we briefly consider which
     aspects of the project might be amenable to, or might benefit the
     most from, the development of automation processes and tools.
@@ -161,18 +165,20 @@ or applicable standards.
 We now consider a few brief categorical examples, to illustrate the
 kinds of decisions such a process of categorisation will likely face.
 
-  - **[`gtsummary`](https://github.com/ropensci/software-review/issues/334)**,
+  - [**gtsummary**](https://github.com/ropensci/software-review/issues/334),
     submitted to rOpenSci and reject as out-of-scope.
-    
-    > Creates presentation-ready tables summarizing data sets,
-    > regression models, and more. The code to create the tables is
-    > concise and highly customizable. Data frames can be summarized
-    > with any function, e.g. mean(), median(), even user-written
-    > functions. Regression models are summarized and include the
-    > reference rows for categorical variables. Common regression
-    > models, such as logistic regression and Cox proportional hazards
-    > regression, are automatically identified and the tables are
-    > pre-filled with appropriate column headers.
+
+<!-- -->
+
+  - Creates presentation-ready tables summarizing data sets, regression
+    models, \> and more. The code to create the tables is concise and
+    highly \> customizable. Data frames can be summarized with any
+    function, \> e.g. mean(), median(), even user-written functions.
+    Regression models are \> summarized and include the reference rows
+    for categorical variables. \> Common regression models, such as
+    logistic regression and Cox proportional \> hazards regression, are
+    automatically identified and the tables are \> pre-filled with
+    appropriate column headers.
     
     This package appears not to contain any algorithmic implementations,
     yet is clearly aimed at enhancing a purely statistical workflow.
@@ -181,23 +187,27 @@ kinds of decisions such a process of categorisation will likely face.
     correspond to any other of the above categories, may be deemed in
     scope?
 
-  - [`greta`: simple and scalable statistical modelling in
+<!-- -->
+
+  - [greta: simple and scalable statistical modelling in
     R](https://joss.theoj.org/papers/10.21105/joss.01601), published in
     JOSS.
+
+<!-- -->
+
+  - greta is an package for statistical modelling in R (R Core Team,
+    2019) that \> has three core differences to commonly used
+    statistical modelling software \> packages:
     
-    > greta is an package for statistical modelling in R (R Core Team,
-    > 2019) that has three core differences to commonly used statistical
-    > modelling software packages:
-    > 
-    >   - greta models are written interactively in R code rather than
-    >     in a compiled domain specific language.
-    > 
-    >   - greta can be extended by other R packages; providing a
-    >     fully-featured package management system for extensions.
-    > 
-    >   - greta performs statistical inference using TensorFlow (Abadi
-    >     et al., 2015), enabling it to scale across modern
-    >     high-performance computing systems.
+      - greta models are written interactively in R code rather than in
+        a \> compiled domain specific language.
+    
+      - greta can be extended by other R packages; providing a
+        fully-featured \> package management system for extensions.
+    
+      - greta performs statistical inference using TensorFlow (Abadi et
+        al., \> 2015), enabling it to scale across modern
+        high-performance computing \> systems.
     
     The `greta` package might be considered predominantly an interface
     to TensorFlow, yet it provides a new way to specify and work with
@@ -208,24 +218,28 @@ kinds of decisions such a process of categorisation will likely face.
     so, to what extent ought aspects of such externally-installed
     software also be directly addressed within a review process?
 
-  - **[`modelStudio`](https://joss.theoj.org/papers/10.21105/joss.01798)**,
+<!-- -->
+
+  - [**modelStudio**](https://joss.theoj.org/papers/10.21105/joss.01798),
     published in JOSS.
-    
-    > The `modelStudio`R package automates the process of model
-    > exploration. It generates advanced interactive and animated model
-    > explanations in the form of a serverless HTML site. It combines
-    > R(R Core Team, 2019) with D3.js (Bostock, 2016) to produce plots
-    > and descriptions for various local and global explanations. Tools
-    > for model exploration unite with tools for EDA to give a broad
-    > overview of the model behaviour.
+
+<!-- -->
+
+  - The `modelStudio`R package automates the process of model
+    exploration. It \> generates advanced interactive and animated model
+    explanations in the form \> of a serverless HTML site. It combines
+    R(R Core Team, 2019) with D3.js \> (Bostock, 2016) to produce plots
+    and descriptions for various local and \> global explanations. Tools
+    for model exploration unite with tools for EDA \> to give a broad
+    overview of the model behaviour.
     
     As with `gtsummary` above, this is clearly a package intended to
     enhance a workflow, and furthermore one which primarily serves to
-    generate summary output as a `html` document, yet the models it
+    generate summary output as a `ht``ml` document, yet the models it
     considers, and all aspects of output produced, are purely
     statistical. This package could meet both workflow and visualization
     categories, and serves here to illustrate difficulties in
-    considering the latter of these. The `D3.js` library contains
+    considering the latter of these. The `D3.``js` library contains
     numerous indubitably statistical routines, and so this package might
     be argued to be a wrapper in the same category as `greta` is a
     wrapper around `TensorFlow`. An important question likely to arise
@@ -292,12 +306,15 @@ to statistical software. Some core questions we seek to resolve are:
       - Do we generally presume ultimate acceptance and work with
         package authors to improve quality prior to acceptance, as
         largely practiced in current rOpenSci system?
+    
       - Or ought there be some possibility of rejection following
         review?
+    
       - Do we develop and use some kind of “checklist” system, with a
         list of essential properties and practices which must be met
         prior to acceptance, along with potentially additional items
         reflecting current best practices which may be met?
+    
       - To what extent can or should processes and procedures following
         review be formalized (and potentially automated)? This is
         related to issues of lifecycle considered below.
@@ -306,11 +323,15 @@ to statistical software. Some core questions we seek to resolve are:
     self-certified? Stages which might gain from automation include:
     
       - Compiling diagnostic reports throughout and following review
+    
       - Using these to populate checklists of the kind mentioned above
+    
       - Finding reviewers, through combinations of text mining, code
         analyses, web scraping, and other means.
+    
       - Directly managing the review process, like current operations of
         the Journal of Statistical Software.
+    
       - Monitoring ongoing use of, and community surrounding, our
         peer-reviewed software.
 
@@ -464,36 +485,13 @@ and geographically expansive communities, and metrics to describe such
 aspects may also be important, as may automated tools to monitor
 community engagement and development.
 
-# 4\. Standards for Statistical Software
+# 4\. Standards
 
-An important output of the present project is anticipated to be two set
-of “standards”, one pertaining to processes for peer review of software,
-and one pertaining to the software itself. The former of these is only
-indirectly addressed within this document, through the preceding
-sections, with concrete standards expected to emerge from latter phases
-of the project. The latter aspect of software standards is the subject
-of the present section.
+An important output of the present project a set of standards which
+serve as expectations for software and guides for reviewers to assess
+software against.
 
-Rather than aiming for a fixed set of immutable standards, we
-acknowledge that standards of the kind anticipated here will likely be
-better conceived of to reflect ongoing processes of development. As
-such, of equal importance to developing a set of standards *per se* will
-be developing an understanding of the kinds of *processes* which may
-have the most defining effect on resultant standards at any point in
-time. An equally important consideration is the distinction between pro-
-and retro-spective standards, where *retrospective standards* can be
-applied to any extant software in order to assess the extent to whether
-it meets those standards, while *prospective standards* represent a set
-of requirements which software is expected to fulfil. The extent to
-which standards developed for this project are retrospective versus
-prospective is likely to change throughout the project’s lifespan and
-beyond.
-
-Standards are likely to emerge from a variety of concrete metrics of the
-types considered in the following section (“*Specific Aspects of
-Software*”), and are not considered in any technical detail in the
-present section. Important general questions regarding standards include
-the following:
+Important general questions regarding standards include the following:
 
   - What kind of standards might apply to software in general?
 
@@ -502,11 +500,15 @@ the following:
   - What kind of standards might specifically apply to statistical
     software? (See the following sub-section.)
 
-  - In what ways might any of the above differ with regard to retro-
-    versus pro-spective standards?
-
   - To what extent should we aim for “verification” or “validation” of
     software?
+
+We acknowledge that standards of the kind anticipated here will likely
+be better conceived of to reflect ongoing processes of development. As
+such, of equal importance to developing a set of standards *per se* will
+be developing an understanding of the kinds of *processes* which may
+have the most defining effect on resultant standards at any point in
+time.
 
 The remainder of this document employs a convenient distinction between:
 
@@ -514,6 +516,7 @@ The remainder of this document employs a convenient distinction between:
     considered within this project, irrespective of how it may be
     categorized under the times of categories of statistical software
     listed above; and
+
   - “*Specific Standards*” which apply to different degrees to
     statistical software depending on the software category.
 
@@ -528,32 +531,24 @@ considerations of *Specific Aspects of Software*.
 ## 4.1 Standards Specific to Statistical Software
 
 The applicability of any concrete set of standards is likely to differ
-between different categories. For example, metrics of numerical accuracy
-will likely differ between categories primarily describing analytical
-algorithms and those describing less tractable routines which produce
-less directly reproducible results. Or consider metrics derived from
-tests, which must be interpreted in *qualitatively* different ways for
-packages entirely dependent on their own internal code versus packages
-largely dependent on the results of calls to external data providers
-(along with additional differences between, for example,
-locally-installed “external” providers versus online sources of external
-data).
+between different categories of statistical. For example, metrics of
+numerical accuracy will likely differ between categories primarily
+describing analytical algorithms and those describing less tractable
+routines which produce less directly reproducible results. Or consider
+metrics derived from tests, which must be interpreted in *qualitatively*
+different ways for packages entirely dependent on their own internal
+code versus packages largely dependent on the results of calls to
+external data providers (along with additional differences between, for
+example, locally-installed “external” providers versus online sources of
+external data).
 
-Different metrics, and thus by extension very likely different
-standards, must thus be considered to be differentially applicable to
-different categories of software, and thus the interplay between the
-scope of statistical software considered above and throughout this
-project, and the standards emerging from the project, will be of
-critical importance throughout the project. More concretely, attempts to
-devise a concrete categorization of statistical software will inevitably
-frustrate attempts to understand more *general* processes leading to the
-establishment of standards, and therefore negatively impact on the
-project’s desired goal stated at the outset of creating and providing a
-truly *general* and *transferrable* set of standards. Conversely,
-attempts to counter this effect by striving for more generally
-applicable standards will likely weaken abilities to assess particular
-categories of statistical software. Such considerations lead to the
-following kinds of questions which will likely have to be addressed:
+Different standards must thus be considered to be differentially
+applicable to different categories of software, and thus the interplay
+between the scope of statistical software considered above and
+throughout this project, and the standards emerging from the project,
+will be of critical importance throughout the project. Such
+considerations lead to the following kinds of questions which will
+likely have to be addressed:
 
   - To what extent ought we aim for general standards at the expense of
     specific ability to assess particular categories of statistical
@@ -577,6 +572,7 @@ alernative kinds of software.
     to analytic and, to some extent, predictive routines) Moreover, even
     these two categories alone will likely require differing standards
     for precision or convergence.
+
   - **Method validity** It may be necessary or useful to develop
     standards for the *validity* of a chosen method, independent of its
     implementation. Questions of validity are commonly related to
@@ -588,6 +584,7 @@ alernative kinds of software.
     to consider potential (in)validity of that software, along with
     potential validity in other domains, themselves potentially not
     explicitly considered by the software authors.
+
   - **Software scope** The preceding considerations extend directly to
     general concerns of *scope*, whether in terms of domains of
     applicability, properties of input or output data, authorial
@@ -597,97 +594,91 @@ alernative kinds of software.
     scope in these senses is also effectively an exercise in
     categorization of the kind described above.
 
-These brief examples serve to illustrate the inextricable relationship
-between categorizations of, and standards for, statistical software. We
-envision the project proceeding from this initial stage by developing
+  - **Reference standards** For software which implements or relies on
+    standard routines, it may be necessary to designate reference data
+    or implementations against which to compare outcomes, or guidance in
+    selecting such references. For instance, the National Institute of
+    Standards and Technology of the U.S. provides [a collection of
+    reference data sets](https://www.itl.nist.gov/div898/strd/) with
+    certified computational results which statistical software should be
+    able to reproduce.
+
+We envision the project proceeding from this initial stage by developing
 parallel definitions for both categories of software (defining both
-*in*-scope and *beyond*-scope), and specific standards. A simple way to
-proceed may be to develop lists for both, along with a representation of
-inter-connections between categories and standards. The final section of
-this document considers several examples of extant software submitted
-for peer-review, and uses these to illustrate in a concrete context how
-such such categories and standards may be developed.\[2\] Prior to doing
-so, the following section lists several *Specific Aspects of Software*
-which may be usefully considered within both general and specific
-standards.
+*in*-scope and *beyond*-scope, above), and specific standards. A simple
+way to proceed may be to develop lists for both, along with a
+representation of inter-connections between categories and standards.
 
-# 5\. Software Assessment
+## 4.2 Generally Applicable Standards
 
-To additionally inform the general considerations described in the
-preceding sections, this section presents a general (yet non-exhaustive)
-overview of aspects of software which may be usefully considered for
-standards-based assessment, both for (retrospective) purposes of peer
-review, and for (prospective) use in developing software both in
-general, and in preparation for peer-review. It will be important to
-consider the applicability of each metric to different categories of
-statistical software, as well as the extent to which the following
-aspects may be more or less applicable or relevant at different phases
-of a software lifecycle, or how expected values for, or results of
-applying, metrics may vary throughout a software lifecycle.
+In addition to standards specific to the challenges of statistical
+software, it will also be necessary to create or adopt standards
+governing general aspects of software, such as interface, documentation,
+and testing. Mili (2015) also provides a general list of software design
+principles, divided between *Functional Attributes* (including
+Correctness and Robustness), *Usability Attributes* (including Ease of
+Use, Ease of Learning, Customizability, Calibrability, and
+Interoperability), and *Structural Attributes* (including Design
+Integrity, Modularity, Testability, and Adaptability).
 
-## 5.1 Software Interface
+### 5.1 Software Interface
 
-There are likely aspects of overall software “design” that might be
-considered, reviewed, encouraged, or expected. rOpenSci’s guide on
-[package development, maintenance, and peer
-review](https://devguide.ropensci.org/) provides arguably one of the
-most prominent guides on the design of R packages, primarily with its
-first chapter. One of the few other notable examples of guides to design
-principles of R packages is the [tidyverse design
-guide](https://principles.tidyverse.org/). Mili (2015) also provides a
-useful, and far more general, list of software design principles,
-divided between *Functional Attributes* (including Correctness and
-Robustness), *Useability Attributes* (including Ease of Use, Ease of
-Learning, Customizability, Calibrability, and Interoperability), and
-*Structural Attributes* (including Design Integrity, Modularity,
-Testability, and Adaptability). These latter two categories extend
-beyond what is, or has been, generally considered within the context of
-R packages, and thus it is worthwhile considering whether such general
-aspects might be explicitly considered as part of the review process,
-and/or potentially incorporated within a set of standards.
+There are likely aspects of overall software interface (“API”) that
+might be considered, reviewed, encouraged, or expected. rOpenSci’s guide
+on [package development, maintenance, and peer
+review](https://devguide.ropensci.org/) provides standards of this type
+for R packages, primarily within its first chapter. Another notable
+example is the [tidyverse design
+guide](https://principles.tidyverse.org/), and [Conventions for R
+Modeling
+Pacakges](https://tidymodels.github.io/model-implementation-principles/)
+provides guidance for model-fitting APIs.
 
-## 5.2 Documentation
+### 5.2 Documentation
 
-In contrast to scientific software in general, statistical software
-might be argued to be associated with some specific kinds of input and
-output data. This observation alone suggests the likely importance of
-some kind of metadata associated with statistical software which
-documents the nature of (expected, permitted, or accepted) input and
-output data (Lenhardt et al. 2014). Given such, relationships between
-data and statistical software may be generally assumed to be structured
-in a sufficiently systematic way to permit systematic documentation. The
-following aspects of documentation may thus be considered for
-assessment:
+Standards will include requirements for form and completeness of
+documentation. As with interface, several sources already provide
+starting points for reasonable documentation.
 
-  - Standard software documentation metrics:
-      - Numbers of documentation lines per function
-      - proportion of documentation to code lines
-      - presence of examples
-      - coverage of examples
-      - vignettes
-  - Data documentation metrics
-      - Intended and/or permitted kinds of input data
-      - Nature of output data
-      - Description of data used in tests
+Some documentation requirements will be specific to the statistical
+context. For instance, it is likely we will have requirements for
+referencing appropriate literature or references for theoretical support
+of implementations. Another area of importance is correctness and
+clarity of definitions of statistical quantities produced by the
+software, e.g., the definition of null hypotheses or confidence
+intervals. Data included in software – that used in examples or tests –
+will also have documentation requirements.
 
-## 5.3 Testing
+An additional area for consideration is the creation of tools for
+documentation creation and evaluation based on metadata of statistical
+method inputs and outputs and packaged data (Lenhardt et al. 2014).
+Relationships between data and statistical software may be structured in
+a sufficiently systematic way to permit systematic documentation.
 
-Vogel (2011) states:
+<!---
+https://github.com/tdwg/vocab/blob/master/sds/documentation-specification.md
+--->
 
-> Software that depends on testing alone for a defect-free \[state\] is
-> depending on perfection in testing
+### 5.3 Testing
 
-There are no unambiguous categories of tests, but the structure of R
-packages which contain both external (exported) and internal
-(non-exported) functions provides for a convenient distinction between
-“unit tests” as tests of *internal* functions, and *functional* or
-*integration tests* as tests of *exported* functions. Almost all testing
-as currently implemented in R is “concrete testing” (Mili 2015), and
-little consideration has been given in R to “stochastic” or
-“property-based” testing, in which expectation values of inputs and
-outputs are tested, rather than concrete instantiations of such. Other
-languages have developed grammars for stochastic or property-based
-testing, notably through the [hypothesis package for
+Testing is a critical area for standards, as tests are a concrete
+manifestation of standards and the means by which authors may
+demonstrate compliance. While testing is considered best practice and
+test coverage often used as a measure of test completeness, guidance on
+*what* to test is rare, especially in the context of R packages. Thus,
+standards will need to provide guidance on the types and methods of
+tests required for different statistical software categories.
+
+In addition, statistical software may benefit from means or modes of
+testing beyond the common frameworks used in and for R packages (e.g. R
+RMD check, testhtat). A variety of other frameworks and workflows from
+other languages and contexts may be relevant. Almost all testing as
+currently implemented in R is “concrete testing” (Mili 2015), and little
+consideration has been given in R to “stochastic” or “property-based”
+testing, in which expectation values of inputs and outputs are tested,
+rather than concrete instantiations of such. Other languages have
+developed grammars for stochastic or property-based testing, notably
+through the [hypothesis package for
 python](https://github.com/HypothesisWorks/hypothesis). These grammars
 enable specification of test assumptions as well as expected test
 outputs. Assumptions in `hypothesis` are declared through simple
@@ -695,22 +686,20 @@ outputs. Assumptions in `hypothesis` are declared through simple
 probability distribution for input data, while outputs are specified
 through equivalent `@expect` statements that might, for example, specify
 expected *distributional properties* of an output rather than just
-concrete values. Given such considerations, we see the following as key
-questions which we will need to address.
+concrete values.
 
-  - To what extent should testing focus on *functional* rather than
-    *unit* testing?
+The following are likely key questions which we will need to address
+regarding testing:
 
-  - What test reporter should be used? Does the `testthat` package and
-    similar suffice? Or might it be worth considering new test reporting
-    systems?
+  - To what extent should testing focus on *functional* or *integration*
+    rather than *unit* testing?
 
   - Is it sufficient to consider test execution as an integral part of
     `R CMD check` only? Or might there by a case for developing
     alternative test execution environments and approaches? For
     instance, should there be an alternate workflow for long-running
     tests, tests requiring large data, or tests intended to be executed
-    for other purposes.
+    for other purposes?
 
   - Is it worthwhile concretely defining one or more goals of testing?
     (Such as error detection, error frequencies, error tolerance,
@@ -721,93 +710,206 @@ questions which we will need to address.
 
   - Is there scope for “stochastic” or “property-based” testing?
 
+  - What test reporter should be used? Does the `testthat` package and
+    similar suffice? Or might it be worth considering new test reporting
+    systems?
+
   - What aspects of tests and test data (both actual and permissible)
     might be worthwhile documenting in some kind of metadata format?
 
-## 5.4 General Software Metrics
+# 5\. Software Assessment
+
+To additionally inform the general considerations described in the
+preceding sections, this section presents a general (yet non-exhaustive)
+overview of aspects of software which may be usefully considered for
+standards-based assessment, both for retrospective purposes of peer
+review, and for prospective use in developing software both in general,
+and in preparation for peer-review. It will be important to consider the
+applicability of each metric to different categories of statistical
+software, as well as the extent to which the following aspects may be
+more or less applicable or relevant at different phases of a software
+lifecycle, or how expected values for, or results of applying, metrics
+may vary throughout a software lifecycle.
+
+## 5.1 General Software Metrics
 
 The following is an incomplete list of the kinds of metrics commonly
-used to evaluate software, and which might provide useful for assessing
-statistical software in the present project.
+used to evaluate software in general, and which might provide useful for
+assessing statistical software in the present project.
 
   - Code structure
+    
       - Cyclomatic complexity
+    
       - Codebase size
+    
       - Function size / number
+    
       - Numbers of external calls within functions
-      - Exported / non exported functions
+    
+      - Numbers and proportions of Exported / non exported functions
+    
       - Code consistency
-  - Documentation metrics detailed above
+    
+      - Dynamic metrics derived from function call networks or similar
+        
+          - Network-based metrics both for entire packages, for
+            individual functions, and derived from analyses of test
+            coverage
+        
+          - Functional overlap with other packages
+
+  - Documentation metrics:
+    
+      - Numbers of documentation lines per function
+    
+      - Proportion of documentation to code lines
+    
+      - Presence of examples
+    
+      - Vignettes
+
+  - Data documentation metrics
+    
+      - Intended and/or permitted kinds of input data
+    
+      - Nature of output data
+    
+      - Description of data used in tests
+
   - Meta struture
+    
       - Dependencies
+    
       - Reverse dependencies
-      - License
+
   - Meta metrics
+    
+      - License (type, availability, compatibility)
+    
       - Version control?
+    
       - Availability of website
+    
       - Availability of source code (beyond CRAN or similar)
+    
       - Community:
+        
           - Software downloads and usage statistics
+        
           - Numbers of active contributors
+        
           - Numbers or rates of issues reported
+    
       - Maintenance:
+        
           - Rate/Numbers of releases
+        
           - Rate of response to reported issues
+        
           - Last commit
+        
           - Commit rate
-      - stars (for github or equivalent)
+    
+      - stars (for github, or equivalent for other platforms)
+    
       - forks
+
   - Extent of testing
+    
       - Code coverage
-      - Examples
+    
+      - Examples and their coverage
+    
       - Range of inputs tested
-  - Dynamic metrics derived from function call networks
-      - Graph-based metrics for each function, and for package as a
-        whole
-      - Functional overlap with other, extant packages
 
-# 6\. Automation and Tooling
+## 5.2 Metrics specific to statistical software
 
-A key question for this project concerns the kinds of tools this project
-might best focus on developing. It is useful in this context to
-distinguish between *collective* tools useful for, of applicable to,
-collections of software, of individuals, or of processes pertaining to
-either (here, primarily peer review), and *singular* tools of direct
-applicability to individual pieces of software. We envision needing to
-address the (likely relative) importance of some of the following kinds
-of tools which may be usefully developed.
+Metrics specific to statistical software will depend on, and vary in
+applicability or relevance with, the system for categorizing statistical
+software expected to emerge from the initial phase of this project.
+Details of this sub-section will be largely deferred until we have a
+clearer view of what categories might best be considered, which we are
+hopeful will emerge following the first committee meeting, and in
+response to ensuing feedback. In the meantime, metrics can be
+anticipated by referring to the preceding examples for categories of
+statistical software (numerical standards, method validity, software
+scope, and reference standards). We anticipate having a number of such
+categories, along with a number of corresponding metrics for assessing
+software in regard to each category. As mentioned at the outset,
+software will generally be expected to fit within multiple categories,
+and specific metrics will need to be developed to ensure validity for
+software encompassing any potential combination of categories.
+
+## 5.3 Diagnostics and Reporting
+
+While the preceding sub-sections considered *what* might be assessed in
+relation to statistical software, the project will also need to
+explicitly consider *how* any resultant assessment might best be
+presented and reported upon. Indeed, a key output of the project is
+expected to be a suite of tools which can be used both in this and other
+projects to construct, curate, and report upon a suite of peer-reviewed
+software. Moreover, we will aim to develop these tools partly to provide
+or enhance the *automation* of associated processes, aiming both to
+enhance adaptability and transferability, and to ensure the scalability
+of our own project.
+
+It is useful in this context to distinguish between *collective* tools
+useful for, of applicable to, collections of software, of individuals,
+or of processes pertaining to either (here, primarily peer review), and
+*singular* tools of direct applicability to individual pieces of
+software. We envision needing to address the (likely relative)
+importance of some of the following kinds of diagnostic and reporting
+tools which may be usefully developed.
 
 **Collective Tools**
 
   - Qualitative tools useful in assessing or formalizing categories of
     software
-  - Quantitative tools to *retrospectively* assess such aspects as:
+
+  - Quantitative tools to retrospectively assess such aspects as:
+    
       - Collective “quality” of software
+    
       - Community engagement
+    
       - Effectiveness (or other metrics) of review
 
 **Singular Tools**
 
-  - Quantitative tools that can be *prospectively* used to
+  - Quantitative tools that can be prospectively used to
+    
       - Improve or assure software quality
+    
       - Document aspects of software quality
+    
       - Aid modularity or transferability either of software, or of the
         tools themselves
-  - Formalize structural aspects of software such as tests (for example,
-    through implementing new frameworks or grammars)
+
+  - Tools to formalize structural aspects of software such as tests (for
+    example, through implementing new frameworks or grammars)
+
   - Extensions of extant packages such as **lintr**, **covr**,
     **goodpractice**
+
   - Comparisons of package metrics to distributions for other packages
     or systems (such as the CRAN archive directories)
-  - Diagnostic and report aggregation, design, or automatic creation
 
-Tools developed under any of these categories may be used to aid the
-automation of both software development and peer review. An important
-question for this project is accordingly the extent to which automation
-via any such tools may enhance either software development, peer review
-thereof, or both. A good example for the effectiveness of automation in
-the kinds of peer review processes envisioned to emerge from this
-project is provided by submissions to the [Journal of Open Source
+  - Diagnostic and report aggregation, design, or automatic creation at
+    any stage before, during, or after peer review.
+
+The one question of abiding importance is the extent to which any such
+tools, and/or the automation of processes which they may enable, might
+enhance any of the following aspects:
+
+  - Software development
+  - Peer review of software
+  - Wider communities of users or developers
+  - The adaptation of our system to other domains
+
+A good example for the effectiveness of automation in the kinds of peer
+review processes envisioned to emerge from this project is provided by
+submissions to the [Journal of Open Source
 Software](https://joss.theoj.org/), which features [open
 reviews](https://github.com/openjournals/joss-reviews/issues), many
 aspects of which are automated by a custom-developed bot called
@@ -885,5 +987,3 @@ Publishing Series in Biomedicine. Woodhead Publishing.
     topics which might be useful to define or categorize statistical
     software, other than topics pertaining to particular areas of
     application.
-
-2.  Not yet incorporated within current document version.

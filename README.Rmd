@@ -1,16 +1,17 @@
 ---
 title: 'rOpenSci Statistical Software Review: Scoping Document'
-author: Noam Ross and Mark Padgham
-date: `r Sys.Date()`
+author: 'Noam Ross and Mark Padgham'
+date: '`r Sys.Date()`'
 output:
   html_document:
     toc: yes
     toc_float: yes
     number_sections: no
     theme: flatly
+bibliography: statsoft.bib
 ---
 
-```{r getbib, eval = FALSE}
+```{r getbib, echo = FALSE, eval = FALSE}
 if (!file.exists ("statsoft.bib")) {
    refs <- RefManageR::ReadZotero(group = "2416765",
                                  .params = list (limit = 100))
@@ -405,16 +406,14 @@ packages](https://www.debian.org/doc/packaging-manuals/python-policy/module_pack
 
 The importance of considering Software "lifecycles" has long been recognized for
 closed-source proprietary software, yet lifecycles have only been given scant
-consideration in contexts of open source software \[exceptions include
-\[\@stokes\_21\_2012\]{.redoc \#redoc-citation-1};[@lenhardt_data_2014]{.redoc
-\#redoc-citation-2}\]. A long history and tradition in both practice and
-published literature on software review \[for example,
-@mili_software_2015;\[\@ammann\_introduction\_2017\]{.redoc
-\#redoc-citation-4}\] generally concludes that software review is most effective
-when it is an ongoing process that is structurally embedded within a software
-lifecycle, and when review occurs as frequently as possible. Such a practice
-contrasts strongly with the singular nature of review as currently implemented
-by rOpenSci.
+consideration in contexts of open source software [exceptions include
+@stokes_21_2012;@lenhardt_data_2014]. A long history and tradition in both
+practice and published literature on software review [for example,
+@mili_software_2015;@ammann_introduction_2017] generally concludes that
+software review is most effective when it is an ongoing process that is
+structurally embedded within a software lifecycle, and when review occurs as
+frequently as possible. Such a practice contrasts strongly with the singular
+nature of review as currently implemented by rOpenSci.
 
 An effective system for peer review of statistical software is thus may lie
 somewhere between the "one-off" practices above, and frequent, ongoing review
@@ -588,13 +587,13 @@ software.
     software, just as defining scope in these senses is also effectively an
     exercise in categorization of the kind described above.
 
--   **Reference standards For software which implements or relies on standard
-    routines, it may be necessary to designate reference data or implementations
-    against which to compare outcomes, or guidance in selecting such references.
-    For instance, the National Institute of Standards and Technology of the U.S.
-    provides [a collection of reference data
+-   **Reference standards** For software which implements or relies on standard
+    routines, it may be necessary to designate reference data or
+    implementations against which to compare outcomes, or guidance in selecting
+    such references. For instance, the National Institute of Standards and
+    Technology of the U.S. provides [a collection of reference data
     sets](https://www.itl.nist.gov/div898/strd/) with certified computational
-    results which statistical software should be able to reproduce.**
+    results which statistical software should be able to reproduce.
 
 We envision the project proceeding from this initial stage by developing
 parallel definitions for both categories of software (defining both *in*-scope
@@ -607,7 +606,7 @@ between categories and standards.
 
 In addition to standards specific to the challenges of statistical software, it
 will also be necessary to create or adopt standards governing general aspects of
-software, such as interface, documentation, and testing. \@mili\_software\_2015
+software, such as interface, documentation, and testing. @mili_software_2015
 also provides a general list of software design principles, divided between
 *Functional Attributes* (including Correctness and Robustness), *Usability
 Attributes* (including Ease of Use, Ease of Learning, Customizability,
@@ -641,9 +640,13 @@ tests -- will also have documentation requirements.
 
 An additional area for consideration is the creation of tools for documentation
 creation and evaluation based on metadata of statistical method inputs and
-outputs and packaged data \[\@lenhardt\_data\_2014\]. Relationships between data
+outputs and packaged data [@lenhardt_data_2014]. Relationships between data
 and statistical software may be structured in a sufficiently systematic way to
 permit systematic documentation.
+
+<!---
+https://github.com/tdwg/vocab/blob/master/sds/documentation-specification.md
+--->
 
 ### 5.3 Testing
 
@@ -665,12 +668,11 @@ languages have developed grammars for stochastic or property-based testing,
 notably through the [hypothesis package for
 python](https://github.com/HypothesisWorks/hypothesis). These grammars enable
 specification of test assumptions as well as expected test outputs. Assumptions
-in `hypothesis` are declared through simple
-`[@``given]{``.``redoc`` #redoc-citation-7}` statements that might, for example,
-quantify an assumed probability distribution for input data, while outputs are
-specified through equivalent `[@expect]{.``redoc`` #redoc-citation-8}`
-statements that might, for example, specify expected *distributional properties*
-of an output rather than just concrete values.
+in `hypothesis` are declared through simple `@given` statements that might, for
+example, quantify an assumed probability distribution for input data, while
+outputs are specified through equivalent `@expect` statements that might, for
+example, specify expected *distributional properties* of an output rather than
+just concrete values.
 
 The following are likely key questions which we will need to address regarding
 testing:
@@ -704,11 +706,11 @@ testing:
 To additionally inform the general considerations described in the preceding
 sections, this section presents a general (yet non-exhaustive) overview of
 aspects of software which may be usefully considered for standards-based
-assessment, both for (retrospective) purposes of peer review, and for
-(prospective) use in developing software both in general, and in preparation for
-peer-review. It will be important to consider the applicability of each metric
-to different categories of statistical software, as well as the extent to which
-the following aspects may be more or less applicable or relevant at different
+assessment, both for retrospective purposes of peer review, and for prospective
+use in developing software both in general, and in preparation for peer-review.
+It will be important to consider the applicability of each metric to different
+categories of statistical software, as well as the extent to which the
+following aspects may be more or less applicable or relevant at different
 phases of a software lifecycle, or how expected values for, or results of
 applying, metrics may vary throughout a software lifecycle.
 
@@ -716,8 +718,8 @@ applying, metrics may vary throughout a software lifecycle.
 ----------------------------
 
 The following is an incomplete list of the kinds of metrics commonly used to
-evaluate software, and which might provide useful for assessing statistical
-software in the present project.
+evaluate software in general, and which might provide useful for assessing
+statistical software in the present project.
 
 -   Code structure
 
@@ -729,23 +731,26 @@ software in the present project.
 
     -   Numbers of external calls within functions
 
-    -   Exported / non exported functions
+    -   Numbers and proportions of Exported / non exported functions
 
     -   Code consistency
 
-<!-- -->
+    -   Dynamic metrics derived from function call networks or similar
 
--   Standard software documentation metrics:
+        -   Network-based metrics both for entire packages, for individual
+            functions, and derived from analyses of test coverage
+
+        -   Functional overlap with other packages
+
+-   Documentation metrics:
 
     -   Numbers of documentation lines per function
 
-    -   proportion of documentation to code lines
+    -   Proportion of documentation to code lines
 
-    -   presence of examples
+    -   Presence of examples
 
-    -   coverage of examples
-
-    -   vignettes
+    -   Vignettes
 
 -   Data documentation metrics
 
@@ -755,17 +760,15 @@ software in the present project.
 
     -   Description of data used in tests
 
-<!-- -->
-
 -   Meta struture
 
     -   Dependencies
 
     -   Reverse dependencies
 
-    -   License
-
 -   Meta metrics
+
+    -   License (type, availability, compatibility)
 
     -   Version control?
 
@@ -791,7 +794,7 @@ software in the present project.
 
         -   Commit rate
 
-    -   stars (for github or equivalent)
+    -   stars (for github, or equivalent for other platforms)
 
     -   forks
 
@@ -799,32 +802,53 @@ software in the present project.
 
     -   Code coverage
 
-    -   Examples
+    -   Examples and their coverage
 
     -   Range of inputs tested
 
--   Dynamic metrics derived from function call networks
-
-    -   Graph-based metrics for each function, and for package as a whole
-
-    -   Functional overlap with other, extant packages
-
-5.2 Diagnostics and Reporting
+5.2 Metrics specific to statistical software
 -----------------------------
 
-A key question for this project concerns the kinds of tools this project might
-best focus on developing. It is useful in this context to distinguish between
-*collective* tools useful for, of applicable to, collections of software, of
-individuals, or of processes pertaining to either (here, primarily peer review),
-and *singular* tools of direct applicability to individual pieces of software.
-We envision needing to address the (likely relative) importance of some of the
-following kinds of tools which may be usefully developed.
+Metrics specific to statistical software will depend on, and vary in
+applicability or relevance with, the system for categorizing statistical
+software expected to emerge from the initial phase of this project. Details
+of this sub-section will be largely deferred until we have a clearer view of
+what categories might best be considered, which we are hopeful will emerge
+following the first committee meeting, and in response to ensuing feedback. In
+the meantime, metrics can be anticipated by referring to the preceding examples
+for categories of statistical software (numerical standards, method validity,
+software scope, and reference standards). We anticipate having a number of such
+categories, along with a number of corresponding metrics for assessing software
+in regard to each category. As mentioned at the outset, software will generally
+be expected to fit within multiple categories, and specific metrics will need
+to be developed to ensure validity for software encompassing any potential
+combination of categories.
+
+5.3 Diagnostics and Reporting
+-----------------------------
+
+While the preceding sub-sections considered *what* might be assessed in
+relation to statistical software, the project will also need to explicitly
+consider *how* any resultant assessment might best be presented and reported
+upon. Indeed, a key output of the project is expected to be a suite of tools
+which can be used both in this and other projects to construct, curate, and
+report upon a suite of peer-reviewed software. Moreover, we will aim to develop
+these tools partly to provide or enhance the *automation* of associated
+processes, aiming both to enhance adaptability and transferability, and to
+ensure the scalability of our own project.
+
+It is useful in this context to distinguish between *collective* tools useful
+for, of applicable to, collections of software, of individuals, or of processes
+pertaining to either (here, primarily peer review), and *singular* tools of
+direct applicability to individual pieces of software. We envision needing to
+address the (likely relative) importance of some of the following kinds of
+diagnostic and reporting tools which may be usefully developed.
 
 **Collective Tools**
 
 -   Qualitative tools useful in assessing or formalizing categories of software
 
--   Quantitative tools to *retrospectively* assess such aspects as:
+-   Quantitative tools to retrospectively assess such aspects as:
 
     -   Collective "quality" of software
 
@@ -834,7 +858,7 @@ following kinds of tools which may be usefully developed.
 
 **Singular Tools**
 
--   Quantitative tools that can be *prospectively* used to
+-   Quantitative tools that can be prospectively used to
 
     -   Improve or assure software quality
 
@@ -843,25 +867,32 @@ following kinds of tools which may be usefully developed.
     -   Aid modularity or transferability either of software, or of the tools
         themselves
 
--   Formalize structural aspects of software such as tests (for example, through
-    implementing new frameworks or grammars)
+-   Tools to formalize structural aspects of software such as tests (for
+    example, through implementing new frameworks or grammars)
 
 -   Extensions of extant packages such as **lintr**, **covr**, **goodpractice**
 
 -   Comparisons of package metrics to distributions for other packages or
     systems (such as the CRAN archive directories)
 
--   Diagnostic and report aggregation, design, or automatic creation
+-   Diagnostic and report aggregation, design, or automatic creation at any
+    stage before, during, or after peer review.
 
-Tools developed under any of these categories may be used to aid the automation
-of both software development and peer review. An important question for this
-project is accordingly the extent to which automation via any such tools may
-enhance either software development, peer review thereof, or both. A good
-example for the effectiveness of automation in the kinds of peer review
-processes envisioned to emerge from this project is provided by submissions to
-the [Journal of Open Source Software](https://joss.theoj.org/), which features
-[open reviews](https://github.com/openjournals/joss-reviews/issues), many
-aspects of which are automated by a custom-developed bot called
+The one question of abiding importance is the extent to which any such tools,
+and/or the automation of processes which they may enable, might enhance any of
+the following aspects:
+
+- Software development
+- Peer review of software
+- Wider communities of users or developers
+- The adaptation of our system to other domains
+
+A good example for the
+effectiveness of automation in the kinds of peer review processes envisioned to
+emerge from this project is provided by submissions to the [Journal of Open
+Source Software](https://joss.theoj.org/), which features [open
+reviews](https://github.com/openjournals/joss-reviews/issues), many aspects of
+which are automated by a custom-developed bot called
 ["whedon"](https://github.com/whedon).
 
 7. Bibliography
