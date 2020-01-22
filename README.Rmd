@@ -11,7 +11,7 @@ output:
 bibliography: statsoft.bib
 ---
 
-```{r getbib, echo = FALSE, eval = TRUE}
+```{r getbib, include = FALSE, eval = TRUE}
 if (!file.exists ("statsoft.bib")) {
    refs <- RefManageR::ReadZotero(group = "2416765",
                                  .params = list (limit = 100))
