@@ -24,16 +24,15 @@ source ("get-joss-papers-extra-functions.R")
 ```
 
 
-## Get list of papers
+## Get all issue numbers of original JOSS submissions
 
-```{r get_issue_lables, eval = FALSE}
+```{r get_issue_labels, eval = FALSE}
 library (ghrecipes)
 issues <- get_issue_labels_state (owner = "openjournals", repo = "joss-reviews")
 saveRDS (issues, file = "joss-reviews-all.Rds")
 ```
 
-Get all original repositories for published software:
-```{r get_repos}
+```{r get_issue_numbers, eval = FALSE}
 library (ghrecipes)
 library (dplyr)
 issues <- readRDS ("joss-reviews-all.Rds") %>%
@@ -41,44 +40,73 @@ issues <- readRDS ("joss-reviews-all.Rds") %>%
             grepl ("accepted", .$labels) &
             repo == "joss-reviews") # They all are, but just in case
 issue_nums <- issues$number
+```
 
-# Get the official repo URL from the JOSS issue
-get_repo <- function (gh_cli, issue_num) {
-    cmt <- get_issue_first_cmt (gh_cli, issue_num = issue_num)
-    cmt <- strsplit (cmt, "\\n") [[1]]
-    repo <- cmt [grep ("^\\*\\*Repository", cmt)]
-    repo <- strsplit (repo, "href") [[1]] [2]
-    quotes <- gregexpr ("\"", repo) [[1]]
-    u <- substr (repo, quotes [1] + 1, quotes [2] - 1)
-    url_cut <- strsplit (u, "/") [[1]]
-    list (url = u,
-          org = tail (url_cut, 2) [1],
-          repo = tail (url_cut, 1))
+Those issues do not include the labels used to identify languages. Instead,
+those can be scraped directly from the main JOSS page:
+```{r}
+library (magrittr)
+library (rvest)
+links <- NULL
+newlinks <- NA
+pagenum <- 1
+while (length (newlinks) > 0) {
+    u <- paste0 ("https://joss.theoj.org/papers/in/R?page=", pagenum)
+    pagenum <- pagenum + 1
+    newlinks <- read_html (u) %>%
+        html_nodes ("link") %>%
+        html_attr ("href")
+    newlinks <- newlinks [grep ("/papers/10.21105", newlinks)]
+    links <- c (links, newlinks)
 }
 
-repo <- get_repo (gh_cli, 11)
-# --> stop if repo$url not github
-repo$raw <- gsub ("github.com", "raw.githubusercontent.com", repo$url)
+# Then transform those links to the actual software repo link from the
+# corresponding JOSS page
+links <- readRDS ("joss-doi-all.Rds")
+get_repo <- function (joss_link) {
+    b <- read_html (joss_link) %>%
+        html_nodes ("a.btn") # link to repo is a "btn" class object
+    i <- grep ("Software repository", html_text (b))
+    html_attr (b [i], "href")
+}
+links <- vapply (links, function (i) get_repo (i), character (1),
+                 USE.NAMES = FALSE)
+saveRDS (links, file = "joss-repos-all.Rds")
+```
+
+
+## Get contents of `paper.md` from original repos
+
+
+```{r get_papermd}
+links <- readRDS ("./joss-repos-all.Rds")
+links <- links [grepl ("github\\.com", links)]
+txt <- paste0 ("Extracting paper.md entries from ", length (links),
+               " repositories")
+message (cli::rule (center = txt, line = 2, col = "green"))
 
 # Get the `paper.md` file from the repo URL
 get_papermd <- function (gh_cli, repo) {
+    repo <- gsub ("www\\.github\\.com", "github\\.com", repo)
+    url_cut <- strsplit (repo, "/") [[1]]
+    repo <- list (url = repo,
+                  raw = gsub ("github.com", "raw.githubusercontent.com", repo),
+                  org = tail (url_cut, 2) [1],
+                  repo = tail (url_cut, 1))
+
     files <- get_repo_files (gh_cli, repo$org, repo$repo)
+    if (is.null (files))
+        return (NA_character_)
     mdfile <- files [grep ("paper\\.md", files$name), ]
-    u <- paste0 (repo$raw, "/master/", mdfile$name)
-    readLines (u)
+    if (nrow (mdfile) < 1)
+        return (NA_character_)
+    u <- paste0 (repo$raw, "/master/", mdfile$name [1])
+    res <- tryCatch (readLines (u, warn = FALSE),
+                     error = function (e) NULL)
+    return (list (repo = repo, md = res))
 }
 
-papers <- pbapply::pblapply (issue_nums, function (i) {
-                      message (i)
-                     repo <- get_repo (gh_cli, i)
-                     if (!grepl ("github.com", repo$url))
-                         return (NA_character_)
-
-                     repo$raw <- gsub ("github.com",
-                                       "raw.githubusercontent.com", repo$url)
-                     repo$paper <- get_papermd (gh_cli, repo)
-                     return (repo)
-          })
+papers <- pbapply::pblapply (links, function (i) get_papermd (gh_cli, i))
 names (papers) <- vapply (papers, function (i) i$repo, character (1))
 save (papers, file = "joss-papersmd-all.Rds")
 ```

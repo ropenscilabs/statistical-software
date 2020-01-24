@@ -63,6 +63,9 @@ get_repo_files <- function (gh_cli, org, repo) {
         jsonlite::fromJSON ()
     res <- res$data$repository$object$entries
 
+    if (is.null (res)) # non-existent repos
+        return (NULL)
+
     blobs <- res [res$type == "blob", ]
     trees <- res [res$type == "tree", ]
     # recurse all trees:
