@@ -1,0 +1,86 @@
+
+---
+title: 'Scrape contents of JOSS papers'
+author: 'Mark Padgham'
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    number_sections: no
+    theme: flatly
+---
+
+## Set up client for github graphql API
+
+Also source a couple of helper functions
+```{r gh-cli}
+token <- Sys.getenv("GITHUB_GRAPHQL_TOKEN") # or whatever
+gh_cli <- ghql::GraphqlClient$new (
+    url = "https://api.github.com/graphql",
+    headers = httr::add_headers (Authorization = paste0 ("Bearer ", token))
+)
+source ("get-joss-papers-extra-functions.R")
+```
+
+
+## Get list of papers
+
+```{r get_issue_lables, eval = FALSE}
+library (ghrecipes)
+issues <- get_issue_labels_state (owner = "openjournals", repo = "joss-reviews")
+saveRDS (issues, file = "joss-reviews-all.Rds")
+```
+
+Get all original repositories for published software:
+```{r get_repos}
+library (ghrecipes)
+library (dplyr)
+issues <- readRDS ("joss-reviews-all.Rds") %>%
+    filter (state == "CLOSED" &
+            grepl ("accepted", .$labels) &
+            repo == "joss-reviews") # They all are, but just in case
+issue_nums <- issues$number
+
+# Get the official repo URL from the JOSS issue
+get_repo <- function (gh_cli, issue_num) {
+    cmt <- get_issue_first_cmt (gh_cli, issue_num = issue_num)
+    cmt <- strsplit (cmt, "\\n") [[1]]
+    repo <- cmt [grep ("^\\*\\*Repository", cmt)]
+    repo <- strsplit (repo, "href") [[1]] [2]
+    quotes <- gregexpr ("\"", repo) [[1]]
+    u <- substr (repo, quotes [1] + 1, quotes [2] - 1)
+    url_cut <- strsplit (u, "/") [[1]]
+    list (url = u,
+          org = tail (url_cut, 2) [1],
+          repo = tail (url_cut, 1))
+}
+
+repo <- get_repo (gh_cli, 11)
+# --> stop if repo$url not github
+repo$raw <- gsub ("github.com", "raw.githubusercontent.com", repo$url)
+
+# Get the `paper.md` file from the repo URL
+get_papermd <- function (gh_cli, repo) {
+    files <- get_repo_files (gh_cli, repo$org, repo$repo)
+    mdfile <- files [grep ("paper\\.md", files$name), ]
+    u <- paste0 (repo$raw, "/master/", mdfile$name)
+    readLines (u)
+}
+
+papers <- lapply (issue_nums, function (i) {
+                      message (i)
+                     repo <- get_repo (gh_cli, i)
+                     if (!grepl ("github.com", repo$url))
+                         return (NA_character_)
+
+                     repo$raw <- gsub ("github.com",
+                                       "raw.githubusercontent.com", repo$url)
+                     repo$paper <- get_papermd (gh_cli, repo)
+                     return (repo)
+          })
+names (papers) <- vapply (papers, function (i) i$repo, character (1))
+save (papers, file = "joss-papersmd-all.Rds")
+```
+
+
