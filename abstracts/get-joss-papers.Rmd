@@ -68,7 +68,7 @@ get_papermd <- function (gh_cli, repo) {
     readLines (u)
 }
 
-papers <- lapply (issue_nums, function (i) {
+papers <- pbapply::pblapply (issue_nums, function (i) {
                       message (i)
                      repo <- get_repo (gh_cli, i)
                      if (!grepl ("github.com", repo$url))
