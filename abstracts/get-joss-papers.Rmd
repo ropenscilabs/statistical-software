@@ -47,7 +47,7 @@ those can be scraped directly from the main JOSS page:
 ```{r}
 library (magrittr)
 library (rvest)
-links <- NULL
+josslinks <- NULL
 newlinks <- NA
 pagenum <- 1
 while (length (newlinks) > 0) {
@@ -57,20 +57,21 @@ while (length (newlinks) > 0) {
         html_nodes ("link") %>%
         html_attr ("href")
     newlinks <- newlinks [grep ("/papers/10.21105", newlinks)]
-    links <- c (links, newlinks)
+    josslinks <- c (josslinks, newlinks)
 }
 
 # Then transform those links to the actual software repo link from the
 # corresponding JOSS page
-links <- readRDS ("joss-doi-all.Rds")
-get_repo <- function (joss_link) {
-    b <- read_html (joss_link) %>%
+get_repo <- function (link) {
+    b <- read_html (link) %>%
         html_nodes ("a.btn") # link to repo is a "btn" class object
     i <- grep ("Software repository", html_text (b))
     html_attr (b [i], "href")
 }
-links <- vapply (links, function (i) get_repo (i), character (1),
-                 USE.NAMES = FALSE)
+repolinks <- vapply (josslinks, function (i) get_repo (i), character (1),
+                     USE.NAMES = FALSE)
+links <- data.frame (joss = josslinks, repo = repolinks,
+                     stringsAsFactors = FALSE)
 saveRDS (links, file = "joss-repos-all.Rds")
 ```
 
@@ -80,17 +81,19 @@ saveRDS (links, file = "joss-repos-all.Rds")
 
 ```{r get_papermd}
 links <- readRDS ("./joss-repos-all.Rds")
-links <- links [grepl ("github\\.com", links)]
-txt <- paste0 ("Extracting paper.md entries from ", length (links),
+links <- links [grepl ("github\\.com", links$repo), ]
+txt <- paste0 ("Extracting paper.md entries from ", nrow (links),
                " repositories")
 message (cli::rule (center = txt, line = 2, col = "green"))
 
 # Get the `paper.md` file from the repo URL
 get_papermd <- function (gh_cli, repo) {
-    repo <- gsub ("www\\.github\\.com", "github\\.com", repo)
-    url_cut <- strsplit (repo, "/") [[1]]
-    repo <- list (url = repo,
-                  raw = gsub ("github.com", "raw.githubusercontent.com", repo),
+    repo$repo <- gsub ("www\\.github\\.com", "github\\.com", repo$repo)
+    url_cut <- strsplit (repo$repo, "/") [[1]]
+    repo <- list (joss = repo$joss,
+                  url = repo$repo,
+                  raw = gsub ("github.com", "raw.githubusercontent.com",
+                              repo [2]),
                   org = tail (url_cut, 2) [1],
                   repo = tail (url_cut, 1))
 
@@ -101,14 +104,92 @@ get_papermd <- function (gh_cli, repo) {
     if (nrow (mdfile) < 1)
         return (NA_character_)
     u <- paste0 (repo$raw, "/master/", mdfile$name [1])
-    res <- tryCatch (readLines (u, warn = FALSE),
-                     error = function (e) NULL)
-    return (list (repo = repo, md = res))
+    repo$md <- tryCatch (readLines (u, warn = FALSE),
+                         error = function (e) NULL)
+    return (repo)
 }
 
-papers <- pbapply::pblapply (links, function (i) get_papermd (gh_cli, i))
-names (papers) <- vapply (papers, function (i) i$repo, character (1))
-save (papers, file = "joss-papersmd-all.Rds")
+#papers <- pbapply::pbapply (links, 1, function (i) get_papermd (gh_cli, i))
+papers <- list ()
+pb <- txtProgressBar (style = 3)
+for (i in seq (nrow (links))) {
+    papers [[length (papers) + 1]] <- get_papermd (gh_cli, links [i, ])
+    setTxtProgressBar (pb, i / nrow (links))
+}
+close (pb)
+
+#papers <- papers [which (!is.na (papers))]
+#names (papers) <- vapply (papers, function (i) i$repo, character (1))
+#saveRDS (papers, file = "joss-papersmd-all.Rds")
 ```
+
+Then format them as a single `.html` with index
+
+```{r}
+papers <- readRDS ("joss-papersmd-all.Rds")
+out <- c ("---",
+          "title: \"All R papers submitted to JOSS\"",
+          "author: \"\"",
+          "output:",
+          "    html_document:",
+          "        toc: true",
+          "        toc_float: true",
+          "        number_sections: false",
+          "        theme: flatly",
+          "---", "", "")
+
+count <- 1
+for (i in papers) {
+    md <- i$md
+    hdr <- grep ("^---$", md)
+    if (length (hdr) > 1)
+        md <- md [(hdr [2] + 1):length (md)]
+    if (any (grepl ("^# References$", md)))
+        md <- md [which (!grepl ("^# References$", md))]
+
+    # Remove image links:
+    md <- gsub ("\\.jpeg", "\\.jpg", md, ignore.case = TRUE)
+    index <- grep ("\\.png|\\.jpg|\\.pdf", md, ignore.case = TRUE)
+    for (j in index) {
+        starts <- gregexpr ("\\!\\[", md [j]) [[1]]
+        ends <- gregexpr ("\\.png\\)|\\.jpg)|\\.pdf\\)", md [j],
+                          ignore.case = TRUE) [[1]] + 4
+        for (k in seq_along (starts)) {
+            if (starts [k] == 1 & ends [k] == nchar (md [j]))
+                md [j] <- ""
+            else if (starts [k] == 1 & ends [k] < nchar (md [j]))
+                md [j] <- substring (md [j], ends [k] + 1, nchar (md [j]))
+            else if (starts [k] > 1 & ends [k] == nchar (md [j]))
+                md [j] <- substring (md [j], 1, starts [k] - 1)
+            else
+                md [j] <- paste0 (substring (md [j], 1, starts [k] - 1), " ",
+                                  substring (md [j], ends [k] + 1, nchar (md [j])))
+        }
+    }
+
+    ## change all secondary to tertiary, and primary to secondary headers
+    md <- gsub ("^##\\s", "### ", md)
+    md <- gsub ("^#\\s", "## ", md)
+
+    # And remove any standard markdown header notations:
+    md [grep ("^=+$", md)] <- ""
+
+    out <- c (out, paste0 ("# ", count, ". ", i$repo), "",
+              paste0 ("[", i$org, "/", i$repo, "](", i$url, ")"), "",
+              md)
+    count <- count + 1
+}
+fname <- "joss-papersmd-all"
+con <- file (paste0 (fname, ".md"), open = "w")
+writeLines (out, con = con)
+close (con)
+```
+
+Then render the markdown to html (takes a few seconds)
+```{r}
+rmarkdown::render(paste0 (fname, ".md"), output_file = paste0 (fname, ".html"))
+```
+
+
 
 
