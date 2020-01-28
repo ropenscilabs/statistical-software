@@ -128,8 +128,19 @@ Then format them as a single `.html` with index
 
 ```{r}
 papers <- readRDS ("joss-papersmd-all.Rds")
+# Hand-coded index of papers which might be in-scope. Excluded from this list
+# are many but not all packages which implement statistical algorithms
+# exclusively to analyse genetic or other molecular sequences, or
+# (phylo)genetic trees.
+stats_index <- c (4:8, 12, 15:16, 18, 21, 23:24, 27, 30:33, 37:39, 41:43,
+                  45:48, 52, 55, 58, 64:66, 68, 75:76, 80, 82, 85:86, 89:90,
+                  93, 96, 99:100, 102:104, 110, 113, 116, 119:120, 124:125,
+                  127, 129:132, 136, 140:142, 148:149, 151:153, 155, 157:158,
+                  160, 162, 166, 174, 176, 178, 183, 187, 189, 192, 194:196,
+                  200, 203:205, 213)
+papers <- papers [stats_index]
 out <- c ("---",
-          "title: \"All R papers submitted to JOSS\"",
+          "title: \"Potentially in-scope R papers submitted to JOSS\"",
           "author: \"\"",
           "output:",
           "    html_document:",
@@ -147,6 +158,14 @@ for (i in papers) {
         md <- md [(hdr [2] + 1):length (md)]
     if (any (grepl ("^# References$", md)))
         md <- md [which (!grepl ("^# References$", md))]
+
+    # one paper has a yaml header that starts with `---` but ends with backticks,
+    # and another ends with a space after the terminal `---` (so `--- `)
+    if (length (hdr) == 1) {
+        hdr_alt <- grep ("^\\.\\.\\.$|^--- $", md)
+        if (length (hdr_alt) == 1)
+            md <- md [(hdr_alt + 1):length (md)]
+    }
 
     # Remove image links:
     md <- gsub ("\\.jpeg", "\\.jpg", md, ignore.case = TRUE)
@@ -175,7 +194,9 @@ for (i in papers) {
     # And remove any standard markdown header notations:
     md [grep ("^=+$", md)] <- ""
 
-    out <- c (out, "", paste0 ("# ", count, ". ", i$repo), "",
+    #out <- c (out, "", paste0 ("# ", count, ". ", i$repo), "",
+    out <- c (out, "", "-----", "",
+              paste0 ("# ", stats_index [count], ". ", i$repo), "",
               paste0 ("[", i$org, "/", i$repo, "](", i$url, ") [JOSS](",
                       i$joss, ")"), "",
               md)
