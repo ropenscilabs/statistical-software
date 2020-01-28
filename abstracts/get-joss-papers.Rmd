@@ -80,6 +80,7 @@ saveRDS (links, file = "joss-repos-all.Rds")
 
 
 ```{r get_papermd}
+library (magrittr)
 links <- readRDS ("./joss-repos-all.Rds")
 links <- links [grepl ("github\\.com", links$repo), ]
 txt <- paste0 ("Extracting paper.md entries from ", nrow (links),
@@ -118,9 +119,9 @@ for (i in seq (nrow (links))) {
 }
 close (pb)
 
-#papers <- papers [which (!is.na (papers))]
-#names (papers) <- vapply (papers, function (i) i$repo, character (1))
-#saveRDS (papers, file = "joss-papersmd-all.Rds")
+papers <- papers [which (!is.na (papers))]
+names (papers) <- vapply (papers, function (i) i$repo, character (1))
+saveRDS (papers, file = "joss-papersmd-all.Rds")
 ```
 
 Then format them as a single `.html` with index
@@ -174,8 +175,9 @@ for (i in papers) {
     # And remove any standard markdown header notations:
     md [grep ("^=+$", md)] <- ""
 
-    out <- c (out, paste0 ("# ", count, ". ", i$repo), "",
-              paste0 ("[", i$org, "/", i$repo, "](", i$url, ")"), "",
+    out <- c (out, "", paste0 ("# ", count, ". ", i$repo), "",
+              paste0 ("[", i$org, "/", i$repo, "](", i$url, ") [JOSS](",
+                      i$joss, ")"), "",
               md)
     count <- count + 1
 }
