@@ -1,3 +1,5 @@
+# Statistical Software Abstracts 
+
 ## Scrape the Abstracts
 
 This code gets the number of papers for each volume:
@@ -163,28 +165,28 @@ my_lda <- LDA (d, k = 5)
 knitr::kable (get_terms (my_lda, 20))
 ```
 
-| Topic 1    | Topic 2      | Topic 3     | Topic 4        | Topic 5    |
-| :--------- | :----------- | :---------- | :------------- | :--------- |
-| can        | package      | package     | r              | data       |
-| r          | models       | data        | model          | package    |
-| package    | r            | models      | using          | methods    |
-| data       | model        | analysis    | data           | model      |
-| models     | can          | can         | methods        | using      |
-| functions  | also         | statistical | statistical    | r          |
-| time       | analysis     | provides    | available      | use        |
-| provides   | paper        | use         | also           | regression |
-| paper      | statistical  | software    | used           | used       |
-| linear     | used         | used        | regression     | examples   |
-| estimation | using        | r           | different      | models     |
-| software   | available    | algorithms  | new            | several    |
-| different  | data         | methods     | estimation     | provides   |
-| method     | framework    | modeling    | test           | software   |
-| using      | algorithm    | set         | method         | paper      |
-| based      | distribution | clustering  | implementation | two        |
-| variables  | use          | also        | algorithm      | user       |
-| analysis   | based        | user        | approach       | functions  |
-| large      | estimation   | provide     | effects        | based      |
-| number     | examples     | well        | linear         | number     |
+| Topic 1    | Topic 2      | Topic 3    | Topic 4     | Topic 5     |
+| :--------- | :----------- | :--------- | :---------- | :---------- |
+| package    | package      | data       | data        | data        |
+| methods    | models       | package    | models      | package     |
+| can        | r            | r          | r           | model       |
+| paper      | methods      | analysis   | statistical | models      |
+| using      | can          | using      | methods     | can         |
+| based      | using        | paper      | analysis    | r           |
+| model      | distribution | functions  | functions   | analysis    |
+| r          | well         | provides   | use         | software    |
+| analysis   | estimation   | used       | regression  | used        |
+| also       | two          | use        | model       | functions   |
+| use        | paper        | also       | based       | time        |
+| used       | used         | can        | method      | statistical |
+| available  | data         | software   | linear      | several     |
+| approach   | functions    | examples   | network     | paper       |
+| regression | several      | estimation | examples    | different   |
+| article    | series       | set        | software    | likelihood  |
+| algorithms | model        | process    | test        | also        |
+| models     | software     | time       | time        | method      |
+| number     | provides     | two        | tests       | algorithm   |
+| variables  | regression   | methods    | including   | provide     |
 
 spacy-parsed nouns and verbs also don’t reveal anything:
 
@@ -227,36 +229,36 @@ lda_n <- LDA (dn, k = 5)
 knitr::kable (get_terms (lda_n, 10))
 ```
 
-| Topic 1      | Topic 2    | Topic 3    | Topic 4   | Topic 5      |
-| :----------- | :--------- | :--------- | :-------- | :----------- |
-| r            | data       | models     | package   | package      |
-| package      | package    | model      | data      | data         |
-| methods      | r          | package    | analysis  | r            |
-| software     | methods    | data       | r         | distribution |
-| algorithms   | analysis   | regression | time      | test         |
-| code         | clustering | estimation | series    | tests        |
-| paper        | algorithm  | r          | models    | paper        |
-| data         | functions  | likelihood | functions | sample       |
-| optimization | density    | functions  | paper     | algorithm    |
-| computing    | method     | parameters | methods   | number       |
+| Topic 1      | Topic 2    | Topic 3        | Topic 4    | Topic 5    |
+| :----------- | :--------- | :------------- | :--------- | :--------- |
+| models       | package    | package        | paper      | data       |
+| data         | r          | data           | model      | package    |
+| package      | model      | r              | models     | analysis   |
+| time         | data       | models         | r          | software   |
+| functions    | methods    | paper          | functions  | time       |
+| methods      | likelihood | model          | methods    | models     |
+| software     | estimation | methods        | analysis   | approach   |
+| algorithms   | analysis   | implementation | packages   | method     |
+| optimization | user       | analysis       | regression | functions  |
+| model        | algorithm  | parameters     | parameters | regression |
 
 ``` r
 lda_v <- LDA (dv, k = 5)
 knitr::kable (get_terms (lda_v, 10))
 ```
 
-| Topic 1     | Topic 2    | Topic 3     | Topic 4    | Topic 5   |
-| :---------- | :--------- | :---------- | :--------- | :-------- |
-| based       | used       | can         | describe   | using     |
-| can         | provides   | using       | can        | can       |
-| used        | can        | implemented | using      | based     |
-| implemented | based      | allows      | presented  | provides  |
-| developed   | provided   | provide     | used       | obtained  |
-| provides    | allows     | given       | based      | proposed  |
-| using       | may        | based       | provided   | used      |
-| present     | implements | present     | including  | given     |
-| provided    | provide    | describes   | implements | called    |
-| provide     | using      | generalized | estimated  | described |
+| Topic 1   | Topic 2     | Topic 3     | Topic 4  | Topic 5     |
+| :-------- | :---------- | :---------- | :------- | :---------- |
+| provides  | using       | can         | can      | using       |
+| provided  | can         | used        | provides | based       |
+| based     | provides    | using       | based    | used        |
+| use       | based       | based       | using    | provide     |
+| can       | provided    | implements  | used     | implemented |
+| developed | including   | implemented | provide  | can         |
+| may       | illustrate  | present     | may      | illustrate  |
+| used      | given       | proposed    | describe | describe    |
+| contains  | includes    | describe    | present  | proposed    |
+| including | illustrated | provides    | modeling | known       |
 
 … none of those reveal anything useful.
 

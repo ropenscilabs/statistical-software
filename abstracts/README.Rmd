@@ -19,6 +19,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+<¬-- uncomment to render title in github .md
+# Analyses of Journal of Statistical Software Abstracts
+--->
+
+
 
 ## Scrape the Abstracts
 
