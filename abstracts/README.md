@@ -1,4 +1,4 @@
-# Statistical Software Abstracts 
+# Analyses of Journal of Statistical Software Abstracts
 
 ## Scrape the Abstracts
 
@@ -165,28 +165,28 @@ my_lda <- LDA (d, k = 5)
 knitr::kable (get_terms (my_lda, 20))
 ```
 
-| Topic 1    | Topic 2      | Topic 3    | Topic 4     | Topic 5     |
-| :--------- | :----------- | :--------- | :---------- | :---------- |
-| package    | package      | data       | data        | data        |
-| methods    | models       | package    | models      | package     |
-| can        | r            | r          | r           | model       |
-| paper      | methods      | analysis   | statistical | models      |
-| using      | can          | using      | methods     | can         |
-| based      | using        | paper      | analysis    | r           |
-| model      | distribution | functions  | functions   | analysis    |
-| r          | well         | provides   | use         | software    |
-| analysis   | estimation   | used       | regression  | used        |
-| also       | two          | use        | model       | functions   |
-| use        | paper        | also       | based       | time        |
-| used       | used         | can        | method      | statistical |
-| available  | data         | software   | linear      | several     |
-| approach   | functions    | examples   | network     | paper       |
-| regression | several      | estimation | examples    | different   |
-| article    | series       | set        | software    | likelihood  |
-| algorithms | model        | process    | test        | also        |
-| models     | software     | time       | time        | method      |
-| number     | provides     | two        | tests       | algorithm   |
-| variables  | regression   | methods    | including   | provide     |
+| Topic 1   | Topic 2    | Topic 3       | Topic 4        | Topic 5       |
+| :-------- | :--------- | :------------ | :------------- | :------------ |
+| data      | package    | data          | package        | models        |
+| package   | data       | analysis      | r              | package       |
+| model     | can        | r             | data           | model         |
+| methods   | functions  | software      | statistical    | r             |
+| r         | methods    | used          | used           | using         |
+| using     | models     | method        | can            | software      |
+| provides  | analysis   | paper         | models         | use           |
+| analysis  | r          | provides      | functions      | also          |
+| models    | regression | can           | paper          | estimation    |
+| can       | using      | two           | also           | functions     |
+| paper     | use        | time          | model          | paper         |
+| graphical | estimation | package       | method         | analysis      |
+| also      | effects    | also          | use            | algorithm     |
+| time      | present    | user          | available      | well          |
+| series    | standard   | based         | implementation | number        |
+| one       | new        | computational | often          | implemented   |
+| general   | well       | algorithms    | software       | distributions |
+| linear    | available  | tools         | two            | many          |
+| results   | variables  | allows        | algorithms     | available     |
+| two       | time       | regression    | provides       | can           |
 
 spacy-parsed nouns and verbs also don’t reveal anything:
 
@@ -229,36 +229,36 @@ lda_n <- LDA (dn, k = 5)
 knitr::kable (get_terms (lda_n, 10))
 ```
 
-| Topic 1      | Topic 2    | Topic 3        | Topic 4    | Topic 5    |
-| :----------- | :--------- | :------------- | :--------- | :--------- |
-| models       | package    | package        | paper      | data       |
-| data         | r          | data           | model      | package    |
-| package      | model      | r              | models     | analysis   |
-| time         | data       | models         | r          | software   |
-| functions    | methods    | paper          | functions  | time       |
-| methods      | likelihood | model          | methods    | models     |
-| software     | estimation | methods        | analysis   | approach   |
-| algorithms   | analysis   | implementation | packages   | method     |
-| optimization | user       | analysis       | regression | functions  |
-| model        | algorithm  | parameters     | parameters | regression |
+| Topic 1      | Topic 2      | Topic 3        | Topic 4    | Topic 5   |
+| :----------- | :----------- | :------------- | :--------- | :-------- |
+| package      | package      | models         | models     | package   |
+| data         | data         | data           | r          | data      |
+| methods      | r            | time           | model      | analysis  |
+| estimation   | software     | paper          | methods    | r         |
+| model        | models       | r              | data       | functions |
+| distribution | user         | model          | analysis   | model     |
+| analysis     | analysis     | regression     | code       | paper     |
+| paper        | functions    | studies        | method     | time      |
+| r            | applications | implementation | variables  | method    |
+| examples     | methods      | algorithm      | estimation | function  |
 
 ``` r
 lda_v <- LDA (dv, k = 5)
 knitr::kable (get_terms (lda_v, 10))
 ```
 
-| Topic 1   | Topic 2     | Topic 3     | Topic 4  | Topic 5     |
-| :-------- | :---------- | :---------- | :------- | :---------- |
-| provides  | using       | can         | can      | using       |
-| provided  | can         | used        | provides | based       |
-| based     | provides    | using       | based    | used        |
-| use       | based       | based       | using    | provide     |
-| can       | provided    | implements  | used     | implemented |
-| developed | including   | implemented | provide  | can         |
-| may       | illustrate  | present     | may      | illustrate  |
-| used      | given       | proposed    | describe | describe    |
-| contains  | includes    | describe    | present  | proposed    |
-| including | illustrated | provides    | modeling | known       |
+| Topic 1     | Topic 2    | Topic 3     | Topic 4   | Topic 5   |
+| :---------- | :--------- | :---------- | :-------- | :-------- |
+| using       | based      | can         | can       | used      |
+| can         | given      | using       | using     | provides  |
+| based       | provide    | provides    | developed | can       |
+| provides    | illustrate | allows      | designed  | based     |
+| used        | implements | developed   | based     | allows    |
+| implemented | using      | implemented | provide   | presented |
+| present     | may        | based       | estimate  | describe  |
+| allow       | present    | describe    | perform   | proposed  |
+| use         | used       | provided    | use       | may       |
+| described   | describes  | includes    | used      | including |
 
 … none of those reveal anything useful.
 
