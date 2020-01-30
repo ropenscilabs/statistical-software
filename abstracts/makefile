@@ -1,3 +1,4 @@
+#LFILE = README
 LFILE = categories
 
 all: knith
