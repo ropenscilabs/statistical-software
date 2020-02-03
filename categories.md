@@ -8,11 +8,13 @@ Taken from programs for the following conferences:
 ## Algorithms & Methods Categories
 
 - Analyses of (multivariate) extremes; anomaly detection
+- (Automated) Variable and model selection
 - Bayesian modelling and statistics
 - Causal inference and graphical models
 - Clustering
 - Feature selection
 - Functional data analysis
+- Genetic Algorithms
 - High-dimensional data and (non-linear) dimensionality reduction
 - Hypothesis testing
 - Measurement error, missing data, reliability, model uncertainty
@@ -29,7 +31,6 @@ Taken from programs for the following conferences:
 - (Stochastic) Optimization
 - (Supervised, Unsupervised, Automated, Interactive) Machine and Deep Learning, Statistical Learning
 - Survival analysis
-- Variable and (automated) model selection
 
 ## General Data Categories
 
