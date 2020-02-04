@@ -414,4 +414,6 @@ packages:
     ## └── smooth.construct.so.smooth.spec.R
 ```
 
-And only 10 out of 29 packages even have tests.
+And only `r length (which (chk))` out of `r length (u)` packages even have
+tests, and most of those are from the latter list of "mentioned" but not focal
+packages, and so are likely ones that are most established anyway.
