@@ -1,0 +1,283 @@
+# Categories of Statistical Software
+
+Taken from programs for the following conferences:
+
+- Joint Statistical Meetings
+  [2018](https://ww2.amstat.org/meetings/jsm/2018/pdfs/JSM2018-SessionBooklet.pdf),
+  [2019](https://ww2.amstat.org/meetings/jsm/2019/pdfs/JSM2019-SessionBooklet.pdf),
+  or online text versions with links to abstracts here for
+  [2018](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/MainSearchResults.cfm),
+  [2019](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/MainSearchResults.cfm).
+- Symposium on Data Science and Statistics (SDSS)
+  [2018](https://ww2.amstat.org/meetings/sdss/2018/onlineprogram/Program.cfm),
+  [2019](https://ww2.amstat.org/meetings/sdss/2019/onlineprogram/Program.cfm),
+  [2020](https://ww2.amstat.org/meetings/sdss/2020/onlineprogram/Program.cfm).
+
+Categories which arise from analyses of JOSS abstracts yet do not emerge from
+these conference programs include:
+
+- workflow
+- exploratory data analysis
+- summary statistics
+- statistical reporting
+
+Each of the items listed below is followed by a sub-list of aspects of software
+and associated algorithms which may be assessed or compared with some kind of
+standards.
+
+## Algorithms & Methods Categories
+
+- Analyses of (multivariate) extremes; anomaly detection
+    - distributional properties
+    - reproducibility
+    - sensitivity to thresholds
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=305170),
+      [2](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=304741),
+      [3](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=305246)
+- (Automated) Variable and model selection
+    - reproducibility
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=330806),
+      [2](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=328563),
+      [3](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=329844),
+      [4](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=328716),
+      [5](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=329500),
+      [6](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=332632),
+      [7](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=330418)
+- Bayesian modelling and statistics
+    - sensitivity to prior distributions
+    - model behaviour under null prior
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=329025),
+- Causal inference, graphical models, and statistical decision making
+    - causal tree complexity and traversal behaviour
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=328682),
+      [2](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=306385)
+- Clustering
+    - algorithm
+    - benchmarking against other algorithms
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=303055),
+      [2](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=304606),
+      [3](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=300541),
+      [4](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=328764),
+      [5](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=327171),
+      [6](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=330418)
+- Dynamical systems
+- Feature selection
+    - benchmarking against other algorithms
+- Functional data analysis
+    - representation of functions
+    - statistical properties
+- Genetic Algorithms
+- High-dimensional data and (non-linear) dimensionality reduction
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=302972)
+- Hypothesis testing
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=329601)
+- Maximum likelihood
+- Measurement error, missing data, reliability, model uncertainty
+- Monte Carlo, including Markov Chain processes
+    - sensitivity and reproduciblity
+- (Multiple) Imputation and synthetic data
+    - sensitivity and reproduciblity
+- Non- and semi-parametric methods
+    - comparison with parametric methods
+- Non-probability samples and probability samples; sampling techniques
+    - distributional properties
+    - divergence of non-probability samples from underlying distribution
+- (Multivariate) Time series, non-stationarity, changepoint analysis
+    - comparison with stationary methods
+    - sensitivity of changepoints
+    - model error
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=304637),
+      [2](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=304493),
+      [3](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=328764)
+      [4](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=328764)
+- Power calculations
+- Probability
+- Regression / random trees and forests
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/MainSearchResults.cfm)
+- Risk prediction and analysis
+    - sensitivity
+    - error
+- (Single- and multi-dimensional, static and dynamic) smoothing
+    - tolerance; feature loss
+- (Stochastic) Optimization
+    - 
+- (Supervised, Unsupervised, Automated, Interactive) Machine and Deep Learning, Statistical Learning
+- Survival analysis
+- Warping
+
+## General Data Categories
+
+- Binary and ordinal data
+- Complex-valued data
+- Discrete data
+- Longitudinal and correlated data analyses
+- Structured and dynamically dependent data
+- Time-to-event data
+
+## Applied Data Categories
+
+- Anonymization and (data) privacy; blockchain
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=308049)
+- Backcasting, nowcasting, forecasting
+- (Dynamic) Networks and networks statistics
+    - underlying data representation
+    - transferability within other network software
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=328764),
+      [2](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=327171)
+- Financial data and econometrics
+- Information statistics
+- "omics" data
+- Randomized clinical trials
+- Seasonal data
+- Spatial and spatio-temporal modelling
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=327171)
+- Streaming data
+
+## Miscellaneous Categories
+
+- Data visualization
+- Statistical education
+    - Examples
+      [1](https://ww2.amstat.org/meetings/jsm/2018/onlineprogram/AbstractDetails.cfm?abstractid=329246),
+      [2](https://cran.r-project.org/web/packages/TeachingDemos/)
+- Meta analysis
+
+An additional category of both software, and likely ubiquitous within
+conference programs, concerns the calculation of specific statistical metrics
+or indices.
+
+# Software packages
+
+There are no python packages mentioned or presented in JMS abstracts.
+
+- [`LearnBayes`](https://cran.r-project.org/web/packages/LearnBayes/index.html): Functions for learning Bayesian inference
+- [`rethinking`](https://github.com/rmcelreath/rethinking): Statistical rethinking course and book packages
+- [`rms`](https://cran.r-project.org/web/packages/rms/index.html): Regression modelling strategies
+- [`revisit`](https://github.com/matloff/revisit): a Tool for Statistical Reproducibility and for Teaching
+- [`liftr`](https://cran.r-project.org/web/packages/liftr/index.html): Persistent reproducible reporting by containerization of R Markdown documents
+- [`gmediation`](https://cran.r-project.org/web/packages/gmediation/): Mediation Analysis for Multiple and Multi-Stage Mediators
+- [`scdensity`](https://cran.r-project.org/web/packages/scdensity/): Shape-Constrained Kernel Density Estimation
+- [`SurvBoost`](https://cran.r-project.org/web/packages/SurvBoost/): Gradient Boosting for Survival Data
+- [`EAinference`](https://cran.r-project.org/web/packages/EAinference/): Estimator Augmentation and Simulation-Based Inference
+- [`gLRTH`](https://cran.r-project.org/web/packages/gLRTH/index.html): Genome-Wide Association and Linkage Analysis under Heterogeneity
+- [`rpms`](https://cran.r-project.org/web/packages/rpms/index.html): Recursive Partitioning for Modeling Survey Data
+- [`ggdag`](https://cran.r-project.org/web/packages/ggdag/index.html): Analyze and Create Elegant Directed Acyclic Graphs
+- [`confoundr`](https://cran.r-project.org/web/packages/confoundr/): Diagnostics for Confounding of Time-Varying and Other Joint Exposures
+- [`adapr`](https://cran.r-project.org/web/packages/adapr/): Implementation of an Accountable Data Analysis Process
+- [`conf`](https://cran.r-project.org/web/packages/conf/): Visualization and Analysis of Statistical Measures of Confidence
+- [`medExtractR`](https://cran.r-project.org/web/packages/medExtractR/index.html): Extraction of Medication Information from Clinical Text
+- [`isni`](https://cran.r-project.org/web/packages/isni/): Index of Local Sensitivity to Nonignorability
+- [`PhysicalActivity`](https://cran.r-project.org/web/packages/PhysicalActivity/): Process Accelerometer Data for Physical Activity Measurement
+- [`accelmissing`](https://cran.r-project.org/web/packages/accelmissing/index.html): Missing Value Imputation for Accelerometer Data
+- [`lmboot`](https://cran.r-project.org/web/packages/lmboot/index.html): Bootstrap in Linear Models
+- [`TeachingDemos`](https://cran.r-project.org/web/packages/TeachingDemos/): Demonstrations for Teaching and Learning
+- [`ghclass`](https://github.com/rundel/ghclass): Tools for managing classroom organizations
+- [`ggvoronoi`](https://cran.r-project.org/web/packages/ggvoronoi/index.html): Voronoi Diagrams and Heatmaps with 'ggplot2'
+- [`igraphmatch`](https://github.com/dpmcsuss/iGraphMatch): Tools to find the correspondences between vertices in different graphs
+- [`Intkrige`](https://cran.r-project.org/web/packages/intkrige/index.html): A Numerical Implementation of Interval-Valued Kriging
+- [`Bioc2mlr`](https://github.com/drorberel/Bioc2mlr): Utility functions to transform Bioconductor's S4 omic classes into mlr's task and CPOs
+- [`MHTdiscrete`](https://cran.r-project.org/web/packages/MHTdiscrete/index.html): Multiple Hypotheses Testing for Discrete Data
+
+Packages mentioned but not as focus:
+- [`twang`](https://cran.r-project.org/web/packages/twang/index.html): Toolkit for Weighting and Analysis of Nonequivalent Groups
+- [`Zelig`](https://cran.r-project.org/web/packages/Zelig/): Everyone's Statistical Software
+- [`rbounds`](https://cran.r-project.org/web/packages/rbounds/): Perform Rosenbaum bounds sensitivity tests for matched and unmatched data
+- [`refund`](https://cran.r-project.org/web/packages/refund/): Regression with Functional Data
+- [`mgcv`](https://cran.r-project.org/web/packages/mgcv/): Mixed GAM Computation Vehicle with Automatic Smoothness Estimation
+
+As well as the [`neurconductor`](https://neuroconductor.org/) and
+[`cloudyr`](https://cloudyr.github.io/) platforms.
+
+Python packages presented or mentioned in SDSS programs:
+
+- [`altair`](https://altair-viz.github.io/): Declarative Visualization in Python
+- [`salmon`](https://arxiv.org/abs/1911.00648) + [github](https://github.com/ajboyd2/salmon): Symbolic algebra of linear regression and modeling
+- [`symbulate`](https://github.com/dlsun/symbulate): A symbolic algebra for specifying simulations
+
+
+```{r pkg-testdirs, echo = FALSE}
+library (rvest)
+u <- c ("https://cran.r-project.org/web/packages/LearnBayes/index.html",
+        "https://github.com/rmcelreath/rethinking",
+        "https://cran.r-project.org/web/packages/rms/index.html",
+        "https://github.com/matloff/revisit",
+        "https://cran.r-project.org/web/packages/liftr/index.html",
+        "https://cran.r-project.org/web/packages/scdensity/",
+        "https://cran.r-project.org/web/packages/SurvBoost/",
+        "https://cran.r-project.org/web/packages/EAinference/",
+        "https://cran.r-project.org/web/packages/gLRTH/index.html",
+        "https://cran.r-project.org/web/packages/rpms/index.html",
+        "https://cran.r-project.org/web/packages/ggdag/index.html",
+        "https://cran.r-project.org/web/packages/confoundr/",
+        "https://cran.r-project.org/web/packages/adapr/",
+        "https://cran.r-project.org/web/packages/conf/",
+        "https://cran.r-project.org/web/packages/medExtractR/index.html",
+        "https://cran.r-project.org/web/packages/isni/",
+        "https://cran.r-project.org/web/packages/PhysicalActivity/",
+        "https://cran.r-project.org/web/packages/accelmissing/index.html",
+        "https://cran.r-project.org/web/packages/lmboot/index.html",
+        "https://cran.r-project.org/web/packages/TeachingDemos/",
+        "https://github.com/rundel/ghclass",
+        "https://cran.r-project.org/web/packages/ggvoronoi/index.html",
+        "https://github.com/dpmcsuss/iGraphMatch",
+        "https://cran.r-project.org/web/packages/intkrige/index.html",
+        "https://cran.r-project.org/web/packages/twang/index.html",
+        "https://cran.r-project.org/web/packages/Zelig/",
+        "https://cran.r-project.org/web/packages/rbounds/",
+        "https://cran.r-project.org/web/packages/refund/",
+        "https://cran.r-project.org/web/packages/mgcv/")
+
+all_pkgs <- read_html ("https://cran.r-project.org/src/contrib/") %>%
+    html_nodes ("body") %>%
+    html_nodes ("a") %>%
+    html_attr ("href")
+
+dl_pkg <- function (u, all_pkgs) {
+    ret <- FALSE
+    if (grepl ("cran", u)) {
+        pkg <- strsplit (strsplit (u, "packages/") [[1]] [2], "/") [[1]] [1]
+        message (cli::rule (line = 2, center = pkg, col = "green"))
+        pkg_ver <- all_pkgs [grep (paste0 ("^", pkg, "\\_"), all_pkgs)]
+        umod <- paste0 ("https://cran.r-project.org/src/contrib/", pkg_ver)
+        destfile <- file.path (tempdir (), pkg_ver)
+        download.file (umod, destfile = destfile, quiet = TRUE)
+        untar (destfile, exdir = tempdir ())
+        test_dir <- file.path (tempdir (), pkg, "tests")
+        if (file.exists (test_dir)) {
+            fs::dir_tree (test_dir)
+            ret <- TRUE
+        }
+    } else if (grepl ("github", u)) {
+        pkg <- tail (strsplit (u, "/") [[1]], 1)
+        message (cli::rule (line = 2, center = pkg, col = "green"))
+        # just presume master branch for ease here
+        umod <- paste0 (u, "/archive/master.zip")
+        destfile <- file.path (tempdir (), pkg)
+        download.file (umod, destfile = destfile, quiet = TRUE)
+        unzip (destfile, exdir = tempdir ())
+        test_dir <- file.path (tempdir (), paste0 (pkg, "-master"), "tests")
+        if (file.exists (test_dir)) {
+            fs::dir_tree (test_dir)
+            ret <- TRUE
+        }
+    } else
+        stop ("only works for CRAN or github URLs")
+    return (ret)
+}
+chk <- vapply (u, function (i) dl_pkg (i, all_pkgs), logical (1))
+```
+
+And only `r length (which (chk))` out of `r length (u)` packages even have tests.
+
