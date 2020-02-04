@@ -247,14 +247,17 @@ Python packages presented or mentioned in SDSS programs:
   - [`symbulate`](https://github.com/dlsun/symbulate): A symbolic
     algebra for specifying simulations
 
+Then run a script to output the structure of all `test` directories from those
+packages:
 
+```
     ## ══════════════════════════════════ LearnBayes ══════════════════════════════════
     ## ══════════════════════════════════ rethinking ══════════════════════════════════
     ## ══════════════════════════════════════ rms ═════════════════════════════════════
     ## ════════════════════════════════════ revisit ═══════════════════════════════════
     ## ═════════════════════════════════════ liftr ════════════════════════════════════
     ## ═══════════════════════════════════ scdensity ══════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/scdensity/tests
+    ## /tmp/RtmpkQiB3I/scdensity/tests
     ## ├── testthat
     ## │   ├── testHelperFunctions.R
     ## │   ├── testScdensity.R
@@ -263,7 +266,7 @@ Python packages presented or mentioned in SDSS programs:
     ## └── testthat.R
     ## ═══════════════════════════════════ SurvBoost ══════════════════════════════════
     ## ══════════════════════════════════ EAinference ═════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/EAinference/tests
+    ## /tmp/RtmpkQiB3I/EAinference/tests
     ## ├── testthat
     ## │   ├── test-MHInference.R
     ## │   ├── test-MHLS.R
@@ -274,13 +277,13 @@ Python packages presented or mentioned in SDSS programs:
     ## ═════════════════════════════════════ gLRTH ════════════════════════════════════
     ## ═════════════════════════════════════ rpms ═════════════════════════════════════
     ## ═════════════════════════════════════ ggdag ════════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/ggdag/tests
+    ## /tmp/RtmpkQiB3I/ggdag/tests
     ## ├── spelling.R
     ## ├── testthat
     ## │   └── test_tidy_dagitty.R
     ## └── testthat.R
     ## ═══════════════════════════════════ confoundr ══════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/confoundr/tests
+    ## /tmp/RtmpkQiB3I/confoundr/tests
     ## ├── testthat
     ## │   ├── testBalanceWApplyScope.r
     ## │   ├── testBalanceWOApplyScope.r
@@ -302,7 +305,7 @@ Python packages presented or mentioned in SDSS programs:
     ## ═════════════════════════════════ TeachingDemos ════════════════════════════════
     ## ════════════════════════════════════ ghclass ═══════════════════════════════════
     ## ═══════════════════════════════════ ggvoronoi ══════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/ggvoronoi/tests
+    ## /tmp/RtmpkQiB3I/ggvoronoi/tests
     ## ├── figs
     ## │   ├── border-with-blank-diagram.svg
     ## │   ├── border-with-continuous-fill.svg
@@ -317,7 +320,7 @@ Python packages presented or mentioned in SDSS programs:
     ## │   └── test_polygons.R
     ## └── testthat.R
     ## ══════════════════════════════════ iGraphMatch ═════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/iGraphMatch-master/tests
+    ## /tmp/RtmpkQiB3I/iGraphMatch-master/tests
     ## ├── testthat
     ## │   ├── test-FW-hard-seeding.R
     ## │   ├── test-Isorank.R
@@ -336,13 +339,13 @@ Python packages presented or mentioned in SDSS programs:
     ## │   └── test-umeyama.R
     ## └── testthat.R
     ## ═══════════════════════════════════ intkrige ═══════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/intkrige/tests
+    ## /tmp/RtmpkQiB3I/intkrige/tests
     ## ├── testthat
     ## │   └── test_intkrige.R
     ## └── testthat.R
     ## ═════════════════════════════════════ twang ════════════════════════════════════
     ## ═════════════════════════════════════ Zelig ════════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/Zelig/tests
+    ## /tmp/RtmpkQiB3I/Zelig/tests
     ## ├── testthat
     ## │   ├── test-amelia.R
     ## │   ├── test-arima.R
@@ -386,7 +389,7 @@ Python packages presented or mentioned in SDSS programs:
     ## └── testthat.R
     ## ════════════════════════════════════ rbounds ═══════════════════════════════════
     ## ════════════════════════════════════ refund ════════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/refund/tests
+    ## /tmp/RtmpkQiB3I/refund/tests
     ## ├── testthat
     ## │   ├── ccb.fpca.obj.rds
     ## │   ├── ccb.obj.rds
@@ -401,7 +404,7 @@ Python packages presented or mentioned in SDSS programs:
     ## │   └── test-pffr.R
     ## └── testthat.R
     ## ═════════════════════════════════════ mgcv ═════════════════════════════════════
-    ## /tmp/Rtmp4NrPNF/mgcv/tests
+    ## /tmp/RtmpkQiB3I/mgcv/tests
     ## ├── bam.R
     ## ├── coxpht.R
     ## ├── gam.R
@@ -409,5 +412,6 @@ Python packages presented or mentioned in SDSS programs:
     ## ├── missing.data.R
     ## ├── single.index.R
     ## └── smooth.construct.so.smooth.spec.R
+```
 
 And only 10 out of 29 packages even have tests.
