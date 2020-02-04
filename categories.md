@@ -222,17 +222,19 @@ There are no python packages mentioned or presented in JMS abstracts.
   - [`MHTdiscrete`](https://cran.r-project.org/web/packages/MHTdiscrete/index.html):
     Multiple Hypotheses Testing for Discrete Data
 
-Packages mentioned but not as focus: -
-[`twang`](https://cran.r-project.org/web/packages/twang/index.html):
-Toolkit for Weighting and Analysis of Nonequivalent Groups -
-[`Zelig`](https://cran.r-project.org/web/packages/Zelig/): Everyone’s
-Statistical Software -
-[`rbounds`](https://cran.r-project.org/web/packages/rbounds/): Perform
-Rosenbaum bounds sensitivity tests for matched and unmatched data -
-[`refund`](https://cran.r-project.org/web/packages/refund/): Regression
-with Functional Data -
-[`mgcv`](https://cran.r-project.org/web/packages/mgcv/): Mixed GAM
-Computation Vehicle with Automatic Smoothness Estimation
+Packages mentioned but not as focus:
+
+  - [`twang`](https://cran.r-project.org/web/packages/twang/index.html):
+    Toolkit for Weighting and Analysis of Nonequivalent Groups
+  - [`Zelig`](https://cran.r-project.org/web/packages/Zelig/):
+    Everyone’s Statistical Software
+  - [`rbounds`](https://cran.r-project.org/web/packages/rbounds/):
+    Perform Rosenbaum bounds sensitivity tests for matched and unmatched
+    data
+  - [`refund`](https://cran.r-project.org/web/packages/refund/):
+    Regression with Functional Data
+  - [`mgcv`](https://cran.r-project.org/web/packages/mgcv/): Mixed GAM
+    Computation Vehicle with Automatic Smoothness Estimation
 
 As well as the [`neurconductor`](https://neuroconductor.org/) and
 [`cloudyr`](https://cloudyr.github.io/) platforms.
@@ -250,15 +252,17 @@ Python packages presented or mentioned in SDSS programs:
 Then run a script to output the structure of all `test` directories from
 those packages:
 
-
 ```
+    ## 
+    ## ── Focal packages ──────────────────────────────────────────────────────────────
+    ## cli-6726-1
     ## ══════════════════════════════════ LearnBayes ══════════════════════════════════
     ## ══════════════════════════════════ rethinking ══════════════════════════════════
     ## ══════════════════════════════════════ rms ═════════════════════════════════════
     ## ════════════════════════════════════ revisit ═══════════════════════════════════
     ## ═════════════════════════════════════ liftr ════════════════════════════════════
     ## ═══════════════════════════════════ scdensity ══════════════════════════════════
-    ## /tmp/RtmpxzmIji/scdensity/tests
+    ## /tmp/RtmpOCVD9i/scdensity/tests
     ## ├── testthat
     ## │   ├── testHelperFunctions.R
     ## │   ├── testScdensity.R
@@ -267,7 +271,7 @@ those packages:
     ## └── testthat.R
     ## ═══════════════════════════════════ SurvBoost ══════════════════════════════════
     ## ══════════════════════════════════ EAinference ═════════════════════════════════
-    ## /tmp/RtmpxzmIji/EAinference/tests
+    ## /tmp/RtmpOCVD9i/EAinference/tests
     ## ├── testthat
     ## │   ├── test-MHInference.R
     ## │   ├── test-MHLS.R
@@ -278,13 +282,13 @@ those packages:
     ## ═════════════════════════════════════ gLRTH ════════════════════════════════════
     ## ═════════════════════════════════════ rpms ═════════════════════════════════════
     ## ═════════════════════════════════════ ggdag ════════════════════════════════════
-    ## /tmp/RtmpxzmIji/ggdag/tests
+    ## /tmp/RtmpOCVD9i/ggdag/tests
     ## ├── spelling.R
     ## ├── testthat
     ## │   └── test_tidy_dagitty.R
     ## └── testthat.R
     ## ═══════════════════════════════════ confoundr ══════════════════════════════════
-    ## /tmp/RtmpxzmIji/confoundr/tests
+    ## /tmp/RtmpOCVD9i/confoundr/tests
     ## ├── testthat
     ## │   ├── testBalanceWApplyScope.r
     ## │   ├── testBalanceWOApplyScope.r
@@ -306,7 +310,7 @@ those packages:
     ## ═════════════════════════════════ TeachingDemos ════════════════════════════════
     ## ════════════════════════════════════ ghclass ═══════════════════════════════════
     ## ═══════════════════════════════════ ggvoronoi ══════════════════════════════════
-    ## /tmp/RtmpxzmIji/ggvoronoi/tests
+    ## /tmp/RtmpOCVD9i/ggvoronoi/tests
     ## ├── figs
     ## │   ├── border-with-blank-diagram.svg
     ## │   ├── border-with-continuous-fill.svg
@@ -321,7 +325,7 @@ those packages:
     ## │   └── test_polygons.R
     ## └── testthat.R
     ## ══════════════════════════════════ iGraphMatch ═════════════════════════════════
-    ## /tmp/RtmpxzmIji/iGraphMatch-master/tests
+    ## /tmp/RtmpOCVD9i/iGraphMatch-master/tests
     ## ├── testthat
     ## │   ├── test-FW-hard-seeding.R
     ## │   ├── test-Isorank.R
@@ -340,13 +344,16 @@ those packages:
     ## │   └── test-umeyama.R
     ## └── testthat.R
     ## ═══════════════════════════════════ intkrige ═══════════════════════════════════
-    ## /tmp/RtmpxzmIji/intkrige/tests
+    ## /tmp/RtmpOCVD9i/intkrige/tests
     ## ├── testthat
     ## │   └── test_intkrige.R
     ## └── testthat.R
+    ## 
+
+    ## ── Non-focal packages ──────────────────────────────────────────────────────────
     ## ═════════════════════════════════════ twang ════════════════════════════════════
     ## ═════════════════════════════════════ Zelig ════════════════════════════════════
-    ## /tmp/RtmpxzmIji/Zelig/tests
+    ## /tmp/RtmpOCVD9i/Zelig/tests
     ## ├── testthat
     ## │   ├── test-amelia.R
     ## │   ├── test-arima.R
@@ -390,7 +397,7 @@ those packages:
     ## └── testthat.R
     ## ════════════════════════════════════ rbounds ═══════════════════════════════════
     ## ════════════════════════════════════ refund ════════════════════════════════════
-    ## /tmp/RtmpxzmIji/refund/tests
+    ## /tmp/RtmpOCVD9i/refund/tests
     ## ├── testthat
     ## │   ├── ccb.fpca.obj.rds
     ## │   ├── ccb.obj.rds
@@ -405,7 +412,7 @@ those packages:
     ## │   └── test-pffr.R
     ## └── testthat.R
     ## ═════════════════════════════════════ mgcv ═════════════════════════════════════
-    ## /tmp/RtmpxzmIji/mgcv/tests
+    ## /tmp/RtmpOCVD9i/mgcv/tests
     ## ├── bam.R
     ## ├── coxpht.R
     ## ├── gam.R
@@ -415,6 +422,4 @@ those packages:
     ## └── smooth.construct.so.smooth.spec.R
 ```
 
-And only 10 out of 29 packages even have tests, and most of those are
-from the latter list of “mentioned” but not focal packages, and so are
-likely ones that are most established anyway.
+And only 10 out of 29 packages even have tests.

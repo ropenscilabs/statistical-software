@@ -191,6 +191,7 @@ There are no python packages mentioned or presented in JMS abstracts.
 - [`MHTdiscrete`](https://cran.r-project.org/web/packages/MHTdiscrete/index.html): Multiple Hypotheses Testing for Discrete Data
 
 Packages mentioned but not as focus:
+
 - [`twang`](https://cran.r-project.org/web/packages/twang/index.html): Toolkit for Weighting and Analysis of Nonequivalent Groups
 - [`Zelig`](https://cran.r-project.org/web/packages/Zelig/): Everyone's Statistical Software
 - [`rbounds`](https://cran.r-project.org/web/packages/rbounds/): Perform Rosenbaum bounds sensitivity tests for matched and unmatched data
@@ -212,35 +213,36 @@ packages:
 
 ```{r pkg-testdirs, echo = FALSE}
 library (rvest)
-u <- c ("https://cran.r-project.org/web/packages/LearnBayes/index.html",
-        "https://github.com/rmcelreath/rethinking",
-        "https://cran.r-project.org/web/packages/rms/index.html",
-        "https://github.com/matloff/revisit",
-        "https://cran.r-project.org/web/packages/liftr/index.html",
-        "https://cran.r-project.org/web/packages/scdensity/",
-        "https://cran.r-project.org/web/packages/SurvBoost/",
-        "https://cran.r-project.org/web/packages/EAinference/",
-        "https://cran.r-project.org/web/packages/gLRTH/index.html",
-        "https://cran.r-project.org/web/packages/rpms/index.html",
-        "https://cran.r-project.org/web/packages/ggdag/index.html",
-        "https://cran.r-project.org/web/packages/confoundr/",
-        "https://cran.r-project.org/web/packages/adapr/",
-        "https://cran.r-project.org/web/packages/conf/",
-        "https://cran.r-project.org/web/packages/medExtractR/index.html",
-        "https://cran.r-project.org/web/packages/isni/",
-        "https://cran.r-project.org/web/packages/PhysicalActivity/",
-        "https://cran.r-project.org/web/packages/accelmissing/index.html",
-        "https://cran.r-project.org/web/packages/lmboot/index.html",
-        "https://cran.r-project.org/web/packages/TeachingDemos/",
-        "https://github.com/rundel/ghclass",
-        "https://cran.r-project.org/web/packages/ggvoronoi/index.html",
-        "https://github.com/dpmcsuss/iGraphMatch",
-        "https://cran.r-project.org/web/packages/intkrige/index.html",
-        "https://cran.r-project.org/web/packages/twang/index.html",
-        "https://cran.r-project.org/web/packages/Zelig/",
-        "https://cran.r-project.org/web/packages/rbounds/",
-        "https://cran.r-project.org/web/packages/refund/",
-        "https://cran.r-project.org/web/packages/mgcv/")
+# u1 are pkgs which are the focus of talks; u2 those mentioned but not focal
+u1 <- c ("https://cran.r-project.org/web/packages/LearnBayes/index.html",
+         "https://github.com/rmcelreath/rethinking",
+         "https://cran.r-project.org/web/packages/rms/index.html",
+         "https://github.com/matloff/revisit",
+         "https://cran.r-project.org/web/packages/liftr/index.html",
+         "https://cran.r-project.org/web/packages/scdensity/",
+         "https://cran.r-project.org/web/packages/SurvBoost/",
+         "https://cran.r-project.org/web/packages/EAinference/",
+         "https://cran.r-project.org/web/packages/gLRTH/index.html",
+         "https://cran.r-project.org/web/packages/rpms/index.html",
+         "https://cran.r-project.org/web/packages/ggdag/index.html",
+         "https://cran.r-project.org/web/packages/confoundr/",
+         "https://cran.r-project.org/web/packages/adapr/",
+         "https://cran.r-project.org/web/packages/conf/",
+         "https://cran.r-project.org/web/packages/medExtractR/index.html",
+         "https://cran.r-project.org/web/packages/isni/",
+         "https://cran.r-project.org/web/packages/PhysicalActivity/",
+         "https://cran.r-project.org/web/packages/accelmissing/index.html",
+         "https://cran.r-project.org/web/packages/lmboot/index.html",
+         "https://cran.r-project.org/web/packages/TeachingDemos/",
+         "https://github.com/rundel/ghclass",
+         "https://cran.r-project.org/web/packages/ggvoronoi/index.html",
+         "https://github.com/dpmcsuss/iGraphMatch",
+         "https://cran.r-project.org/web/packages/intkrige/index.html")
+u2 <- c ("https://cran.r-project.org/web/packages/twang/index.html",
+         "https://cran.r-project.org/web/packages/Zelig/",
+         "https://cran.r-project.org/web/packages/rbounds/",
+         "https://cran.r-project.org/web/packages/refund/",
+         "https://cran.r-project.org/web/packages/mgcv/")
 
 all_pkgs <- read_html ("https://cran.r-project.org/src/contrib/") %>%
     html_nodes ("body") %>%
@@ -279,10 +281,12 @@ dl_pkg <- function (u, all_pkgs) {
         stop ("only works for CRAN or github URLs")
     return (ret)
 }
-chk <- vapply (u, function (i) dl_pkg (i, all_pkgs), logical (1))
+message (cli::cli_h1 ("Focal packages"))
+chk1 <- vapply (u1, function (i) dl_pkg (i, all_pkgs), logical (1))
+message (cli::cli_h1 ("Non-focal packages"))
+chk2 <- vapply (u2, function (i) dl_pkg (i, all_pkgs), logical (1))
 ```
 
-And only `r length (which (chk))` out of `r length (u)` packages even have
-tests, and most of those are from the latter list of "mentioned" but not focal
-packages, and so are likely ones that are most established anyway.
+And only `r length (which (chk1)) + length (which (chk2))` out of
+`r length (c (u1, u2))` packages even have tests.
 
