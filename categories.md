@@ -162,46 +162,47 @@ or indices.
 
 There are no python packages mentioned or presented in JMS abstracts.
 
-- [`LearnBayes`](https://cran.r-project.org/web/packages/LearnBayes/index.html)
-- [`rethinking`](https://github.com/rmcelreath/rethinking)
-- [`rms`](https://cran.r-project.org/web/packages/rms/index.html)
-- [`revisit`](https://github.com/matloff/revisit)
-- [`liftr`](https://cran.r-project.org/web/packages/liftr/index.html)
-- [`gmediation`](https://cran.r-project.org/web/packages/gmediation/)
-- [`scdensity`](https://cran.r-project.org/web/packages/scdensity/)
-- [`SurvBoost`](https://cran.r-project.org/web/packages/SurvBoost/)
-- [`EAinference`](https://cran.r-project.org/web/packages/EAinference/)
-- [`gLRTH`](https://cran.r-project.org/web/packages/gLRTH/index.html)
-- [`rpms`](https://cran.r-project.org/web/packages/rpms/index.html)
-- [`ggdag`](https://cran.r-project.org/web/packages/ggdag/index.html)
-- [`confoundr`](https://cran.r-project.org/web/packages/confoundr/)
-- [`adapr`](https://cran.r-project.org/web/packages/adapr/)
-- [`conf`](https://cran.r-project.org/web/packages/conf/)
-- [`medExtractR`](https://cran.r-project.org/web/packages/medExtractR/index.html)
-- [`isni`](https://cran.r-project.org/web/packages/isni/)
-- [`PhysicalActivity`](https://cran.r-project.org/web/packages/PhysicalActivity/)
-- [`accelmissing`](https://cran.r-project.org/web/packages/accelmissing/index.html)
-- [`lmboot`](https://cran.r-project.org/web/packages/lmboot/index.html)
-- [`TeachingDemos`](https://cran.r-project.org/web/packages/TeachingDemos/)
-- [`ghclass`](https://github.com/rundel/ghclass)
-- [`ggvoronoi`](https://cran.r-project.org/web/packages/ggvoronoi/index.html)
-- [`igraphmatch`](https://github.com/dpmcsuss/iGraphMatch)
-- [`Intkrige`](https://cran.r-project.org/web/packages/intkrige/index.html)
-- [`Bioc2mlr`](https://github.com/drorberel/Bioc2mlr)
-- [`MHTdiscrete`](https://cran.r-project.org/web/packages/MHTdiscrete/index.html)
+- [`LearnBayes`](https://cran.r-project.org/web/packages/LearnBayes/index.html): Functions for learning Bayesian inference
+- [`rethinking`](https://github.com/rmcelreath/rethinking): Statistical rethinking course and book packages
+- [`rms`](https://cran.r-project.org/web/packages/rms/index.html): Regression modelling strategies
+- [`revisit`](https://github.com/matloff/revisit): a Tool for Statistical Reproducibility and for Teaching
+- [`liftr`](https://cran.r-project.org/web/packages/liftr/index.html): Persistent reproducible reporting by containerization of R Markdown documents
+- [`gmediation`](https://cran.r-project.org/web/packages/gmediation/): Mediation Analysis for Multiple and Multi-Stage Mediators
+- [`scdensity`](https://cran.r-project.org/web/packages/scdensity/): Shape-Constrained Kernel Density Estimation
+- [`SurvBoost`](https://cran.r-project.org/web/packages/SurvBoost/): Gradient Boosting for Survival Data
+- [`EAinference`](https://cran.r-project.org/web/packages/EAinference/): Estimator Augmentation and Simulation-Based Inference
+- [`gLRTH`](https://cran.r-project.org/web/packages/gLRTH/index.html): Genome-Wide Association and Linkage Analysis under Heterogeneity
+- [`rpms`](https://cran.r-project.org/web/packages/rpms/index.html): Recursive Partitioning for Modeling Survey Data
+- [`ggdag`](https://cran.r-project.org/web/packages/ggdag/index.html): Analyze and Create Elegant Directed Acyclic Graphs
+- [`confoundr`](https://cran.r-project.org/web/packages/confoundr/): Diagnostics for Confounding of Time-Varying and Other Joint Exposures
+- [`adapr`](https://cran.r-project.org/web/packages/adapr/): Implementation of an Accountable Data Analysis Process
+- [`conf`](https://cran.r-project.org/web/packages/conf/): Visualization and Analysis of Statistical Measures of Confidence
+- [`medExtractR`](https://cran.r-project.org/web/packages/medExtractR/index.html): Extraction of Medication Information from Clinical Text
+- [`isni`](https://cran.r-project.org/web/packages/isni/): Index of Local Sensitivity to Nonignorability
+- [`PhysicalActivity`](https://cran.r-project.org/web/packages/PhysicalActivity/): Process Accelerometer Data for Physical Activity Measurement
+- [`accelmissing`](https://cran.r-project.org/web/packages/accelmissing/index.html): Missing Value Imputation for Accelerometer Data
+- [`lmboot`](https://cran.r-project.org/web/packages/lmboot/index.html): Bootstrap in Linear Models
+- [`TeachingDemos`](https://cran.r-project.org/web/packages/TeachingDemos/): Demonstrations for Teaching and Learning
+- [`ghclass`](https://github.com/rundel/ghclass): Tools for managing classroom organizations
+- [`ggvoronoi`](https://cran.r-project.org/web/packages/ggvoronoi/index.html): Voronoi Diagrams and Heatmaps with 'ggplot2'
+- [`igraphmatch`](https://github.com/dpmcsuss/iGraphMatch): Tools to find the correspondences between vertices in different graphs
+- [`Intkrige`](https://cran.r-project.org/web/packages/intkrige/index.html): A Numerical Implementation of Interval-Valued Kriging
+- [`Bioc2mlr`](https://github.com/drorberel/Bioc2mlr): Utility functions to transform Bioconductor's S4 omic classes into mlr's task and CPOs
+- [`MHTdiscrete`](https://cran.r-project.org/web/packages/MHTdiscrete/index.html): Multiple Hypotheses Testing for Discrete Data
 
 Packages mentioned but not as focus:
-- [`twang`](https://cran.r-project.org/web/packages/twang/index.html)
-- [`Zelig`](https://cran.r-project.org/web/packages/Zelig/)
-- [`rbounds`](https://cran.r-project.org/web/packages/rbounds/)
-- [`refund`](https://cran.r-project.org/web/packages/refund/)
-- [`mgcv`](https://cran.r-project.org/web/packages/mgcv/)
+- [`twang`](https://cran.r-project.org/web/packages/twang/index.html): Toolkit for Weighting and Analysis of Nonequivalent Groups
+- [`Zelig`](https://cran.r-project.org/web/packages/Zelig/): Everyone's Statistical Software
+- [`rbounds`](https://cran.r-project.org/web/packages/rbounds/): Perform Rosenbaum bounds sensitivity tests for matched and unmatched data
+- [`refund`](https://cran.r-project.org/web/packages/refund/): Regression with Functional Data
+- [`mgcv`](https://cran.r-project.org/web/packages/mgcv/): Mixed GAM Computation Vehicle with Automatic Smoothness Estimation
 
 As well as the [`neurconductor`](https://neuroconductor.org/) and
 [`cloudyr`](https://cloudyr.github.io/) platforms.
 
 Python packages presented or mentioned in SDSS programs:
 
-- [`altair`](https://altair-viz.github.io/)
-- [`salmon`](https://arxiv.org/abs/1911.00648) + [github](https://github.com/ajboyd2/salmon)
-- [`symbulate`](https://github.com/dlsun/symbulate)
+- [`altair`](https://altair-viz.github.io/): Declarative Visualization in Python
+- [`salmon`](https://arxiv.org/abs/1911.00648) + [github](https://github.com/ajboyd2/salmon): Symbolic algebra of linear regression and modeling
+- [`symbulate`](https://github.com/dlsun/symbulate): A symbolic algebra for specifying simulations
+
