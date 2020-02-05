@@ -252,174 +252,94 @@ Python packages presented or mentioned in SDSS programs:
 Then run a script to output the structure of all `test` directories from
 those packages:
 
-```
+    ## Loading required package: xml2
+
     ## 
+
     ## ── Focal packages ──────────────────────────────────────────────────────────────
+
     ## cli-6726-1
+
     ## ══════════════════════════════════ LearnBayes ══════════════════════════════════
+
     ## ══════════════════════════════════ rethinking ══════════════════════════════════
+
     ## ══════════════════════════════════════ rms ═════════════════════════════════════
+
     ## ════════════════════════════════════ revisit ═══════════════════════════════════
+
     ## ═════════════════════════════════════ liftr ════════════════════════════════════
+
     ## ═══════════════════════════════════ scdensity ══════════════════════════════════
-    ## /tmp/RtmpOCVD9i/scdensity/tests
-    ## ├── testthat
-    ## │   ├── testHelperFunctions.R
-    ## │   ├── testScdensity.R
-    ## │   ├── testSharpenedKDE.R
-    ## │   └── testWeightedKDE.R
-    ## └── testthat.R
+
+    ## ~/Downloads/junk/scdensity/tests
+
     ## ═══════════════════════════════════ SurvBoost ══════════════════════════════════
+
     ## ══════════════════════════════════ EAinference ═════════════════════════════════
-    ## /tmp/RtmpOCVD9i/EAinference/tests
-    ## ├── testthat
-    ## │   ├── test-MHInference.R
-    ## │   ├── test-MHLS.R
-    ## │   ├── test-PBsampler.R
-    ## │   ├── test-cvlasso.R
-    ## │   └── test-hdIS.R
-    ## └── testthat.R
+
+    ## ~/Downloads/junk/EAinference/tests
+
     ## ═════════════════════════════════════ gLRTH ════════════════════════════════════
+
     ## ═════════════════════════════════════ rpms ═════════════════════════════════════
+
     ## ═════════════════════════════════════ ggdag ════════════════════════════════════
-    ## /tmp/RtmpOCVD9i/ggdag/tests
-    ## ├── spelling.R
-    ## ├── testthat
-    ## │   └── test_tidy_dagitty.R
-    ## └── testthat.R
+
+    ## ~/Downloads/junk/ggdag/tests
+
     ## ═══════════════════════════════════ confoundr ══════════════════════════════════
-    ## /tmp/RtmpOCVD9i/confoundr/tests
-    ## ├── testthat
-    ## │   ├── testBalanceWApplyScope.r
-    ## │   ├── testBalanceWOApplyScope.r
-    ## │   ├── testDiagnose.r
-    ## │   ├── testLengthenJoint.r
-    ## │   ├── testLengthenSingle.r
-    ## │   ├── testMakeHistoryOne.r
-    ## │   ├── testMakeHistoryTwo.r
-    ## │   ├── testOmitHistory.r
-    ## │   └── testWiden.r
-    ## └── testthat.R
+
+    ## ~/Downloads/junk/confoundr/tests
+
     ## ═════════════════════════════════════ adapr ════════════════════════════════════
+
     ## ═════════════════════════════════════ conf ═════════════════════════════════════
+
     ## ══════════════════════════════════ medExtractR ═════════════════════════════════
+
     ## ═════════════════════════════════════ isni ═════════════════════════════════════
+
     ## ═══════════════════════════════ PhysicalActivity ═══════════════════════════════
+
     ## ═════════════════════════════════ accelmissing ═════════════════════════════════
+
     ## ════════════════════════════════════ lmboot ════════════════════════════════════
+
     ## ═════════════════════════════════ TeachingDemos ════════════════════════════════
+
     ## ════════════════════════════════════ ghclass ═══════════════════════════════════
+
     ## ═══════════════════════════════════ ggvoronoi ══════════════════════════════════
-    ## /tmp/RtmpOCVD9i/ggvoronoi/tests
-    ## ├── figs
-    ## │   ├── border-with-blank-diagram.svg
-    ## │   ├── border-with-continuous-fill.svg
-    ## │   ├── border-with-discrete-fill.svg
-    ## │   ├── deps.txt
-    ## │   ├── heatmap-with-continuous-fill.svg
-    ## │   └── heatmap-with-discrete-fill.svg
-    ## ├── testthat
-    ## │   ├── test_aes_continuous.R
-    ## │   ├── test_aes_discrete.R
-    ## │   ├── test_outline.R
-    ## │   └── test_polygons.R
-    ## └── testthat.R
+
+    ## ~/Downloads/junk/ggvoronoi/tests
+
     ## ══════════════════════════════════ iGraphMatch ═════════════════════════════════
-    ## /tmp/RtmpOCVD9i/iGraphMatch-master/tests
-    ## ├── testthat
-    ## │   ├── test-FW-hard-seeding.R
-    ## │   ├── test-Isorank.R
-    ## │   ├── test-best-match.R
-    ## │   ├── test-convex.R
-    ## │   ├── test-gnp.R
-    ## │   ├── test-ieg.R
-    ## │   ├── test-largest-cc.R
-    ## │   ├── test-measure-func.R
-    ## │   ├── test-perco-exp.R
-    ## │   ├── test-rdpg.R
-    ## │   ├── test-sbm.R
-    ## │   ├── test-seeds.R
-    ## │   ├── test-soft-percolation.R
-    ## │   ├── test-start.R
-    ## │   └── test-umeyama.R
-    ## └── testthat.R
+
     ## ═══════════════════════════════════ intkrige ═══════════════════════════════════
-    ## /tmp/RtmpOCVD9i/intkrige/tests
-    ## ├── testthat
-    ## │   └── test_intkrige.R
-    ## └── testthat.R
+
+    ## ~/Downloads/junk/intkrige/tests
+
     ## 
 
     ## ── Non-focal packages ──────────────────────────────────────────────────────────
-    ## ═════════════════════════════════════ twang ════════════════════════════════════
-    ## ═════════════════════════════════════ Zelig ════════════════════════════════════
-    ## /tmp/RtmpOCVD9i/Zelig/tests
-    ## ├── testthat
-    ## │   ├── test-amelia.R
-    ## │   ├── test-arima.R
-    ## │   ├── test-assertions.R
-    ## │   ├── test-bayesdiagnostics.R
-    ## │   ├── test-createJSON.R
-    ## │   ├── test-exp.R
-    ## │   ├── test-gamma.R
-    ## │   ├── test-gammasurvey.R
-    ## │   ├── test-interface.R
-    ## │   ├── test-ivreg.R
-    ## │   ├── test-logit.R
-    ## │   ├── test-logitbayes.R
-    ## │   ├── test-logitsurvey.R
-    ## │   ├── test-lognom.R
-    ## │   ├── test-ls.R
-    ## │   ├── test-matchit.R
-    ## │   ├── test-negbin.R
-    ## │   ├── test-normal-gee.R
-    ## │   ├── test-normal.R
-    ## │   ├── test-normalbayes.R
-    ## │   ├── test-normalsurvey.R
-    ## │   ├── test-plots.R
-    ## │   ├── test-poisson.R
-    ## │   ├── test-poissonbayes.R
-    ## │   ├── test-poissonsurvey.R
-    ## │   ├── test-probit.R
-    ## │   ├── test-probitbayes.R
-    ## │   ├── test-probitsurvey.R
-    ## │   ├── test-qislimmer.R
-    ## │   ├── test-quantile.R
-    ## │   ├── test-relogit.R
-    ## │   ├── test-survey.R
-    ## │   ├── test-tobit.R
-    ## │   ├── test-tobitbayes.R
-    ## │   ├── test-utils.R
-    ## │   ├── test-weibull.R
-    ## │   ├── test-weights.R
-    ## │   ├── test-wrappers.R
-    ## │   └── test-zelig.R
-    ## └── testthat.R
-    ## ════════════════════════════════════ rbounds ═══════════════════════════════════
-    ## ════════════════════════════════════ refund ════════════════════════════════════
-    ## /tmp/RtmpOCVD9i/refund/tests
-    ## ├── testthat
-    ## │   ├── ccb.fpca.obj.rds
-    ## │   ├── ccb.obj.rds
-    ## │   ├── pffr.ff.coef.rds
-    ## │   ├── test-fosr.R
-    ## │   ├── test-fpca.R
-    ## │   ├── test-fpcr.R
-    ## │   ├── test-lpeer.R
-    ## │   ├── test-lpfr.R
-    ## │   ├── test-pcre.R
-    ## │   ├── test-peer.R
-    ## │   └── test-pffr.R
-    ## └── testthat.R
-    ## ═════════════════════════════════════ mgcv ═════════════════════════════════════
-    ## /tmp/RtmpOCVD9i/mgcv/tests
-    ## ├── bam.R
-    ## ├── coxpht.R
-    ## ├── gam.R
-    ## ├── mgcv-parallel.R
-    ## ├── missing.data.R
-    ## ├── single.index.R
-    ## └── smooth.construct.so.smooth.spec.R
-```
 
-And only 10 out of 29 packages even have tests.
+    ## cli-6726-6
+
+    ## ═════════════════════════════════════ twang ════════════════════════════════════
+
+    ## ═════════════════════════════════════ Zelig ════════════════════════════════════
+
+    ## ~/Downloads/junk/Zelig/tests
+
+    ## ════════════════════════════════════ rbounds ═══════════════════════════════════
+
+    ## ════════════════════════════════════ refund ════════════════════════════════════
+
+    ## ~/Downloads/junk/refund/tests
+
+    ## ═════════════════════════════════════ mgcv ═════════════════════════════════════
+
+    ## ~/Downloads/junk/mgcv/tests
+
+And only 9 out of 29 packages even have tests.

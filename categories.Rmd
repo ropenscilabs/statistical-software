@@ -249,19 +249,21 @@ all_pkgs <- read_html ("https://cran.r-project.org/src/contrib/") %>%
     html_nodes ("a") %>%
     html_attr ("href")
 
-dl_pkg <- function (u, all_pkgs) {
+dl_pkg <- function (u, all_pkgs, dl_dir = tempdir ()) {
     ret <- FALSE
     if (grepl ("cran", u)) {
         pkg <- strsplit (strsplit (u, "packages/") [[1]] [2], "/") [[1]] [1]
         message (cli::rule (line = 2, center = pkg, col = "green"))
         pkg_ver <- all_pkgs [grep (paste0 ("^", pkg, "\\_"), all_pkgs)]
         umod <- paste0 ("https://cran.r-project.org/src/contrib/", pkg_ver)
-        destfile <- file.path (tempdir (), pkg_ver)
-        download.file (umod, destfile = destfile, quiet = TRUE)
-        untar (destfile, exdir = tempdir ())
-        test_dir <- file.path (tempdir (), pkg, "tests")
+        destfile <- file.path (dl_dir, pkg_ver)
+        if (!file.exists (destfile)) {
+            download.file (umod, destfile = destfile, quiet = TRUE)
+            untar (destfile, exdir = path.expand (dl_dir))
+        }
+        test_dir <- file.path (dl_dir, pkg, "tests")
         if (file.exists (test_dir)) {
-            fs::dir_tree (test_dir)
+            fs::dir_tree (path.expand (test_dir))
             ret <- TRUE
         }
     } else if (grepl ("github", u)) {
@@ -269,22 +271,26 @@ dl_pkg <- function (u, all_pkgs) {
         message (cli::rule (line = 2, center = pkg, col = "green"))
         # just presume master branch for ease here
         umod <- paste0 (u, "/archive/master.zip")
-        destfile <- file.path (tempdir (), pkg)
-        download.file (umod, destfile = destfile, quiet = TRUE)
-        unzip (destfile, exdir = tempdir ())
-        test_dir <- file.path (tempdir (), paste0 (pkg, "-master"), "tests")
+        destfile <- file.path (dl_dir, pkg)
+        if (!file.exists (destfile)) {
+            download.file (umod, destfile = destfile, quiet = TRUE)
+            unzip (destfile, exdir = path.expand (dl_dir))
+        }
+        #test_dir <- file.path (dl_dir, paste0 (pkg, "-master"), "tests")
+        test_dir <- file.path (dl_dir, pkg, "tests")
         if (file.exists (test_dir)) {
-            fs::dir_tree (test_dir)
+            fs::dir_tree (path.expand (test_dir))
             ret <- TRUE
         }
     } else
         stop ("only works for CRAN or github URLs")
     return (ret)
 }
+dl_dir <- "~/Downloads/junk"
 message (cli::cli_h1 ("Focal packages"))
-chk1 <- vapply (u1, function (i) dl_pkg (i, all_pkgs), logical (1))
+chk1 <- vapply (u1, function (i) dl_pkg (i, all_pkgs, dl_dir), logical (1))
 message (cli::cli_h1 ("Non-focal packages"))
-chk2 <- vapply (u2, function (i) dl_pkg (i, all_pkgs), logical (1))
+chk2 <- vapply (u2, function (i) dl_pkg (i, all_pkgs, dl_dir), logical (1))
 ```
 
 And only `r length (which (chk1)) + length (which (chk2))` out of
