@@ -16,15 +16,40 @@ names (dat) <- vapply (dat, function (i) i$data$key, character (1))
 index <- which (vapply (dat, function (i)
                         "parentItem" %in% names (i$data),
                         logical (1)))
+
+# function to convert zotero list items delineated with <ui><li>-type tags to
+# markdown format
+convert_list_items <- function (x) {
+    # convert any list items
+    x <- gsub ("<ul>\n<li>", "- ", x)
+    x <- gsub ("<li>", "  - ", x)
+    x <- gsub ("</li>|</ul>", "", x)
+    x <- strsplit (gsub ("<.*?>", "\n", x), "\\n") [[1]]
+    # remove any blank lines between list items.
+    i1 <- grep ("^[[:space:]]+\\-", x) # list items
+    if (length (i1) > 0) {
+        # index of empty lines
+        i2 <- which (nchar (x) == 0)
+        i2 <- i2 [i2 >= min (i1) & i2 <= max (i1)]
+        # get sequences of all i1 between list items
+        i1 <- split (seq (x), findInterval (seq (x), i1))
+        i1 <- unlist (unname (lapply (i1, function (i) i [-1])))
+        # empty lines which lie between list items
+        i2 <- i2 [which (i2 %in% i1)]
+        x <- x [!seq (x) %in% i2]
+    }
+    return (x)
+}
+
 # The notes are formatted with lots of html tags. These must all be removed,
 # and then the strings all split at line breaks.
 notes <- lapply (index, function (i) {
-                 res <- strsplit (gsub ("<.*?>", "\n", dat [[i]]$data$note),
-                                  "\\n") [[1]]
-                 res <- lapply (res, function (j) strsplit (j, "\\n") [[1]])
-                 nc <- unlist (lapply (res, length))
-                 res [which (nc == 0)] <- ""
-                 unlist (res)   })
+                     res <- convert_list_items (dat [[i]]$data$note)
+
+                     res <- lapply (res, function (j) strsplit (j, "\\n") [[1]])
+                     nc <- unlist (lapply (res, length))
+                     res [which (nc == 0)] <- ""
+                     unlist (res)   })
 
 keys <- vapply (index, function (i) dat [[i]]$data$parentItem, character (1))
 names (notes) <- keys
