@@ -35,7 +35,9 @@ titles <- vapply (index, function (i) dat [[i]]$data$title, character (1))
 pubTitles <- vapply (index, function (i) {
                          pt <- dat [[i]]$data$publicationTitle
                          ifelse (length (pt) == 0, "", pt) }, character (1))
-volumes <- vapply (index, function (i) dat [[i]]$data$volume, character (1))
+volumes <- vapply (index, function (i) {
+                       vol <- dat [[i]]$data$volume
+                       ifelse (length (vol) == 0, "", vol)}, character (1))
 issues <- vapply (index, function (i) {
                       issue <- dat [[i]]$data$issue
                       ifelse (length (issue) == 0, "", issue) }, character (1))
@@ -48,7 +50,12 @@ creators <- vapply (index, function (i) {
                                          character (1))
                         last <- vapply (cr, function (i) i$lastName,
                                         character (1))
-                        cr <- paste0 (last, ", ", first)
+                        if (length (first) == 1 & first [1] == "")
+                            cr <- last
+                        else if (length (last) == 1 & last [1] == "")
+                            cr <- first
+                        else
+                            cr <- paste0 (last, ", ", first)
                         if (length (cr) > 1)
                             cr <- paste0 (paste0 (cr [-length (cr)],
                                               collapse = "; "),
