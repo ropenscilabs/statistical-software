@@ -88,15 +88,14 @@ for (i in seq (notes)) {
               paste0 ("[", linkline, "](", urls [i], ")"),
               "",
               paste0 ("**Abstract** ", abstracts [i]),
-              "",
-              "**NOTES**",
-              notes [[i]],
-              "", "")
+              "")
+    if (!is.null (notes [[i]]))
+        out <- c (out, "**NOTES**", notes [[i]], "")
 }
-con <- file ("out.Rmd", "w")
+con <- file ("out.md", "w")
 writeLines (out, con = con)
 close (con)
-rmarkdown::render ("out.Rmd", output_file = "out.html")
+rmarkdown::render ("out.md", output_file = "out.html")
 #system2 ("xdg-open", c ("out.html", "&"))
 ```
 
