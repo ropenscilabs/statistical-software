@@ -316,7 +316,7 @@ var nodes = new vis.DataSet([
       value: 6,
       label: "workflow" },
     { id: 104,
-      value: 8,
+      value: 9,
       label: "wrapper" }
 ]);
 
@@ -421,7 +421,7 @@ var edges = new vis.DataSet([
       value: 1 },
     { from: 6,
       to: 104,
-      value: 2 },
+      value: 3 },
     { from: 7,
       to: 61,
       value: 1 },
@@ -1054,7 +1054,7 @@ var edges = new vis.DataSet([
       value: 2 },
     { from: 54,
       to: 104,
-      value: 1 },
+      value: 2 },
     { from: 55,
       to: 71,
       value: 1 },
@@ -1153,6 +1153,9 @@ var edges = new vis.DataSet([
       value: 1 },
     { from: 61,
       to: 101,
+      value: 1 },
+    { from: 61,
+      to: 104,
       value: 1 },
     { from: 63,
       to: 100,

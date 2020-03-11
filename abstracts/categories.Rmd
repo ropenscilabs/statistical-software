@@ -167,7 +167,7 @@ script](https://github.com/ropenscilabs/statistical-software/blob/master/abstrac
 158. [`psycho.R`](https://joss.theoj.org/papers/10.21105/joss.00470): reporting, model selection, workflow, scores; input: data.frame, arbitrary data; output: summary statistics, visualization
 160. [`origami`](https://joss.theoj.org/papers/10.21105/joss.00512): cross-validation, ML; input: data.frame; output: model prediction
 162. [`GammaGompertzCR`](https://joss.theoj.org/papers/10.21105/joss.00216): survival, Bayesian, Monte Carlo; input: matrix; output: model prediction
-166. [`BayesianNetwork`](https://joss.theoj.org/papers/10.21105/joss.00425): Bayesian, networks, ML; input: application-specific data format; output: summary statistics, visualization
+166. [`BayesianNetwork`](https://joss.theoj.org/papers/10.21105/joss.00425): Bayesian, networks, ML, wrapper; input: application-specific data format; output: summary statistics, visualization
 174. [`hei`](https://joss.theoj.org/papers/10.21105/joss.00417): index, scores; input: data.frame, application-specific data format; output: index scores
 176. [`mcMST`](https://joss.theoj.org/papers/10.21105/joss.00374): networks, optimization; input: application-specific data format, graph; output: application-specific data format, graph
 178. [`varistran`](https://joss.theoj.org/papers/10.21105/joss.00257): noise, variance; input: application-specific data format; output: summary statistics, model estimates, visualization
