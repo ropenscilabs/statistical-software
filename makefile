@@ -1,4 +1,4 @@
-RFILE = categories
+RFILE = README
 BFILE = background
 
 all: knith
